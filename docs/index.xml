@@ -5,9 +5,45 @@
     <description>Recent content on Research blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
+    <lastBuildDate>Thu, 30 Jan 2020 15:39:27 -0500</lastBuildDate>
     
         <atom:link href="http://example.org/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Advances in Model Based Reinforcement Learning</title>
+      <link>http://example.org/posts/ambrl/</link>
+      <pubDate>Thu, 30 Jan 2020 15:39:27 -0500</pubDate>
+      
+      <guid>http://example.org/posts/ambrl/</guid>
+      <description>&lt;p&gt;Introduction to the basics on model-based reinforcement learning and the recent advances on this topic.&lt;/p&gt;
+
+&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
+
+&lt;p&gt;Model-based reinforcement learning, can be understanding as a learning the transition function &lt;span  class=&#34;math&#34;&gt;\(P(s&#39;, r|s,a)\)&lt;/span&gt; in the markov desicion process (MDP). Then this model can be used for planning to take actions which in intermediate states the value function is computed.&lt;/p&gt;
+
+&lt;figure&gt;
+    &lt;img src=&#34;https://ericktornero.github.io/blog/images/squeme_mbmg.png&#34;
+         alt=&#34;fig-mbmf-sq&#34;/&gt; &lt;figcaption&gt;
+            &lt;p&gt;Figure 1. Interaction Model, Experience &amp;amp; Value/Policy. Image taken from [1]&lt;/p&gt;
+        &lt;/figcaption&gt;
+&lt;/figure&gt;
+
+
+&lt;p&gt;Basic form of model-based reinforcement learning can be seen in &lt;strong&gt;Dynamic Programming&lt;/strong&gt;, in which is assumed a prior knowladge over the dynamics or the transition function. As we will see later, in real world, the dynamics is usually unknown un can be very complex. For these kind of problems, model learning can be used just as supervised learning.&lt;/p&gt;
+
+&lt;p&gt;For low dimensional state-action space, Gaussian Process (GPs) can be used to approximate the transition function. However when complexity in the model increasses, e.g. in robotics control, gaussian process used to be inadequate. Neural Networks however are known by its high adaptavility to complex functions as in images, and in recent years, has beend showed interesting results in several applications, in that sense, this post focused in recent advances in MBRL that uses Neural Networks for the approximation of the transition function.&lt;/p&gt;
+
+&lt;h2 id=&#34;basic-concepts-in-modelbased-reinforcement-learnig&#34;&gt;Basic concepts in Model-Based Reinforcement Learnig&lt;/h2&gt;
+
+&lt;h2 id=&#34;deep-reinforcement-learning-with-a-handful-of-trials-with-probabilistic-models&#34;&gt;Deep Reinforcement Learning with a handful of trials with probabilistic models&lt;/h2&gt;
+
+&lt;p&gt;This is a resume of paper published in NeuriPS 2018 Montreal, we create a brief summary and the highlights of this paper&lt;/p&gt;
+
+&lt;p&gt;This paper introduces uncertainty-aware to the dynamics model. In comparison&lt;/p&gt;
+
+&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[TD_x = e^2\]&lt;/span&gt;&lt;/p&gt;</description>
+    </item>
     
   </channel>
 </rss>
