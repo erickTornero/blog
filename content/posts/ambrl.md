@@ -1,7 +1,7 @@
 ---
 title: "Advances in Model Based Reinforcement Learning"
 date: 2020-01-30T15:39:27-05:00
-draft: False
+draft: false
 math: true
 markup: mmark
 ---
