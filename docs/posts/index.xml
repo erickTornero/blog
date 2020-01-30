@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts on Research blog</title>
-    <link>http://example.org/posts/</link>
+    <link>http://ericktornero.github.io/blog/posts/</link>
     <description>Recent content in Posts on Research blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Thu, 30 Jan 2020 15:39:27 -0500</lastBuildDate>
     
-	<atom:link href="http://example.org/posts/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://ericktornero.github.io/blog/posts/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Advances in Model Based Reinforcement Learning</title>
-      <link>http://example.org/posts/ambrl/</link>
+      <link>http://ericktornero.github.io/blog/posts/ambrl/</link>
       <pubDate>Thu, 30 Jan 2020 15:39:27 -0500</pubDate>
       
-      <guid>http://example.org/posts/ambrl/</guid>
+      <guid>http://ericktornero.github.io/blog/posts/ambrl/</guid>
       <description>&lt;p&gt;Introduction to the basics on model-based reinforcement learning and the recent advances on this topic.&lt;/p&gt;</description>
     </item>
     
