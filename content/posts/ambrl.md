@@ -6,9 +6,24 @@ math: true
 markup: mmark
 ---
 
-Summary over the recent advances in Model-based Reinforcement Learning
+Introduction to the basics on model-based reinforcement learning and the recent advances on this topic.
 
 <!--more-->
+## Introduction
+
+Model-based reinforcement learning, can be understanding as a learning the transition function $$P(s', r|s,a)$$ in the markov desicion process (MDP). Then this model can be used for planning to take actions which in intermediate states the value function is computed.
+
+{{<figure src="https://ericktornero.github.io/blog/images/squeme_mbmg.png" alt="fig-mbmf-sq" position="center" 
+    caption="Figure 1. Interaction Model, Experience & Value/Policy. Image taken from [1]" captionPosition="center"
+    style="border-radius: 8px;" >}}
+
+Basic form of model-based reinforcement learning can be seen in **Dynamic Programming**, in which is assumed a prior knowladge over the dynamics or the transition function. As we will see later, in real world, the dynamics is usually unknown un can be very complex. For these kind of problems, model learning can be used just as supervised learning.
+
+For low dimensional state-action space, Gaussian Process (GPs) can be used to approximate the transition function. However when complexity in the model increasses, e.g. in robotics control, gaussian process used to be inadequate. Neural Networks however are known by its high adaptavility to complex functions as in images, and in recent years, has beend showed interesting results in several applications, in that sense, this post focused in recent advances in MBRL that uses Neural Networks for the approximation of the transition function.
+
+## Basic concepts in Model-Based Reinforcement Learnig
+
+
 
 ## Deep Reinforcement Learning with a handful of trials with probabilistic models
 
