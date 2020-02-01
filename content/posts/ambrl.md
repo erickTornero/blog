@@ -12,7 +12,7 @@ Introduction to the basics on model-based reinforcement learning and the recent 
 ## Introduction
 
 
-Model-based reinforcement learning is a branch in Reinforcement Learning where the transition function $$P(s', r|s, a)$$ in the Markov decision process (MDP) is required. This model is used for planning to take actions where the value function is calculated as an intermediate step, as can be seen in **Figure 1** in the *model-learning* branch. *Direct RL*, means model-free RL where the policy or value-function is computed directly from experience and it is not needed to model the dynamics. However, these kinds of methods are too poor sample efficient due to that these methods rely on the probability to find good interactions, this becomes even more complicated when the environment has high dimensional state-action space and when sparse reward is presented.
+Model-based reinforcement learning is a branch in Reinforcement Learning where the transition function $$P(s', r|s, a)$$ in the Markov decision process (MDP) is used. This model is used to improve or create the policy (planning), where the value function is calculated as an intermediate step, as can be seen in **Figure 1** in the *model-learning* branch. *Direct RL*, means model-free RL where the policy or value-function is computed *directly* from experience and it is not needed to model the dynamics. However, these kinds of methods are too poor sample efficient due to that these methods rely on the probability to find good interactions, this becomes even more complicated when the environment has high dimensional state-action space and when sparse rewards are presented.
 
 {{<figure src="https://ericktornero.github.io/blog/images/squeme_mbmf.png" title="Figure 1, Taken from [1]">}}
 
@@ -25,7 +25,12 @@ For low dimensional state-action space, Gaussian Process (GPs) can be used to ap
 
 ## Basic concepts in Model-Based Reinforcement Learnig
 
+Reinforcement learning Framework is defined over a Markov Decision Process
 
+{{<figure src="https://ericktornero.github.io/blog/images/mdp.png" title="Figure 3, Interaction in MDP">}}
+
+## Neural network dynamics for model-based deep reinforcement learning with model-free fine-tuning
+### Anusha Nagabandi et al. UC Berkeley 2017
 
 ## Deep Reinforcement Learning with a handful of trials with probabilistic models
 
@@ -34,3 +39,9 @@ This is a resume of paper published in NeuriPS 2018 Montreal, we create a brief 
 This paper introduces uncertainty-aware to the dynamics model. In comparison
 
 $$TD_x = e^2$$
+
+## Deep Dynamics Models for Learning Dexterous Manipulation
+### Anusha Nagabandi et al. UC Berkeley 2019
+
+## Learning Latent Dynamics for Planning from Pixels
+

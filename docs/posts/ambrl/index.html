@@ -70,7 +70,7 @@
 
 <h2 id="introduction">Introduction</h2>
 
-<p>Model-based reinforcement learning is a branch in Reinforcement Learning where the transition function <span  class="math">\(P(s', r|s, a)\)</span> in the Markov decision process (MDP) is required. This model is used for planning to take actions where the value function is calculated as an intermediate step, as can be seen in <strong>Figure 1</strong> in the <em>model-learning</em> branch. <em>Direct RL</em>, means model-free RL where the policy or value-function is computed directly from experience and it is not needed to model the dynamics. However, these kinds of methods are too poor sample efficient due to that these methods rely on the probability to find good interactions, this becomes even more complicated when the environment has high dimensional state-action space and when sparse reward is presented.</p>
+<p>Model-based reinforcement learning is a branch in Reinforcement Learning where the transition function <span  class="math">\(P(s', r|s, a)\)</span> in the Markov decision process (MDP) is used. This model is used to improve or create the policy (planning), where the value function is calculated as an intermediate step, as can be seen in <strong>Figure 1</strong> in the <em>model-learning</em> branch. <em>Direct RL</em>, means model-free RL where the policy or value-function is computed <em>directly</em> from experience and it is not needed to model the dynamics. However, these kinds of methods are too poor sample efficient due to that these methods rely on the probability to find good interactions, this becomes even more complicated when the environment has high dimensional state-action space and when sparse rewards are presented.</p>
 
 <figure>
     <img src="https://ericktornero.github.io/blog/images/squeme_mbmf.png"/> <figcaption>
@@ -92,6 +92,19 @@
 
 <h2 id="basic-concepts-in-modelbased-reinforcement-learnig">Basic concepts in Model-Based Reinforcement Learnig</h2>
 
+<p>Reinforcement learning Framework is defined over a Markov Decision Process</p>
+
+<figure>
+    <img src="https://ericktornero.github.io/blog/images/mdp.png"/> <figcaption>
+            <h4>Figure 3, Interaction in MDP</h4>
+        </figcaption>
+</figure>
+
+
+<h2 id="neural-network-dynamics-for-modelbased-deep-reinforcement-learning-with-modelfree-finetuning">Neural network dynamics for model-based deep reinforcement learning with model-free fine-tuning</h2>
+
+<h3 id="anusha-nagabandi-et-al-uc-berkeley-2017">Anusha Nagabandi et al. UC Berkeley 2017</h3>
+
 <h2 id="deep-reinforcement-learning-with-a-handful-of-trials-with-probabilistic-models">Deep Reinforcement Learning with a handful of trials with probabilistic models</h2>
 
 <p>This is a resume of paper published in NeuriPS 2018 Montreal, we create a brief summary and the highlights of this paper</p>
@@ -99,6 +112,12 @@
 <p>This paper introduces uncertainty-aware to the dynamics model. In comparison</p>
 
 <p><span  class="math">\[TD_x = e^2\]</span></p>
+
+<h2 id="deep-dynamics-models-for-learning-dexterous-manipulation">Deep Dynamics Models for Learning Dexterous Manipulation</h2>
+
+<h3 id="anusha-nagabandi-et-al-uc-berkeley-2019">Anusha Nagabandi et al. UC Berkeley 2019</h3>
+
+<h2 id="learning-latent-dynamics-for-planning-from-pixels">Learning Latent Dynamics for Planning from Pixels</h2>
         </section>
         <footer>
             <a class="permalink u-url" href="https://ericktornero.github.io/blog/posts/ambrl/"></a>
