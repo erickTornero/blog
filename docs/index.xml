@@ -42,7 +42,7 @@
 
 &lt;h2 id=&#34;basic-concepts-in-modelbased-reinforcement-learnig&#34;&gt;Basic concepts in Model-Based Reinforcement Learnig&lt;/h2&gt;
 
-&lt;p&gt;Reinforcement learning Framework is defined over a Markov Decision Process&lt;/p&gt;
+&lt;p&gt;Reinforcement learning Framework is defined over a Markov Decision Process, and elements in an MDP are defined in the tuple &lt;span  class=&#34;math&#34;&gt;\((\mathcal{S}, \mathcal{A}, \mathcal{R}, \mathcal{P}, \gamma)\)&lt;/span&gt;, where &lt;span  class=&#34;math&#34;&gt;\(\mathcal{S}\)&lt;/span&gt; is the state space, &lt;span  class=&#34;math&#34;&gt;\(\mathcal{A}\)&lt;/span&gt; is the action space, &lt;span  class=&#34;math&#34;&gt;\(\mathcal{R}\)&lt;/span&gt; is the reward and &lt;span  class=&#34;math&#34;&gt;\(\mathcal{P(s&#39;, r|s, a)}\)&lt;/span&gt; define the transition function. In &lt;strong&gt;Fig. 3&lt;/strong&gt;, the interaction interaction agent-envrionment is shown, given an observed state &lt;span  class=&#34;math&#34;&gt;\(s_t \in \mathcal{S}\)&lt;/span&gt; at any particular timestep &lt;span  class=&#34;math&#34;&gt;\(t\)&lt;/span&gt;, the agent take an action &lt;span  class=&#34;math&#34;&gt;\(a_t \in \mathcal{A}\)&lt;/span&gt; drawn from its policy &lt;span  class=&#34;math&#34;&gt;\(\pi(a_t|s_t)\)&lt;/span&gt;. The environment respond with the next state &lt;span  class=&#34;math&#34;&gt;\(s_{t+1}\)&lt;/span&gt; and the reward &lt;span  class=&#34;math&#34;&gt;\(r_{t+1}\)&lt;/span&gt; produced by take action &lt;span  class=&#34;math&#34;&gt;\(a_t\)&lt;/span&gt;.&lt;/p&gt;
 
 &lt;figure&gt;
     &lt;img src=&#34;https://ericktornero.github.io/blog/images/mdp.png&#34;/&gt; &lt;figcaption&gt;
@@ -50,6 +50,18 @@
         &lt;/figcaption&gt;
 &lt;/figure&gt;
 
+
+&lt;p&gt;Either model-based or model-free methods try to compute a &lt;strong&gt;policy&lt;/strong&gt; &lt;span  class=&#34;math&#34;&gt;\(\pi(a|s)\)&lt;/span&gt; that maximizes the expected reward. In the case of mode-based, the policy is computed indirectly by using the transition model &lt;span  class=&#34;math&#34;&gt;\(\mathcal{P}(s&#39;,r|s, a)\)&lt;/span&gt; for planning. As an example, some algorithms are explaining in the following section called: &lt;strong&gt;Dynamic Programming&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;h3 id=&#34;dynamic-programming&#34;&gt;Dynamic Programming&lt;/h3&gt;
+
+&lt;p&gt;Dynamic programming are sets of algorithms where is assumed that the environment transition function is priorly known. The aim of RL is summarized in the following equation:&lt;/p&gt;
+
+&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[\mathbb{E}[G_t] = \mathbb{E}_{\pi}[\sum_t \gamma^tr_t | s_t,a_t]\]&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[\mathbb{E}[G_t] = \sum_s [\sum_t v(s) | a_t]\]&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[v_\pi(s) = \sum_{s, r} \sum_{a} p(s&#39;|s,a) \pi(a|s)[r + v(s)]\]&lt;/span&gt;&lt;/p&gt;
 
 &lt;h2 id=&#34;neural-network-dynamics-for-modelbased-deep-reinforcement-learning-with-modelfree-finetuning&#34;&gt;Neural network dynamics for model-based deep reinforcement learning with model-free fine-tuning&lt;/h2&gt;
 
@@ -60,8 +72,6 @@
 &lt;p&gt;This is a resume of paper published in NeuriPS 2018 Montreal, we create a brief summary and the highlights of this paper&lt;/p&gt;
 
 &lt;p&gt;This paper introduces uncertainty-aware to the dynamics model. In comparison&lt;/p&gt;
-
-&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[TD_x = e^2\]&lt;/span&gt;&lt;/p&gt;
 
 &lt;h2 id=&#34;deep-dynamics-models-for-learning-dexterous-manipulation&#34;&gt;Deep Dynamics Models for Learning Dexterous Manipulation&lt;/h2&gt;
 

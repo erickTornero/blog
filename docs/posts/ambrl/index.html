@@ -92,7 +92,7 @@
 
 <h2 id="basic-concepts-in-modelbased-reinforcement-learnig">Basic concepts in Model-Based Reinforcement Learnig</h2>
 
-<p>Reinforcement learning Framework is defined over a Markov Decision Process</p>
+<p>Reinforcement learning Framework is defined over a Markov Decision Process, and elements in an MDP are defined in the tuple <span  class="math">\((\mathcal{S}, \mathcal{A}, \mathcal{R}, \mathcal{P}, \gamma)\)</span>, where <span  class="math">\(\mathcal{S}\)</span> is the state space, <span  class="math">\(\mathcal{A}\)</span> is the action space, <span  class="math">\(\mathcal{R}\)</span> is the reward and <span  class="math">\(\mathcal{P(s', r|s, a)}\)</span> define the transition function. In <strong>Fig. 3</strong>, the interaction interaction agent-envrionment is shown, given an observed state <span  class="math">\(s_t \in \mathcal{S}\)</span> at any particular timestep <span  class="math">\(t\)</span>, the agent take an action <span  class="math">\(a_t \in \mathcal{A}\)</span> drawn from its policy <span  class="math">\(\pi(a_t|s_t)\)</span>. The environment respond with the next state <span  class="math">\(s_{t+1}\)</span> and the reward <span  class="math">\(r_{t+1}\)</span> produced by take action <span  class="math">\(a_t\)</span>.</p>
 
 <figure>
     <img src="https://ericktornero.github.io/blog/images/mdp.png"/> <figcaption>
@@ -100,6 +100,18 @@
         </figcaption>
 </figure>
 
+
+<p>Either model-based or model-free methods try to compute a <strong>policy</strong> <span  class="math">\(\pi(a|s)\)</span> that maximizes the expected reward. In the case of mode-based, the policy is computed indirectly by using the transition model <span  class="math">\(\mathcal{P}(s',r|s, a)\)</span> for planning. As an example, some algorithms are explaining in the following section called: <strong>Dynamic Programming</strong>.</p>
+
+<h3 id="dynamic-programming">Dynamic Programming</h3>
+
+<p>Dynamic programming are sets of algorithms where is assumed that the environment transition function is priorly known. The aim of RL is summarized in the following equation:</p>
+
+<p><span  class="math">\[\mathbb{E}[G_t] = \mathbb{E}_{\pi}[\sum_t \gamma^tr_t | s_t,a_t]\]</span></p>
+
+<p><span  class="math">\[\mathbb{E}[G_t] = \sum_s [\sum_t v(s) | a_t]\]</span></p>
+
+<p><span  class="math">\[v_\pi(s) = \sum_{s, r} \sum_{a} p(s'|s,a) \pi(a|s)[r + v(s)]\]</span></p>
 
 <h2 id="neural-network-dynamics-for-modelbased-deep-reinforcement-learning-with-modelfree-finetuning">Neural network dynamics for model-based deep reinforcement learning with model-free fine-tuning</h2>
 
@@ -110,8 +122,6 @@
 <p>This is a resume of paper published in NeuriPS 2018 Montreal, we create a brief summary and the highlights of this paper</p>
 
 <p>This paper introduces uncertainty-aware to the dynamics model. In comparison</p>
-
-<p><span  class="math">\[TD_x = e^2\]</span></p>
 
 <h2 id="deep-dynamics-models-for-learning-dexterous-manipulation">Deep Dynamics Models for Learning Dexterous Manipulation</h2>
 

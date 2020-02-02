@@ -25,9 +25,23 @@ For low dimensional state-action space, Gaussian Process (GPs) can be used to ap
 
 ## Basic concepts in Model-Based Reinforcement Learnig
 
-Reinforcement learning Framework is defined over a Markov Decision Process
+Reinforcement learning Framework is defined over a Markov Decision Process, and elements in an MDP are defined in the tuple $$(\mathcal{S}, \mathcal{A}, \mathcal{R}, \mathcal{P}, \gamma)$$, where $$\mathcal{S}$$ is the state space, $$\mathcal{A}$$ is the action space, $$\mathcal{R}$$ is the reward and $$\mathcal{P(s', r|s, a)}$$ define the transition function. In **Fig. 3**, the interaction interaction agent-envrionment is shown, given an observed state $$s_t \in \mathcal{S}$$ at any particular timestep $$t$$, the agent take an action $$a_t \in \mathcal{A}$$ drawn from its policy $$\pi(a_t|s_t)$$. The environment respond with the next state $$s_{t+1}$$ and the reward $$r_{t+1}$$ produced by take action $$a_t$$. 
 
 {{<figure src="https://ericktornero.github.io/blog/images/mdp.png" title="Figure 3, Interaction in MDP">}}
+
+Either model-based or model-free methods try to compute a **policy** $$\pi(a|s)$$ that maximizes the expected reward. In the case of mode-based, the policy is computed indirectly by using the transition model $$\mathcal{P}(s',r|s, a)$$ for planning. As an example, some algorithms are explaining in the following section called: **Dynamic Programming**.
+
+### Dynamic Programming ###
+
+Dynamic programming are sets of algorithms where is assumed that the environment transition function is priorly known. The aim of RL is summarized in the following equation:
+
+$$\mathbb{E}[G_t] = \mathbb{E}_{\pi}[\sum_t \gamma^tr_t | s_t,a_t]$$
+
+$$\mathbb{E}[G_t] = \sum_s [\sum_t v(s) | a_t]$$
+
+$$v_\pi(s) = \sum_{s, r} \sum_{a} p(s'|s,a) \pi(a|s)[r + v(s)]$$
+
+
 
 ## Neural network dynamics for model-based deep reinforcement learning with model-free fine-tuning
 ### Anusha Nagabandi et al. UC Berkeley 2017
@@ -38,7 +52,6 @@ This is a resume of paper published in NeuriPS 2018 Montreal, we create a brief 
 
 This paper introduces uncertainty-aware to the dynamics model. In comparison
 
-$$TD_x = e^2$$
 
 ## Deep Dynamics Models for Learning Dexterous Manipulation
 ### Anusha Nagabandi et al. UC Berkeley 2019
