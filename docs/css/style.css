@@ -470,3 +470,15 @@ div.top > a:hover {
     overflow-y: hidden;
   }
 }
+
+figure{
+  float: right;
+  width: 100%;
+  text-align: center;
+  font-style: italic;
+  font-size: smaller;
+  text-indent: 0;
+  border: thin;
+  margin: 0.5em;
+  padding: 0.5em;
+}
