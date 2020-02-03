@@ -92,6 +92,24 @@
 &lt;/figure&gt;
 
 
+&lt;h4 id=&#34;uncertainty-propagation&#34;&gt;Uncertainty propagation:&lt;/h4&gt;
+
+&lt;p&gt;Several methods exists for the propagation in next states, this paper uses &lt;strong&gt;particle filter&lt;/strong&gt; method or known as a &lt;em&gt;Sequential Monte Carlo&lt;/em&gt;,&lt;/p&gt;
+
+&lt;figure&gt;
+    &lt;img src=&#34;https://ericktornero.github.io/blog/images/pipeline_handful.png&#34;/&gt; &lt;figcaption&gt;
+            &lt;h4&gt;Figure 5, probabilistc Ensembles&lt;/h4&gt;
+        &lt;/figcaption&gt;
+&lt;/figure&gt;
+
+
+&lt;figure&gt;
+    &lt;img src=&#34;https://ericktornero.github.io/blog/images/algorithm_handful.png&#34;/&gt; &lt;figcaption&gt;
+            &lt;h4&gt;Figure 6, probabilistc Ensembles&lt;/h4&gt;
+        &lt;/figcaption&gt;
+&lt;/figure&gt;
+
+
 &lt;h2 id=&#34;deep-dynamics-models-for-learning-dexterous-manipulation&#34;&gt;Deep Dynamics Models for Learning Dexterous Manipulation&lt;/h2&gt;
 
 &lt;h3 id=&#34;anusha-nagabandi-et-al-uc-berkeley-2019&#34;&gt;Anusha Nagabandi et al. UC Berkeley 2019&lt;/h3&gt;

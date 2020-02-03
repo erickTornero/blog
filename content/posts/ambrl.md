@@ -66,6 +66,14 @@ This uncertainty is given by the limitation of data, similar to a bayesian model
 
 {{<figure src="https://ericktornero.github.io/blog/images/epistemic_unc.png" title="Figure 4, probabilistc Ensembles">}}
 
+#### Uncertainty propagation:
+
+Several methods exists for the propagation in next states, this paper uses **particle filter** method or known as a *Sequential Monte Carlo*,
+
+{{<figure src="https://ericktornero.github.io/blog/images/pipeline_handful.png" title="Figure 5, probabilistc Ensembles">}}
+
+{{<figure src="https://ericktornero.github.io/blog/images/algorithm_handful.png" title="Figure 6, probabilistc Ensembles">}}
+
 ## Deep Dynamics Models for Learning Dexterous Manipulation
 ### Anusha Nagabandi et al. UC Berkeley 2019
 
