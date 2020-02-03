@@ -48,13 +48,27 @@ $$v_\pi(s) = \sum_{s, r} \sum_{a} p(s'|s,a) \pi(a|s)[r + v(s)]$$
 
 ## Deep Reinforcement Learning with a handful of trials with probabilistic models
 
-This is a resume of paper published in NeuriPS 2018 Montreal, we create a brief summary and the highlights of this paper
+This paper achieve interesting results reducing the gap between model-free and model-based RL in assimptotic convergence with 10x less sample iterations required, by mixing some ideas to model the uncertainty of the dynamics: These are devide into two: 
 
-This paper introduces uncertainty-aware to the dynamics model. In comparison
+**1. Aleatoric Uncertainty**: 
 
+This uncertainty is given by the stochasticity of the system, this allows to model differents variances for differents states. While the distribution over states can be assumed any tractable distribution, this paper assumed a Gaussian Distribution over states. Given by:
+
+$$\hat{f} = Pr(s_{t+1}|s_t, a_t) = \mathcal{N}(\mu_\theta(s_t, a_t), \Sigma{_\theta}(s_t,a_t))$$
+
+In that sense the loss function is given by:
+
+$$loss_{Gauss}(\theta) = \sum_{n=1}^N[\mu_\theta(s_n, a_n) - s_{n+1}]^\intercal \Sigma_\theta^{-1}(s_n, a_n)[\mu_\theta(s_n, a_n) - s_{n+1}] + \dots \newline \dots + \log\det\Sigma{_\theta}(s_n, a_n)$$
+
+**2. Epistemic Uncertainty**:
+
+This uncertainty is given by the limitation of data, similar to a bayesian model. This is made by using a simple bootstrap of ensembles. In **Fig. 4**, an example of two ensembles is shown (red and blue). In zones where there are data for training, two ensembles behaive very similar, but in zones where not, for example between the two markable zones of datapoints, each ensemble can take different behaivor, these differences represents an uncertainty due to the missing of data or *epistemic uncertainty*.
+
+{{<figure src="https://ericktornero.github.io/blog/images/epistemic_unc.png" title="Figure 4, probabilistc Ensembles">}}
 
 ## Deep Dynamics Models for Learning Dexterous Manipulation
 ### Anusha Nagabandi et al. UC Berkeley 2019
 
 ## Learning Latent Dynamics for Planning from Pixels
+
 
