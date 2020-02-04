@@ -63,7 +63,7 @@
 
 &lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[v_\pi(s) = \sum_{s, r} \sum_{a} p(s&#39;|s,a) \pi(a|s)[r + v(s)]\]&lt;/span&gt;&lt;/p&gt;
 
-&lt;hr&gt;
+&lt;hr width=90%&gt;
 
 &lt;h2 id=&#34;neural-network-dynamics-for-modelbased-deep-reinforcement-learning-with-modelfree-finetuning&#34;&gt;Neural network dynamics for model-based deep reinforcement learning with model-free fine-tuning&lt;/h2&gt;
 
@@ -78,8 +78,9 @@
 &lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[Loss_\theta = \frac{1}{\mathcal{D}} \sum_{(s_t, a_t, s_{t+1}) \in \mathcal{D}} \frac{1}{2} \Vert (s_{t+1} - s_t) - \hat{f}_\theta(s_t, a_t) \Vert^2 \tag{3}\]&lt;/span&gt;&lt;/p&gt;
 
 &lt;figure&gt;
-    &lt;img src=&#34;https://ericktornero.github.io/blog/images/anusha2017.png&#34;/&gt; &lt;figcaption&gt;
-            &lt;h4&gt;Figure 4, Pipeline Anusha paper&lt;/h4&gt;
+    &lt;img src=&#34;https://ericktornero.github.io/blog/images/anusha2017.png&#34;
+         alt=&#34;Figure 4, Pipeline Anusha paper. MPC Controller is a trajectory optimizer for planning future H actions, given a known transition function p(s&amp;#39;|s, a) and a reward function r_t = fn(s_t). The MPC just take the first action of the trajectory and replan for each time-step. Transition tuple (s_i, a_i, s_{i&amp;#43;1}) is stored in a dataset D for train the Dynamics with supervised learning and MSE Loss.&#34;/&gt; &lt;figcaption&gt;
+            &lt;p&gt;&lt;strong&gt;Figure 4&lt;/strong&gt;, Pipeline Anusha paper. MPC Controller is a trajectory optimizer for planning future H actions, given a known transition function &lt;strong&gt;p(s&#39;|s, a)&lt;/strong&gt; and a reward function &lt;strong&gt;r_t = fn(s_t)&lt;/strong&gt;. The MPC just take the first action of the trajectory and replan for each time-step. Transition tuple (s_i, a_i, s_{i+1}) is stored in a dataset D for train the Dynamics  with supervised learning and MSE Loss.&lt;/p&gt;
         &lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -89,7 +90,7 @@
 &lt;figure&gt;
     &lt;img src=&#34;https://ericktornero.github.io/blog/images/anusha2017results1.gif&#34;
          alt=&#34;Figure 5, Performance of Model-based method (left) vs Model-free with fine tuning (right), aceptable performance is show for model-based with just thousands of samples, model-free shown high performance in the convergence (millions of samples).&#34;/&gt; &lt;figcaption&gt;
-            &lt;p&gt;Figure 5, Performance of Model-based method (left) vs Model-free with fine tuning (right), aceptable performance is show for model-based with just thousands of samples, model-free shown high performance in the convergence (millions of samples).&lt;/p&gt;
+            &lt;p&gt;&lt;strong&gt;Figure 5&lt;/strong&gt;, Performance of Model-based method (left) vs Model-free with fine tuning (right), aceptable performance is show for model-based with just thousands of samples, model-free shown high performance in the convergence (millions of samples).&lt;/p&gt;
         &lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -97,10 +98,12 @@
 &lt;figure&gt;
     &lt;img src=&#34;https://ericktornero.github.io/blog/images/anusha2017results2.png&#34;
          alt=&#34;Figure 6, Performance Model-free with fine tuning (red) vs Model-free (blue) in the Swimmer environment. Here, greater sample efficient of applying fine-tuning over the previous model-based is shown. We can appreciate that is difficult or imposible for a simple model-free method to achieve the performance of a Model-based method with the same number of samples, this feature is taked in advantage to make fine-tuning&#34;/&gt; &lt;figcaption&gt;
-            &lt;p&gt;Figure 6, Performance Model-free with fine tuning (red) vs Model-free (blue) in the Swimmer environment. Here, greater sample efficient of applying fine-tuning over the previous model-based is shown. We can appreciate that is difficult or imposible for a simple model-free method to achieve the performance of a Model-based method with the same number of samples, this feature is taked in advantage to make fine-tuning&lt;/p&gt;
+            &lt;p&gt;&lt;strong&gt;Figure 6&lt;/strong&gt;, Performance Model-free with fine tuning (red) vs Model-free (blue) in the Swimmer environment. Here, greater sample efficient of applying fine-tuning over the previous model-based is shown. We can appreciate that is difficult or imposible for a simple model-free method to achieve the performance of a Model-based method with the same number of samples, this feature is taked in advantage to make fine-tuning&lt;/p&gt;
         &lt;/figcaption&gt;
 &lt;/figure&gt;
 
+
+&lt;hr width=90%&gt;
 
 &lt;h2 id=&#34;deep-reinforcement-learning-with-a-handful-of-trials-with-probabilistic-models&#34;&gt;Deep Reinforcement Learning with a handful of trials with probabilistic models&lt;/h2&gt;
 
@@ -108,7 +111,7 @@
 
 &lt;p&gt;&lt;strong&gt;1. Aleatoric Uncertainty&lt;/strong&gt;:&lt;/p&gt;
 
-&lt;p&gt;This uncertainty is given by the stochasticity of the system, e.g. noise. This allows to model differents variances for differents states. While the distribution over states can be assumed any tractable distribution, this paper assumed a Gaussian Distribution over states. Given by:&lt;/p&gt;
+&lt;p&gt;This uncertainty is given by the stochasticity of the system, e.g. noise, inherent randomness. The paper models this behaviour by outputting the mean and variance of a &lt;em&gt;Gaussian Distribution&lt;/em&gt;, It allows to model differents variances for differents states (&lt;a href=&#34;https://en.wikipedia.org/wiki/Heteroscedasticity&#34;&gt;Heterokedastic&lt;/a&gt;). While the distribution over states can be assumed any tractable distribution, this paper assumed a Gaussian Distribution over states. Given by:&lt;/p&gt;
 
 &lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[\hat{f} = Pr(s_{t+1}|s_t, a_t) = \mathcal{N}(\mu_\theta(s_t, a_t), \Sigma{_\theta}(s_t,a_t))\]&lt;/span&gt;&lt;/p&gt;
 
@@ -118,29 +121,30 @@
 
 &lt;p&gt;&lt;strong&gt;2. Epistemic Uncertainty&lt;/strong&gt;:&lt;/p&gt;
 
-&lt;p&gt;This uncertainty is given by the limitation of data, similar to a bayesian model. This is made by using a simple bootstrap of ensembles. In &lt;strong&gt;Fig. 4&lt;/strong&gt;, an example of two ensembles is shown (red and blue). In zones where there are data for training, two ensembles behaive very similar, but in zones where not, for example between the two markable zones of datapoints, each ensemble can take different behaivor, these differences represents an uncertainty due to the missing of data or &lt;em&gt;epistemic uncertainty&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;This uncertainty is given by the limitation of data. Overconfidence in zones where there are not sufficient data-training points can be fatal for prediction, epistemic uncertainty tries to model this. The paper model this by using a simple bootstrap of ensembles. In &lt;strong&gt;Fig. 4&lt;/strong&gt;, an example of two ensembles is shown (red and blue). In zones where there are data for training, the two ensembles behaive very similar, but in zones where not, for example between the two markable zones of datapoints, each ensemble can take different behaivor, these differences represents an uncertainty due to the missing of data or &lt;em&gt;epistemic uncertainty&lt;/em&gt;.&lt;/p&gt;
 
 &lt;figure&gt;
-    &lt;img src=&#34;https://ericktornero.github.io/blog/images/epistemic_unc.png&#34;/&gt; &lt;figcaption&gt;
-            &lt;h4&gt;Figure 4, probabilistc Ensembles&lt;/h4&gt;
+    &lt;img src=&#34;https://ericktornero.github.io/blog/images/epistemic_unc.png&#34;
+         alt=&#34;Figure 7, probabilistc Ensembles. Epistemic uncertainty can be seen in the center of the picture, where not data-training points appear, as a result different behaviour of the bootstrap ensembles exists. Aleatoric uncertainties can be seen in zones where there are many data-training points (Green) but still exits variance, proper of the environment.&#34;/&gt; &lt;figcaption&gt;
+            &lt;p&gt;&lt;strong&gt;Figure 7&lt;/strong&gt;, probabilistc Ensembles. Epistemic uncertainty can be seen in the center of the picture, where not data-training points appear, as a result different behaviour of the bootstrap ensembles exists. Aleatoric uncertainties can be seen in zones where there are many data-training points (Green) but still exits variance, proper of the environment.&lt;/p&gt;
         &lt;/figcaption&gt;
 &lt;/figure&gt;
 
 
 &lt;h4 id=&#34;uncertainty-propagation&#34;&gt;Uncertainty propagation:&lt;/h4&gt;
 
-&lt;p&gt;Several methods exists for the propagation in next states, this paper uses &lt;strong&gt;particle filter&lt;/strong&gt; method or known as a &lt;em&gt;Sequential Monte Carlo&lt;/em&gt;,&lt;/p&gt;
-
 &lt;figure&gt;
-    &lt;img src=&#34;https://ericktornero.github.io/blog/images/pipeline_handful.png&#34;/&gt; &lt;figcaption&gt;
-            &lt;h4&gt;Figure 5, probabilistc Ensembles&lt;/h4&gt;
+    &lt;img src=&#34;https://ericktornero.github.io/blog/images/pipeline_handful.png&#34;
+         alt=&#34;Figure 8, Pipeline. Algorithm uses both uncertainties previously presented for model the dynamics (left picture). These uncertainties is propagated through each sequence of trajectories by a particles system (center picture). The final reward for each timestep would the average of each particle at given index. MPC controller in this case Cross Entropy Method (CEM), propagate N candidates of sequences of horizon H, and evaluate the best one trajectory, then first action of best trajectory is taken.&#34;/&gt; &lt;figcaption&gt;
+            &lt;p&gt;&lt;strong&gt;Figure 8&lt;/strong&gt;, Pipeline. Algorithm uses both uncertainties previously presented for model the dynamics (left picture). These uncertainties is propagated through each sequence of trajectories by a particles system (center picture). The final reward for each timestep would the average of each particle at given index. MPC controller in this case Cross Entropy Method (CEM), propagate N candidates of sequences of horizon H, and evaluate the best one trajectory, then first action of best trajectory is taken.&lt;/p&gt;
         &lt;/figcaption&gt;
 &lt;/figure&gt;
 
 
 &lt;figure&gt;
-    &lt;img src=&#34;https://ericktornero.github.io/blog/images/algorithm_handful.png&#34;/&gt; &lt;figcaption&gt;
-            &lt;h4&gt;Figure 6, probabilistc Ensembles&lt;/h4&gt;
+    &lt;img src=&#34;https://ericktornero.github.io/blog/images/algorithm_handful.png&#34;
+         alt=&#34;Figure 9, Algorithm: PETS&#34;/&gt; &lt;figcaption&gt;
+            &lt;p&gt;&lt;strong&gt;Figure 9&lt;/strong&gt;, Algorithm: PETS&lt;/p&gt;
         &lt;/figcaption&gt;
 &lt;/figure&gt;
 

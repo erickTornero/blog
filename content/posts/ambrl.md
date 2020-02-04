@@ -42,7 +42,7 @@ $$\mathbb{E}[G_t] = \sum_s [\sum_t v(s) | a_t]$$
 $$v_\pi(s) = \sum_{s, r} \sum_{a} p(s'|s,a) \pi(a|s)[r + v(s)]$$
 
 
-<hr>
+<hr width=90%>
 
 ## Neural network dynamics for model-based deep reinforcement learning with model-free fine-tuning
 ### Anusha Nagabandi et al. UC Berkeley 2017
@@ -57,13 +57,15 @@ $$Loss_\theta = \frac{1}{\mathcal{D}} \sum_{(s_t, a_t, s_{t+1}) \in \mathcal{D}}
 
 
 
-{{<figure src="https://ericktornero.github.io/blog/images/anusha2017.png" title="Figure 4, Pipeline Anusha paper">}}
+{{<figure src="https://ericktornero.github.io/blog/images/anusha2017.png" caption="**Figure 4**, Pipeline Anusha paper. MPC Controller is a trajectory optimizer for planning future H actions, given a known transition function **p(s'|s, a)** and a reward function **r_t = fn(s_t)**. The MPC just take the first action of the trajectory and replan for each time-step. Transition tuple (s_i, a_i, s_{i+1}) is stored in a dataset D for train the Dynamics  with supervised learning and MSE Loss.">}}
 
 This method reach aceptable results in continuous tasks, this was shown in the [Mujoco Environment][mujocolink]. While this method take over 100x less interactions with respect model-free methods, this method can not achieve the assimpotic results, to reduce this gap this method, uses the previous model-based for initialize a model-free method (*PPO*), this is particular useful for model-free becouse model-free performance based on the probability to see good interactions, and model-based can achieve this with few samples, resulting in a faster convergence for model-free methods as can be seen in **Fig. 5** and **Fig. 6** (*fine-tuning*).
 
-{{<figure src="https://ericktornero.github.io/blog/images/anusha2017results1.gif" caption="Figure 5, Performance of Model-based method (left) vs Model-free with fine tuning (right), aceptable performance is show for model-based with just thousands of samples, model-free shown high performance in the convergence (millions of samples).">}}
+{{<figure src="https://ericktornero.github.io/blog/images/anusha2017results1.gif" caption="**Figure 5**, Performance of Model-based method (left) vs Model-free with fine tuning (right), aceptable performance is show for model-based with just thousands of samples, model-free shown high performance in the convergence (millions of samples).">}}
 
-{{<figure src="https://ericktornero.github.io/blog/images/anusha2017results2.png" caption="Figure 6, Performance Model-free with fine tuning (red) vs Model-free (blue) in the Swimmer environment. Here, greater sample efficient of applying fine-tuning over the previous model-based is shown. We can appreciate that is difficult or imposible for a simple model-free method to achieve the performance of a Model-based method with the same number of samples, this feature is taked in advantage to make fine-tuning">}}
+{{<figure src="https://ericktornero.github.io/blog/images/anusha2017results2.png" caption="**Figure 6**, Performance Model-free with fine tuning (red) vs Model-free (blue) in the Swimmer environment. Here, greater sample efficient of applying fine-tuning over the previous model-based is shown. We can appreciate that is difficult or imposible for a simple model-free method to achieve the performance of a Model-based method with the same number of samples, this feature is taked in advantage to make fine-tuning">}}
+
+<hr width=90%>
 
 ## Deep Reinforcement Learning with a handful of trials with probabilistic models
 
@@ -71,7 +73,7 @@ This paper achieve interesting results reducing the gap between model-free and m
 
 **1. Aleatoric Uncertainty**: 
 
-This uncertainty is given by the stochasticity of the system, e.g. noise. This allows to model differents variances for differents states. While the distribution over states can be assumed any tractable distribution, this paper assumed a Gaussian Distribution over states. Given by:
+This uncertainty is given by the stochasticity of the system, e.g. noise, inherent randomness. The paper models this behaviour by outputting the mean and variance of a *Gaussian Distribution*, It allows to model differents variances for differents states ([Heterokedastic][heterokedasticlink]). While the distribution over states can be assumed any tractable distribution, this paper assumed a Gaussian Distribution over states. Given by:
 
 $$\hat{f} = Pr(s_{t+1}|s_t, a_t) = \mathcal{N}(\mu_\theta(s_t, a_t), \Sigma{_\theta}(s_t,a_t))$$
 
@@ -81,17 +83,15 @@ $$loss_{Gauss}(\theta) = \sum_{n=1}^N[\mu_\theta(s_n, a_n) - s_{n+1}]^\intercal 
 
 **2. Epistemic Uncertainty**:
 
-This uncertainty is given by the limitation of data, similar to a bayesian model. This is made by using a simple bootstrap of ensembles. In **Fig. 4**, an example of two ensembles is shown (red and blue). In zones where there are data for training, two ensembles behaive very similar, but in zones where not, for example between the two markable zones of datapoints, each ensemble can take different behaivor, these differences represents an uncertainty due to the missing of data or *epistemic uncertainty*.
+This uncertainty is given by the limitation of data. Overconfidence in zones where there are not sufficient data-training points can be fatal for prediction, epistemic uncertainty tries to model this. The paper model this by using a simple bootstrap of ensembles. In **Fig. 4**, an example of two ensembles is shown (red and blue). In zones where there are data for training, the two ensembles behaive very similar, but in zones where not, for example between the two markable zones of datapoints, each ensemble can take different behaivor, these differences represents an uncertainty due to the missing of data or *epistemic uncertainty*.
 
-{{<figure src="https://ericktornero.github.io/blog/images/epistemic_unc.png" title="Figure 4, probabilistc Ensembles">}}
+{{<figure src="https://ericktornero.github.io/blog/images/epistemic_unc.png" caption="**Figure 7**, probabilistc Ensembles. Epistemic uncertainty can be seen in the center of the picture, where not data-training points appear, as a result different behaviour of the bootstrap ensembles exists. Aleatoric uncertainties can be seen in zones where there are many data-training points (Green) but still exits variance, proper of the environment.">}}
 
 #### Uncertainty propagation:
 
-Several methods exists for the propagation in next states, this paper uses **particle filter** method or known as a *Sequential Monte Carlo*,
+{{<figure src="https://ericktornero.github.io/blog/images/pipeline_handful.png" caption="**Figure 8**, Pipeline. Algorithm uses both uncertainties previously presented for model the dynamics (left picture). These uncertainties is propagated through each sequence of trajectories by a particles system (center picture). The final reward for each timestep would the average of each particle at given index. MPC controller in this case Cross Entropy Method (CEM), propagate N candidates of sequences of horizon H, and evaluate the best one trajectory, then first action of best trajectory is taken.">}}
 
-{{<figure src="https://ericktornero.github.io/blog/images/pipeline_handful.png" title="Figure 5, probabilistc Ensembles">}}
-
-{{<figure src="https://ericktornero.github.io/blog/images/algorithm_handful.png" title="Figure 6, probabilistc Ensembles">}}
+{{<figure src="https://ericktornero.github.io/blog/images/algorithm_handful.png" caption="**Figure 9**, Algorithm: PETS">}}
 
 <hr>
 ## Deep Dynamics Models for Learning Dexterous Manipulation
@@ -104,4 +104,4 @@ Several methods exists for the propagation in next states, this paper uses **par
 
 [mujocolink]: http://www.mujoco.org/
 [mselink]: https://en.wikipedia.org/wiki/Mean_squared_error
-[fhattheta]: $$\hat{f}_\theta$$
+[heterokedasticlink]: https://en.wikipedia.org/wiki/Heteroscedasticity
