@@ -42,15 +42,28 @@ $$\mathbb{E}[G_t] = \sum_s [\sum_t v(s) | a_t]$$
 $$v_\pi(s) = \sum_{s, r} \sum_{a} p(s'|s,a) \pi(a|s)[r + v(s)]$$
 
 
+<hr>
 
 ## Neural network dynamics for model-based deep reinforcement learning with model-free fine-tuning
 ### Anusha Nagabandi et al. UC Berkeley 2017
 
-This paper proposes deterministic Neural Network for Model-based Reinforcement for solving continuous taks. This paper achieve aceptable results in continuous tasks in the [Mujoco Environment][mujocolink].
+This paper proposes deterministic Neural Network for Model-based Reinforcement for solving continuous taks. The pipeline is shown in **Fig. 4**, a Neural Network $$\hat{f}_\theta$$ models the dynamics of the environment and is trained as a multidimensional regression in a deterministic way using [MSE Loss][mselink] function (**Eq. 3**). The *MPC Controller* laverage the knowledge of the transition function $$\hat{f}_{\theta}$$ to predict the next state $$\hat{s}_{t+1}$$ given a current state $$s_t$$ and an action taken $$a_t$$ as in **Eq. 1**. Then this used for multistep prediction of *horizon* $$H$$ by recursively applying the **Eq. 1** $$H$$ times (**Eq. 2**). Note that reward is a function over states $$r_t = fn(s_t)$$, then if the state $$s_t$$ is predicted by **Eq. 1**, reward is approximate by $$\hat{r}_{t+i} = fn(\hat{s}_{t+i})$$. 
+
+$$\hat{s}_{t+1} = s_t + \hat{f}_\theta(s_t, a_t)\tag{1}$$
+
+$$\hat{s}_{t+i} = \hat{f}_\theta(\dots(\hat{f}_\theta(\hat{f}_\theta(s_t, a_t), a_{t+1})\dots, a_{t+i}) \tag{2}$$
+
+$$Loss_\theta = \frac{1}{\mathcal{D}} \sum_{(s_t, a_t, s_{t+1}) \in \mathcal{D}} \frac{1}{2} \Vert (s_{t+1} - s_t) - \hat{f}_\theta(s_t, a_t) \Vert^2 \tag{3}$$
+
+
 
 {{<figure src="https://ericktornero.github.io/blog/images/anusha2017.png" title="Figure 4, Pipeline Anusha paper">}}
 
-{{<figure src="https://ericktornero.github.io/blog/images/anusha2017results1.gif">}}
+This method reach aceptable results in continuous tasks, this was shown in the [Mujoco Environment][mujocolink]. While this method take over 100x less interactions with respect model-free methods, this method can not achieve the assimpotic results, to reduce this gap this method, uses the previous model-based for initialize a model-free method (*PPO*), this is particular useful for model-free becouse model-free performance based on the probability to see good interactions, and model-based can achieve this with few samples, resulting in a faster convergence for model-free methods as can be seen in **Fig. 5** and **Fig. 6** (*fine-tuning*).
+
+{{<figure src="https://ericktornero.github.io/blog/images/anusha2017results1.gif" caption="Figure 5, Performance of Model-based method (left) vs Model-free with fine tuning (right), aceptable performance is show for model-based with just thousands of samples, model-free shown high performance in the convergence (millions of samples).">}}
+
+{{<figure src="https://ericktornero.github.io/blog/images/anusha2017results2.png" caption="Figure 6, Performance Model-free with fine tuning (red) vs Model-free (blue). Here, greater sample efficient of applying fine-tuning over the previous model-based is shown. We can appreciate that is difficult or imposible for a simple model-free method to achieve the performance of a Model-based method with the same number of samples, this feature is taked in advantage to make fine-tuning">}}
 
 ## Deep Reinforcement Learning with a handful of trials with probabilistic models
 
@@ -80,6 +93,7 @@ Several methods exists for the propagation in next states, this paper uses **par
 
 {{<figure src="https://ericktornero.github.io/blog/images/algorithm_handful.png" title="Figure 6, probabilistc Ensembles">}}
 
+<hr>
 ## Deep Dynamics Models for Learning Dexterous Manipulation
 ### Anusha Nagabandi et al. UC Berkeley 2019
 
@@ -89,3 +103,5 @@ Several methods exists for the propagation in next states, this paper uses **par
 
 
 [mujocolink]: http://www.mujoco.org/
+[mselink]: https://en.wikipedia.org/wiki/Mean_squared_error
+[fhattheta]: $$\hat{f}_\theta$$

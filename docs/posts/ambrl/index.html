@@ -113,11 +113,19 @@
 
 <p><span  class="math">\[v_\pi(s) = \sum_{s, r} \sum_{a} p(s'|s,a) \pi(a|s)[r + v(s)]\]</span></p>
 
+<hr>
+
 <h2 id="neural-network-dynamics-for-modelbased-deep-reinforcement-learning-with-modelfree-finetuning">Neural network dynamics for model-based deep reinforcement learning with model-free fine-tuning</h2>
 
 <h3 id="anusha-nagabandi-et-al-uc-berkeley-2017">Anusha Nagabandi et al. UC Berkeley 2017</h3>
 
-<p>This paper proposes deterministic Neural Network for Model-based Reinforcement for solving continuous taks. This paper achieve aceptable results in continuous tasks in the <a href="http://www.mujoco.org/">Mujoco Environment</a>.</p>
+<p>This paper proposes deterministic Neural Network for Model-based Reinforcement for solving continuous taks. The pipeline is shown in <strong>Fig. 4</strong>, a Neural Network <span  class="math">\(\hat{f}_\theta\)</span> models the dynamics of the environment and is trained as a multidimensional regression in a deterministic way using <a href="https://en.wikipedia.org/wiki/Mean_squared_error">MSE Loss</a> function (<strong>Eq. 3</strong>). The <em>MPC Controller</em> laverage the knowledge of the transition function <span  class="math">\(\hat{f}_{\theta}\)</span> to predict the next state <span  class="math">\(\hat{s}_{t+1}\)</span> given a current state <span  class="math">\(s_t\)</span> and an action taken <span  class="math">\(a_t\)</span> as in <strong>Eq. 1</strong>. Then this used for multistep prediction of <em>horizon</em> <span  class="math">\(H\)</span> by recursively applying the <strong>Eq. 1</strong> <span  class="math">\(H\)</span> times (<strong>Eq. 2</strong>). Note that reward is a function over states <span  class="math">\(r_t = fn(s_t)\)</span>, then if the state <span  class="math">\(s_t\)</span> is predicted by <strong>Eq. 1</strong>, reward is approximate by <span  class="math">\(\hat{r}_{t+i} = fn(\hat{s}_{t+i})\)</span>.</p>
+
+<p><span  class="math">\[\hat{s}_{t+1} = s_t + \hat{f}_\theta(s_t, a_t)\tag{1}\]</span></p>
+
+<p><span  class="math">\[\hat{s}_{t+i} = \hat{f}_\theta(\dots(\hat{f}_\theta(\hat{f}_\theta(s_t, a_t), a_{t+1})\dots, a_{t+i}) \tag{2}\]</span></p>
+
+<p><span  class="math">\[Loss_\theta = \frac{1}{\mathcal{D}} \sum_{(s_t, a_t, s_{t+1}) \in \mathcal{D}} \frac{1}{2} \Vert (s_{t+1} - s_t) - \hat{f}_\theta(s_t, a_t) \Vert^2 \tag{3}\]</span></p>
 
 <figure>
     <img src="https://ericktornero.github.io/blog/images/anusha2017.png"/> <figcaption>
@@ -126,8 +134,21 @@
 </figure>
 
 
+<p>This method reach aceptable results in continuous tasks, this was shown in the <a href="http://www.mujoco.org/">Mujoco Environment</a>. While this method take over 100x less interactions with respect model-free methods, this method can not achieve the assimpotic results, to reduce this gap this method, uses the previous model-based for initialize a model-free method (<em>PPO</em>), this is particular useful for model-free becouse model-free performance based on the probability to see good interactions, and model-based can achieve this with few samples, resulting in a faster convergence for model-free methods as can be seen in <strong>Fig. 5</strong> and <strong>Fig. 6</strong> (<em>fine-tuning</em>).</p>
+
 <figure>
-    <img src="https://ericktornero.github.io/blog/images/anusha2017results1.gif"/> 
+    <img src="https://ericktornero.github.io/blog/images/anusha2017results1.gif"
+         alt="Figure 5, Performance of Model-based method (left) vs Model-free with fine tuning (right), aceptable performance is show for model-based with just thousands of samples, model-free shown high performance in the convergence (millions of samples)."/> <figcaption>
+            <p>Figure 5, Performance of Model-based method (left) vs Model-free with fine tuning (right), aceptable performance is show for model-based with just thousands of samples, model-free shown high performance in the convergence (millions of samples).</p>
+        </figcaption>
+</figure>
+
+
+<figure>
+    <img src="https://ericktornero.github.io/blog/images/anusha2017results2.png"
+         alt="Figure 6, Performance Model-free with fine tuning (red) vs Model-free (blue). Here, greater sample efficient of applying fine-tuning over the previous model-based is shown. We can appreciate that is difficult or imposible for a simple model-free method to achieve the performance of a Model-based method with the same number of samples, this feature is taked in advantage to make fine-tuning"/> <figcaption>
+            <p>Figure 6, Performance Model-free with fine tuning (red) vs Model-free (blue). Here, greater sample efficient of applying fine-tuning over the previous model-based is shown. We can appreciate that is difficult or imposible for a simple model-free method to achieve the performance of a Model-based method with the same number of samples, this feature is taked in advantage to make fine-tuning</p>
+        </figcaption>
 </figure>
 
 
@@ -173,6 +194,8 @@
         </figcaption>
 </figure>
 
+
+<hr>
 
 <h2 id="deep-dynamics-models-for-learning-dexterous-manipulation">Deep Dynamics Models for Learning Dexterous Manipulation</h2>
 
