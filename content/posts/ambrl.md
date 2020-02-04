@@ -17,7 +17,7 @@ Model-based reinforcement learning is a branch in Reinforcement Learning where t
 {{<figure src="https://ericktornero.github.io/blog/images/squeme_mbmf.png" title="Figure 1, Taken from [1]">}}
 
 
-The basic form of model-based reinforcement learning can be seen in **Dynamic Programming**, which is assumed a prior knowledge over the dynamics or the transition function. However, in the real world, the dynamics are usually unknown and can be very complex to model. For these kinds of problems, model learning can be used just as supervised learning. In **Fig. 2**, the left picture shows a Simple Gridworld example with a discrete state and actions. In this case the transition function is known, for example $$P(s_2|s_1,right)=1.0$$ and $$P(s_2|s_1, left)=0.0$$, where $$s_x$$: represents the slot $$x \in \{0, 15\}$$. In the right picture, Halfcheetah in the [Mujoco Environment](http://www.mujoco.org/) is shown, where a priory of the dynamics of this environment is unknown and complex. 
+The basic form of model-based reinforcement learning can be seen in **Dynamic Programming**, which is assumed a prior knowledge over the dynamics or the transition function. However, in the real world, the dynamics are usually unknown and can be very complex to model. For these kinds of problems, model learning can be used just as supervised learning. In **Fig. 2**, the left picture shows a Simple Gridworld example with a discrete state and actions. In this case the transition function is known, for example $$P(s_2|s_1,right)=1.0$$ and $$P(s_2|s_1, left)=0.0$$, where $$s_x$$: represents the slot $$x \in \{0, 15\}$$. In the right picture, Halfcheetah in the [Mujoco Environment][mujocolink] is shown, where a priory of the dynamics of this environment is unknown and complex. 
 
 {{<figure src="https://ericktornero.github.io/blog/images/gridworld_hchetaah.png" title="Figure 2, left: Gridworld environment, taken from [1]. Right: Halfcheetah Environment">}}
 
@@ -46,13 +46,19 @@ $$v_\pi(s) = \sum_{s, r} \sum_{a} p(s'|s,a) \pi(a|s)[r + v(s)]$$
 ## Neural network dynamics for model-based deep reinforcement learning with model-free fine-tuning
 ### Anusha Nagabandi et al. UC Berkeley 2017
 
+This paper proposes deterministic Neural Network for Model-based Reinforcement for solving continuous taks. This paper achieve aceptable results in continuous tasks in the [Mujoco Environment][mujocolink].
+
+{{<figure src="https://ericktornero.github.io/blog/images/anusha2017.png" title="Figure 4, Pipeline Anusha paper">}}
+
+{{<figure src="https://ericktornero.github.io/blog/images/anusha2017results1.gif">}}
+
 ## Deep Reinforcement Learning with a handful of trials with probabilistic models
 
-This paper achieve interesting results reducing the gap between model-free and model-based RL in assimptotic convergence with 10x less sample iterations required, by mixing some ideas to model the uncertainty of the dynamics: These are devide into two: 
+This paper achieve interesting results reducing the gap between model-free and model-based RL in assimptotic performance with 10x less sample iterations required, by mixing some ideas to model the uncertainty of the dynamics: These uncertainties are devide into two: 
 
 **1. Aleatoric Uncertainty**: 
 
-This uncertainty is given by the stochasticity of the system, this allows to model differents variances for differents states. While the distribution over states can be assumed any tractable distribution, this paper assumed a Gaussian Distribution over states. Given by:
+This uncertainty is given by the stochasticity of the system, e.g. noise. This allows to model differents variances for differents states. While the distribution over states can be assumed any tractable distribution, this paper assumed a Gaussian Distribution over states. Given by:
 
 $$\hat{f} = Pr(s_{t+1}|s_t, a_t) = \mathcal{N}(\mu_\theta(s_t, a_t), \Sigma{_\theta}(s_t,a_t))$$
 
@@ -80,3 +86,6 @@ Several methods exists for the propagation in next states, this paper uses **par
 ## Learning Latent Dynamics for Planning from Pixels
 
 
+
+
+[mujocolink]: http://www.mujoco.org/

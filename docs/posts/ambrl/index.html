@@ -117,13 +117,27 @@
 
 <h3 id="anusha-nagabandi-et-al-uc-berkeley-2017">Anusha Nagabandi et al. UC Berkeley 2017</h3>
 
+<p>This paper proposes deterministic Neural Network for Model-based Reinforcement for solving continuous taks. This paper achieve aceptable results in continuous tasks in the <a href="http://www.mujoco.org/">Mujoco Environment</a>.</p>
+
+<figure>
+    <img src="https://ericktornero.github.io/blog/images/anusha2017.png"/> <figcaption>
+            <h4>Figure 4, Pipeline Anusha paper</h4>
+        </figcaption>
+</figure>
+
+
+<figure>
+    <img src="https://ericktornero.github.io/blog/images/anusha2017results1.gif"/> 
+</figure>
+
+
 <h2 id="deep-reinforcement-learning-with-a-handful-of-trials-with-probabilistic-models">Deep Reinforcement Learning with a handful of trials with probabilistic models</h2>
 
-<p>This paper achieve interesting results reducing the gap between model-free and model-based RL in assimptotic convergence with 10x less sample iterations required, by mixing some ideas to model the uncertainty of the dynamics: These are devide into two:</p>
+<p>This paper achieve interesting results reducing the gap between model-free and model-based RL in assimptotic performance with 10x less sample iterations required, by mixing some ideas to model the uncertainty of the dynamics: These uncertainties are devide into two:</p>
 
 <p><strong>1. Aleatoric Uncertainty</strong>:</p>
 
-<p>This uncertainty is given by the stochasticity of the system, this allows to model differents variances for differents states. While the distribution over states can be assumed any tractable distribution, this paper assumed a Gaussian Distribution over states. Given by:</p>
+<p>This uncertainty is given by the stochasticity of the system, e.g. noise. This allows to model differents variances for differents states. While the distribution over states can be assumed any tractable distribution, this paper assumed a Gaussian Distribution over states. Given by:</p>
 
 <p><span  class="math">\[\hat{f} = Pr(s_{t+1}|s_t, a_t) = \mathcal{N}(\mu_\theta(s_t, a_t), \Sigma{_\theta}(s_t,a_t))\]</span></p>
 
