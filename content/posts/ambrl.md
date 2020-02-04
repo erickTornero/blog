@@ -17,7 +17,7 @@ Model-based reinforcement learning is a branch in Reinforcement Learning where t
 {{<figure src="https://ericktornero.github.io/blog/images/squeme_mbmf.png" title="Figure 1, Taken from [1]">}}
 
 
-The basic form of model-based reinforcement learning can be seen in **Dynamic Programming**, which is assumed a prior knowledge over the dynamics or the transition function. However, in the real world, the dynamics are usually unknown and can be very complex to model. For these kinds of problems, model learning can be used just as supervised learning. In **Fig. 2**, the left picture shows a Simple Gridworld example with a discrete state and actions. In this case the transition function is known, for example $$P(s_2|s_1,right)=1.0$$ and $$P(s_2|s_1, left)=0.0$$, where $$s_x$$: represents the slot $$x \in \{0, 15\}$$. In the right picture, Halfcheetah in the [Mujoco Environment][mujocolink] is shown, where a priory of the dynamics of this environment is unknown and complex. 
+The basic form of model-based reinforcement learning can be seen in **Dynamic Programming**, where is assumed a prior knowledge over the dynamics or the transition function. However, in the real world, the dynamics are usually unknown and can be very complex to model. For these kinds of problems, model learning can be used just as supervised learning. In **Fig. 2**, the left picture shows a Simple Gridworld example with a discrete state and actions. In this case the transition function is known, for example $$P(s_2|s_1,right)=1.0$$ and $$P(s_2|s_1, left)=0.0$$, where $$s_x$$: represents the slot $$x \in \{0, 15\}$$. In the right picture, an environment more approximate to real world is shown: Halfcheetah in [Mujoco Environment][mujocolink], where the dynamics of this environment is unknown and complex. 
 
 {{<figure src="https://ericktornero.github.io/blog/images/gridworld_hchetaah.png" title="Figure 2, left: Gridworld environment, taken from [1]. Right: Halfcheetah Environment">}}
 
@@ -63,7 +63,7 @@ This method reach aceptable results in continuous tasks, this was shown in the [
 
 {{<figure src="https://ericktornero.github.io/blog/images/anusha2017results1.gif" caption="Figure 5, Performance of Model-based method (left) vs Model-free with fine tuning (right), aceptable performance is show for model-based with just thousands of samples, model-free shown high performance in the convergence (millions of samples).">}}
 
-{{<figure src="https://ericktornero.github.io/blog/images/anusha2017results2.png" caption="Figure 6, Performance Model-free with fine tuning (red) vs Model-free (blue). Here, greater sample efficient of applying fine-tuning over the previous model-based is shown. We can appreciate that is difficult or imposible for a simple model-free method to achieve the performance of a Model-based method with the same number of samples, this feature is taked in advantage to make fine-tuning">}}
+{{<figure src="https://ericktornero.github.io/blog/images/anusha2017results2.png" caption="Figure 6, Performance Model-free with fine tuning (red) vs Model-free (blue) in the Swimmer environment. Here, greater sample efficient of applying fine-tuning over the previous model-based is shown. We can appreciate that is difficult or imposible for a simple model-free method to achieve the performance of a Model-based method with the same number of samples, this feature is taked in advantage to make fine-tuning">}}
 
 ## Deep Reinforcement Learning with a handful of trials with probabilistic models
 

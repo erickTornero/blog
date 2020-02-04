@@ -79,7 +79,7 @@
 </figure>
 
 
-<p>The basic form of model-based reinforcement learning can be seen in <strong>Dynamic Programming</strong>, which is assumed a prior knowledge over the dynamics or the transition function. However, in the real world, the dynamics are usually unknown and can be very complex to model. For these kinds of problems, model learning can be used just as supervised learning. In <strong>Fig. 2</strong>, the left picture shows a Simple Gridworld example with a discrete state and actions. In this case the transition function is known, for example <span  class="math">\(P(s_2|s_1,right)=1.0\)</span> and <span  class="math">\(P(s_2|s_1, left)=0.0\)</span>, where <span  class="math">\(s_x\)</span>: represents the slot <span  class="math">\(x \in \{0, 15\}\)</span>. In the right picture, Halfcheetah in the <a href="http://www.mujoco.org/">Mujoco Environment</a> is shown, where a priory of the dynamics of this environment is unknown and complex.</p>
+<p>The basic form of model-based reinforcement learning can be seen in <strong>Dynamic Programming</strong>, where is assumed a prior knowledge over the dynamics or the transition function. However, in the real world, the dynamics are usually unknown and can be very complex to model. For these kinds of problems, model learning can be used just as supervised learning. In <strong>Fig. 2</strong>, the left picture shows a Simple Gridworld example with a discrete state and actions. In this case the transition function is known, for example <span  class="math">\(P(s_2|s_1,right)=1.0\)</span> and <span  class="math">\(P(s_2|s_1, left)=0.0\)</span>, where <span  class="math">\(s_x\)</span>: represents the slot <span  class="math">\(x \in \{0, 15\}\)</span>. In the right picture, an environment more approximate to real world is shown: Halfcheetah in <a href="http://www.mujoco.org/">Mujoco Environment</a>, where the dynamics of this environment is unknown and complex.</p>
 
 <figure>
     <img src="https://ericktornero.github.io/blog/images/gridworld_hchetaah.png"/> <figcaption>
@@ -146,8 +146,8 @@
 
 <figure>
     <img src="https://ericktornero.github.io/blog/images/anusha2017results2.png"
-         alt="Figure 6, Performance Model-free with fine tuning (red) vs Model-free (blue). Here, greater sample efficient of applying fine-tuning over the previous model-based is shown. We can appreciate that is difficult or imposible for a simple model-free method to achieve the performance of a Model-based method with the same number of samples, this feature is taked in advantage to make fine-tuning"/> <figcaption>
-            <p>Figure 6, Performance Model-free with fine tuning (red) vs Model-free (blue). Here, greater sample efficient of applying fine-tuning over the previous model-based is shown. We can appreciate that is difficult or imposible for a simple model-free method to achieve the performance of a Model-based method with the same number of samples, this feature is taked in advantage to make fine-tuning</p>
+         alt="Figure 6, Performance Model-free with fine tuning (red) vs Model-free (blue) in the Swimmer environment. Here, greater sample efficient of applying fine-tuning over the previous model-based is shown. We can appreciate that is difficult or imposible for a simple model-free method to achieve the performance of a Model-based method with the same number of samples, this feature is taked in advantage to make fine-tuning"/> <figcaption>
+            <p>Figure 6, Performance Model-free with fine tuning (red) vs Model-free (blue) in the Swimmer environment. Here, greater sample efficient of applying fine-tuning over the previous model-based is shown. We can appreciate that is difficult or imposible for a simple model-free method to achieve the performance of a Model-based method with the same number of samples, this feature is taked in advantage to make fine-tuning</p>
         </figcaption>
 </figure>
 
