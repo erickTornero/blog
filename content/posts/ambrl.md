@@ -104,15 +104,35 @@ This uncertainty is given by the limitation of data. Overconfidence in zones whe
 ### Anusha Nagabandi et al. UC Berkeley 2019
 [[See paper](https://arxiv.org/pdf/1909.11652.pdf)]
 
-This paper is an extention of the previous paper *DRL with a handful of trials using probabilistic models*. It also models aleatoric and epistemic uncertainties with Gaussian parametrization via Neural Networks and with Ensembles bootstrap respectively. The main contributions is the mixing with a *Filtering and Reward-Weighted Refinement (MPPI)* for the *Model Predictive Control*, this is described in following equations:
+This paper is an extention of the previous paper *DRL with a handful of trials using probabilistic models*. It also models aleatoric and epistemic uncertainties with Gaussian parametrization via Neural Networks and with Ensembles bootstrap respectively. The main contributions is an extension for (MPPI) algorithm that uses weighted rewards. MPPI uses random sampling techniques to explore actions near to the control sequence, instead in this paper a *Filtering* techniques is added to add dependencies of previous timesteps:
 
-$$\mu_t = \frac{\sum_{k=0}^N (e^{\gamma R_k})(a_t^{(k)})}{\sum_{j=0}^N e^{\gamma R_j}} \hspace{0.25cm} \forall t \in \{0\dots H-1\}$$
+**Filtering and reward weighted refinement overview**:
+
+Given a sequence control:
+
+$$(\mu_0, \mu_1, \dots, \mu_{H-1})$$
+
+It is assumed that the control sequence is a future sequence of lenght $$H$$, and $$\mu_0$$ should be the control input to be taken. Noises is added in the following way:
 
 $$u_t^i \sim \mathcal{N}(0, \Sigma) \hspace{0.25cm} \forall i \in \{0\dots N-1\}, t \in \{0\dots H-1\}$$
 
 $$n_t^i = \beta u_t^i + (1 - \beta) n_{t-1}^i \hspace{0.25cm}\text{where}\hspace{0.25cm} n_{t<0} = 0$$
 
+Then each action for H (index $$t$$) horizon for N (index $$i$$) candidates is computed as:
+
 $$a_t^i = \mu_t + n_t^i$$
+
+With the previous actions sequence for N candidates, the predicted states is computed with the dynamics model, then the reward $$R_k$$ is computed for each trajectory. Then the new mean is computed through the weighted reward.
+
+$$\mu_t = \frac{\sum_{k=0}^N (e^{\gamma R_k})(a_t^{(k)})}{\sum_{j=0}^N e^{\gamma R_j}} \hspace{0.25cm} \forall t \in \{0\dots H-1\}$$
+
+Now, the new trajectory is optimized $$\mu_{0:H-1}$$, but just the first action is taken: **$$\mu_0$$**.
+
+Update the control sequence as, and repeat the process:
+
+$$\mu_i = \mu_{i+1} \hspace{0.25cm} \forall i \in {0\dots H-1}$$
+
+
 ## Learning Latent Dynamics for Planning from Pixels
 
 

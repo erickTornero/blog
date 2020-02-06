@@ -213,15 +213,33 @@
 
 <p>[<a href="https://arxiv.org/pdf/1909.11652.pdf">See paper</a>]</p>
 
-<p>This paper is an extention of the previous paper <em>DRL with a handful of trials using probabilistic models</em>. It also models aleatoric and epistemic uncertainties with Gaussian parametrization via Neural Networks and with Ensembles bootstrap respectively. The main contributions is the mixing with a <em>Filtering and Reward-Weighted Refinement (MPPI)</em> for the <em>Model Predictive Control</em>, this is described in following equations:</p>
+<p>This paper is an extention of the previous paper <em>DRL with a handful of trials using probabilistic models</em>. It also models aleatoric and epistemic uncertainties with Gaussian parametrization via Neural Networks and with Ensembles bootstrap respectively. The main contributions is an extension for (MPPI) algorithm that uses weighted rewards. MPPI uses random sampling techniques to explore actions near to the control sequence, instead in this paper a <em>Filtering</em> techniques is added to add dependencies of previous timesteps:</p>
 
-<p><span  class="math">\[\mu_t = \frac{\sum_{k=0}^N (e^{\gamma R_k})(a_t^{(k)})}{\sum_{j=0}^N e^{\gamma R_j}} \hspace{0.25cm} \forall t \in \{0\dots H-1\}\]</span></p>
+<p><strong>Filtering and reward weighted refinement overview</strong>:</p>
+
+<p>Given a sequence control:</p>
+
+<p><span  class="math">\[(\mu_0, \mu_1, \dots, \mu_{H-1})\]</span></p>
+
+<p>It is assumed that the control sequence is a future sequence of lenght <span  class="math">\(H\)</span>, and <span  class="math">\(\mu_0\)</span> should be the control input to be taken. Noises is added in the following way:</p>
 
 <p><span  class="math">\[u_t^i \sim \mathcal{N}(0, \Sigma) \hspace{0.25cm} \forall i \in \{0\dots N-1\}, t \in \{0\dots H-1\}\]</span></p>
 
 <p><span  class="math">\[n_t^i = \beta u_t^i + (1 - \beta) n_{t-1}^i \hspace{0.25cm}\text{where}\hspace{0.25cm} n_{t<0} = 0\]</span></p>
 
+<p>Then each action for H (index <span  class="math">\(t\)</span>) horizon for N (index <span  class="math">\(i\)</span>) candidates is computed as:</p>
+
 <p><span  class="math">\[a_t^i = \mu_t + n_t^i\]</span></p>
+
+<p>With the previous actions sequence for N candidates, the predicted states is computed with the dynamics model, then the reward <span  class="math">\(R_k\)</span> is computed for each trajectory. Then the new mean is computed through the weighted reward.</p>
+
+<p><span  class="math">\[\mu_t = \frac{\sum_{k=0}^N (e^{\gamma R_k})(a_t^{(k)})}{\sum_{j=0}^N e^{\gamma R_j}} \hspace{0.25cm} \forall t \in \{0\dots H-1\}\]</span></p>
+
+<p>Now, the new trajectory is optimized <span  class="math">\(\mu_{0:H-1}\)</span>, but just the first action is taken: <strong><span  class="math">\(\mu_0\)</span></strong>.</p>
+
+<p>Update the control sequence as, and repeat the process:</p>
+
+<p><span  class="math">\[\mu_i = \mu_{i+1} \hspace{0.25cm} \forall i \in {0\dots H-1}\]</span></p>
 
 <h2 id="learning-latent-dynamics-for-planning-from-pixels">Learning Latent Dynamics for Planning from Pixels</h2>
         </section>

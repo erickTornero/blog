@@ -163,15 +163,33 @@
 
 &lt;p&gt;[&lt;a href=&#34;https://arxiv.org/pdf/1909.11652.pdf&#34;&gt;See paper&lt;/a&gt;]&lt;/p&gt;
 
-&lt;p&gt;This paper is an extention of the previous paper &lt;em&gt;DRL with a handful of trials using probabilistic models&lt;/em&gt;. It also models aleatoric and epistemic uncertainties with Gaussian parametrization via Neural Networks and with Ensembles bootstrap respectively. The main contributions is the mixing with a &lt;em&gt;Filtering and Reward-Weighted Refinement (MPPI)&lt;/em&gt; for the &lt;em&gt;Model Predictive Control&lt;/em&gt;, this is described in following equations:&lt;/p&gt;
+&lt;p&gt;This paper is an extention of the previous paper &lt;em&gt;DRL with a handful of trials using probabilistic models&lt;/em&gt;. It also models aleatoric and epistemic uncertainties with Gaussian parametrization via Neural Networks and with Ensembles bootstrap respectively. The main contributions is an extension for (MPPI) algorithm that uses weighted rewards. MPPI uses random sampling techniques to explore actions near to the control sequence, instead in this paper a &lt;em&gt;Filtering&lt;/em&gt; techniques is added to add dependencies of previous timesteps:&lt;/p&gt;
 
-&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[\mu_t = \frac{\sum_{k=0}^N (e^{\gamma R_k})(a_t^{(k)})}{\sum_{j=0}^N e^{\gamma R_j}} \hspace{0.25cm} \forall t \in \{0\dots H-1\}\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Filtering and reward weighted refinement overview&lt;/strong&gt;:&lt;/p&gt;
+
+&lt;p&gt;Given a sequence control:&lt;/p&gt;
+
+&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[(\mu_0, \mu_1, \dots, \mu_{H-1})\]&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;It is assumed that the control sequence is a future sequence of lenght &lt;span  class=&#34;math&#34;&gt;\(H\)&lt;/span&gt;, and &lt;span  class=&#34;math&#34;&gt;\(\mu_0\)&lt;/span&gt; should be the control input to be taken. Noises is added in the following way:&lt;/p&gt;
 
 &lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[u_t^i \sim \mathcal{N}(0, \Sigma) \hspace{0.25cm} \forall i \in \{0\dots N-1\}, t \in \{0\dots H-1\}\]&lt;/span&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[n_t^i = \beta u_t^i + (1 - \beta) n_{t-1}^i \hspace{0.25cm}\text{where}\hspace{0.25cm} n_{t&lt;0} = 0\]&lt;/span&gt;&lt;/p&gt;
 
+&lt;p&gt;Then each action for H (index &lt;span  class=&#34;math&#34;&gt;\(t\)&lt;/span&gt;) horizon for N (index &lt;span  class=&#34;math&#34;&gt;\(i\)&lt;/span&gt;) candidates is computed as:&lt;/p&gt;
+
 &lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[a_t^i = \mu_t + n_t^i\]&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;With the previous actions sequence for N candidates, the predicted states is computed with the dynamics model, then the reward &lt;span  class=&#34;math&#34;&gt;\(R_k\)&lt;/span&gt; is computed for each trajectory. Then the new mean is computed through the weighted reward.&lt;/p&gt;
+
+&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[\mu_t = \frac{\sum_{k=0}^N (e^{\gamma R_k})(a_t^{(k)})}{\sum_{j=0}^N e^{\gamma R_j}} \hspace{0.25cm} \forall t \in \{0\dots H-1\}\]&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;Now, the new trajectory is optimized &lt;span  class=&#34;math&#34;&gt;\(\mu_{0:H-1}\)&lt;/span&gt;, but just the first action is taken: &lt;strong&gt;&lt;span  class=&#34;math&#34;&gt;\(\mu_0\)&lt;/span&gt;&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;Update the control sequence as, and repeat the process:&lt;/p&gt;
+
+&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[\mu_i = \mu_{i+1} \hspace{0.25cm} \forall i \in {0\dots H-1}\]&lt;/span&gt;&lt;/p&gt;
 
 &lt;h2 id=&#34;learning-latent-dynamics-for-planning-from-pixels&#34;&gt;Learning Latent Dynamics for Planning from Pixels&lt;/h2&gt;</description>
     </item>
