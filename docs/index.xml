@@ -20,7 +20,7 @@
 
 &lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
 
-&lt;p&gt;Model-based reinforcement learning is a branch in Reinforcement Learning where the transition function &lt;span  class=&#34;math&#34;&gt;\(P(s&#39;, r|s, a)\)&lt;/span&gt; in the Markov decision process (MDP) is used. This model is used to improve or create the policy (planning), where the value function is calculated as an intermediate step, as can be seen in &lt;strong&gt;Figure 1&lt;/strong&gt; in the &lt;em&gt;model-learning&lt;/em&gt; branch. &lt;em&gt;Direct RL&lt;/em&gt;, means model-free RL where the policy or value-function is computed &lt;em&gt;directly&lt;/em&gt; from experience and it is not needed to model the dynamics. However, these kinds of methods are too poor sample efficient due to that these methods rely on the probability to find good interactions, this becomes even more complicated when the environment has high dimensional state-action space and when sparse rewards are presented.&lt;/p&gt;
+&lt;p&gt;Model-based reinforcement learning is a branch in Reinforcement Learning where the transition function &lt;span  class=&#34;math&#34;&gt;\(P(s&#39;, r|s, a)\)&lt;/span&gt; in the Markov decision process (MDP) is used. This model is used to improve or create a policy (planning), where the value function is calculated as an intermediate step, as can be seen in &lt;strong&gt;Figure 1&lt;/strong&gt; in the &lt;em&gt;model-learning&lt;/em&gt; branch. &lt;em&gt;Direct RL&lt;/em&gt;, means model-free RL where the policy or value-function is computed &lt;em&gt;directly&lt;/em&gt; from experience and it is not needed to model the dynamics. However, these kinds of methods are too poor sample efficient due to that these methods rely on the probability to find good interactions, this becomes even more complicated when the environment has high dimensional state-action space and when sparse rewards are presented.&lt;/p&gt;
 
 &lt;figure&gt;
     &lt;img src=&#34;https://ericktornero.github.io/blog/images/squeme_mbmf.png&#34;/&gt; &lt;figcaption&gt;
@@ -71,11 +71,11 @@
 
 &lt;p&gt;[&lt;a href=&#34;https://arxiv.org/pdf/1708.02596.pdf&#34;&gt;See paper&lt;/a&gt;]&lt;/p&gt;
 
-&lt;p&gt;This paper proposes deterministic Neural Network for Model-based Reinforcement for solving continuous taks. The pipeline is shown in &lt;strong&gt;Fig. 4&lt;/strong&gt;, a Neural Network &lt;span  class=&#34;math&#34;&gt;\(\hat{f}_\theta\)&lt;/span&gt; models the dynamics of the environment and is trained as a multidimensional regression in a deterministic way using &lt;a href=&#34;https://en.wikipedia.org/wiki/Mean_squared_error&#34;&gt;MSE Loss&lt;/a&gt; function (&lt;strong&gt;Eq. 3&lt;/strong&gt;). The &lt;em&gt;MPC Controller&lt;/em&gt; laverage the knowledge of the transition function &lt;span  class=&#34;math&#34;&gt;\(\hat{f}_{\theta}\)&lt;/span&gt; to predict the next state &lt;span  class=&#34;math&#34;&gt;\(\hat{s}_{t+1}\)&lt;/span&gt; given a current state &lt;span  class=&#34;math&#34;&gt;\(s_t\)&lt;/span&gt; and an action taken &lt;span  class=&#34;math&#34;&gt;\(a_t\)&lt;/span&gt; as in &lt;strong&gt;Eq. 1&lt;/strong&gt;. Then this used for multistep prediction of &lt;em&gt;horizon&lt;/em&gt; &lt;span  class=&#34;math&#34;&gt;\(H\)&lt;/span&gt; by recursively applying the &lt;strong&gt;Eq. 1&lt;/strong&gt; &lt;span  class=&#34;math&#34;&gt;\(H\)&lt;/span&gt; times (&lt;strong&gt;Eq. 2&lt;/strong&gt;). Note that reward is a function over states &lt;span  class=&#34;math&#34;&gt;\(r_t = fn(s_t)\)&lt;/span&gt;, then if the state &lt;span  class=&#34;math&#34;&gt;\(s_t\)&lt;/span&gt; is predicted by &lt;strong&gt;Eq. 1&lt;/strong&gt;, reward is approximate by &lt;span  class=&#34;math&#34;&gt;\(\hat{r}_{t+i} = fn(\hat{s}_{t+i})\)&lt;/span&gt;.&lt;/p&gt;
+&lt;p&gt;This paper proposes deterministic Neural Network for Model-based Reinforcement Learning for solving continuous taks. The pipeline is shown in &lt;strong&gt;Fig. 4&lt;/strong&gt;, a Neural Network &lt;span  class=&#34;math&#34;&gt;\(\hat{f}_\theta\)&lt;/span&gt; models the dynamics of the environment and is trained as a multidimensional regression in a deterministic way using &lt;a href=&#34;https://en.wikipedia.org/wiki/Mean_squared_error&#34;&gt;MSE Loss&lt;/a&gt; function (&lt;strong&gt;Eq. 3&lt;/strong&gt;). The &lt;em&gt;MPC Controller&lt;/em&gt; laverage the knowledge of the transition function &lt;span  class=&#34;math&#34;&gt;\(\hat{f}_{\theta}\)&lt;/span&gt; to predict the next state &lt;span  class=&#34;math&#34;&gt;\(\hat{s}_{t+1}\)&lt;/span&gt; given a current state &lt;span  class=&#34;math&#34;&gt;\(s_t\)&lt;/span&gt; and an action taken &lt;span  class=&#34;math&#34;&gt;\(a_t\)&lt;/span&gt; as in &lt;strong&gt;Eq. 1&lt;/strong&gt;. The same logic is used for multistep prediction of &lt;em&gt;horizon&lt;/em&gt; &lt;span  class=&#34;math&#34;&gt;\(H\)&lt;/span&gt;, by recursively applying the &lt;strong&gt;Eq. 1&lt;/strong&gt; &lt;span  class=&#34;math&#34;&gt;\(H\)&lt;/span&gt; times (&lt;strong&gt;Eq. 2&lt;/strong&gt;). Note that reward is a function over states &lt;span  class=&#34;math&#34;&gt;\(r_t = fn(s_t)\)&lt;/span&gt;, then if the state &lt;span  class=&#34;math&#34;&gt;\(\hat{s}_{t+i}\)&lt;/span&gt; is predicted by &lt;strong&gt;Eq. 2&lt;/strong&gt;, reward is approximate by &lt;span  class=&#34;math&#34;&gt;\(\hat{r}_{t+i} = fn(\hat{s}_{t+i})\)&lt;/span&gt;.&lt;/p&gt;
 
 &lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[\hat{s}_{t+1} = s_t + \hat{f}_\theta(s_t, a_t)\tag{1}\]&lt;/span&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[\hat{s}_{t+i} = \hat{f}_\theta(\dots(\hat{f}_\theta(\hat{f}_\theta(s_t, a_t), a_{t+1})\dots, a_{t+i}) \tag{2}\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[\hat{s}_{t+i} = \hat{f}_\theta(\dots(\hat{f}_\theta(\hat{f}_\theta(s_t, a_t), a_{t+1})\dots, a_{t+i-1}) \tag{2}\]&lt;/span&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[Loss_\theta = \frac{1}{\mathcal{D}} \sum_{(s_t, a_t, s_{t+1}) \in \mathcal{D}} \frac{1}{2} \Vert (s_{t+1} - s_t) - \hat{f}_\theta(s_t, a_t) \Vert^2 \tag{3}\]&lt;/span&gt;&lt;/p&gt;
 
@@ -87,7 +87,7 @@
 &lt;/figure&gt;
 
 
-&lt;p&gt;This method reach aceptable results in continuous tasks, this was shown in the &lt;a href=&#34;http://www.mujoco.org/&#34;&gt;Mujoco Environment&lt;/a&gt;. While this method take over 100x less interactions with respect model-free methods, this method can not achieve the assimpotic results, to reduce this gap this method, uses the previous model-based for initialize a model-free method (&lt;em&gt;PPO&lt;/em&gt;), this is particular useful for model-free becouse model-free performance based on the probability to see good interactions, and model-based can achieve this with few samples, resulting in a faster convergence for model-free methods as can be seen in &lt;strong&gt;Fig. 5&lt;/strong&gt; and &lt;strong&gt;Fig. 6&lt;/strong&gt; (&lt;em&gt;fine-tuning&lt;/em&gt;).&lt;/p&gt;
+&lt;p&gt;This method reach aceptable results in continuous tasks, It was tested in the &lt;a href=&#34;http://www.mujoco.org/&#34;&gt;Mujoco Environment&lt;/a&gt;. While this method take over 100x less samples with respect model-free methods, this method can not reach the same assimpotic performace. A second proposal uses the previous model-based for initialize a model-free method (&lt;em&gt;PPO&lt;/em&gt;), this is particular useful for model-free because the sample-complexity of model-free based on the probability to see good interactions, and model-based can achieve this with few samples. The results show faster convergence for model-free methods as can be seen in &lt;strong&gt;Fig. 5&lt;/strong&gt; and &lt;strong&gt;Fig. 6&lt;/strong&gt; (&lt;em&gt;fine-tuning&lt;/em&gt;).&lt;/p&gt;
 
 &lt;figure&gt;
     &lt;img src=&#34;https://ericktornero.github.io/blog/images/anusha2017results1.gif&#34;
@@ -163,7 +163,7 @@
 
 &lt;p&gt;[&lt;a href=&#34;https://arxiv.org/pdf/1909.11652.pdf&#34;&gt;See paper&lt;/a&gt;]&lt;/p&gt;
 
-&lt;p&gt;This paper is an extention of the previous paper &lt;em&gt;DRL with a handful of trials using probabilistic models&lt;/em&gt;. It also models aleatoric and epistemic uncertainties with Gaussian parametrization via Neural Networks and with Ensembles bootstrap respectively. The main contributions is an extension for (MPPI) algorithm that uses weighted rewards. MPPI uses random sampling techniques to explore actions near to the control sequence, instead in this paper a &lt;em&gt;Filtering&lt;/em&gt; techniques is added to add dependencies of previous timesteps:&lt;/p&gt;
+&lt;p&gt;This paper is an extention of the previous paper &lt;em&gt;DRL with a handful of trials using probabilistic models&lt;/em&gt;, taking the problem of dexterous manipulation. It also models aleatoric and epistemic uncertainties with Gaussian parametrization via Neural Networks and with Ensembles bootstrap respectively. The main contributions is a modification for (MPPI) algorithm that uses weighted rewards. MPPI uses random sampling techniques to explore actions near to the control sequence, instead in this paper a &lt;em&gt;Filtering&lt;/em&gt; technique is used to add dependencies of previous timesteps:&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;Filtering and reward weighted refinement overview&lt;/strong&gt;:&lt;/p&gt;
 
@@ -171,11 +171,13 @@
 
 &lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[(\mu_0, \mu_1, \dots, \mu_{H-1})\]&lt;/span&gt;&lt;/p&gt;
 
-&lt;p&gt;It is assumed that the control sequence is a future sequence of lenght &lt;span  class=&#34;math&#34;&gt;\(H\)&lt;/span&gt;, and &lt;span  class=&#34;math&#34;&gt;\(\mu_0\)&lt;/span&gt; should be the control input to be taken. Noises is added in the following way:&lt;/p&gt;
+&lt;p&gt;It is assumed that the control sequence is a future sequence of lenght &lt;span  class=&#34;math&#34;&gt;\(H\)&lt;/span&gt;. This sequence is optimized every timestep and &lt;span  class=&#34;math&#34;&gt;\(\mu_0\)&lt;/span&gt; should be the control input to be taken at current timestep. Noises is added in the following way:&lt;/p&gt;
 
 &lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[u_t^i \sim \mathcal{N}(0, \Sigma) \hspace{0.25cm} \forall i \in \{0\dots N-1\}, t \in \{0\dots H-1\}\]&lt;/span&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[n_t^i = \beta u_t^i + (1 - \beta) n_{t-1}^i \hspace{0.25cm}\text{where}\hspace{0.25cm} n_{t&lt;0} = 0\]&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;Where &lt;span  class=&#34;math&#34;&gt;\(u_t^i\)&lt;/span&gt; is a gaussian noise with mean &lt;span  class=&#34;math&#34;&gt;\(0\)&lt;/span&gt; and &lt;span  class=&#34;math&#34;&gt;\(\Sigma\)&lt;/span&gt; covariance matrix and &lt;span  class=&#34;math&#34;&gt;\(n_t^i\)&lt;/span&gt; add dependace noise from previous timestep.&lt;/p&gt;
 
 &lt;p&gt;Then each action for H (index &lt;span  class=&#34;math&#34;&gt;\(t\)&lt;/span&gt;) horizon for N (index &lt;span  class=&#34;math&#34;&gt;\(i\)&lt;/span&gt;) candidates is computed as:&lt;/p&gt;
 
@@ -185,13 +187,27 @@
 
 &lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[\mu_t = \frac{\sum_{k=0}^N (e^{\gamma R_k})(a_t^{(k)})}{\sum_{j=0}^N e^{\gamma R_j}} \hspace{0.25cm} \forall t \in \{0\dots H-1\}\]&lt;/span&gt;&lt;/p&gt;
 
-&lt;p&gt;Now, the new trajectory is optimized &lt;span  class=&#34;math&#34;&gt;\(\mu_{0:H-1}\)&lt;/span&gt;, but just the first action is taken: &lt;strong&gt;&lt;span  class=&#34;math&#34;&gt;\(\mu_0\)&lt;/span&gt;&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;Now, the new trajectory is optimized &lt;span  class=&#34;math&#34;&gt;\(\mu_{0:H-1}\)&lt;/span&gt;. Just the first action is taken: &lt;strong&gt;&lt;span  class=&#34;math&#34;&gt;\(\mu_0\)&lt;/span&gt;&lt;/strong&gt; (Send to actuators).&lt;/p&gt;
 
-&lt;p&gt;Update the control sequence as, and repeat the process:&lt;/p&gt;
+&lt;p&gt;Finally, the control sequence is updated, and the process is repeated for each timestep:&lt;/p&gt;
 
-&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[\mu_i = \mu_{i+1} \hspace{0.25cm} \forall i \in {0\dots H-1}\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[\mu_i = \mu_{i+1} \hspace{0.25cm} \forall i \in \{0\dots H-2\}, \hspace{0.25cm} \mu_{H-1} = \mu_{init}\]&lt;/span&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;learning-latent-dynamics-for-planning-from-pixels&#34;&gt;Learning Latent Dynamics for Planning from Pixels&lt;/h2&gt;</description>
+&lt;hr&gt;
+
+&lt;h2 id=&#34;learning-latent-dynamics-for-planning-from-pixels&#34;&gt;Learning Latent Dynamics for Planning from Pixels&lt;/h2&gt;
+
+&lt;hr&gt;
+
+&lt;h2 id=&#34;references&#34;&gt;References&lt;/h2&gt;
+
+&lt;p&gt;[1] R. Sutton, A. Barto. &lt;strong&gt;Reinforcement Learning: An Introduction&lt;/strong&gt;, &lt;em&gt;Second edition&lt;/em&gt;, &lt;a href=&#34;http://incompleteideas.net/book/bookdraft2018jan1.pdf&#34;&gt;2018&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;[2] A. Nagabandi et al. &lt;strong&gt;Neural Network Dynamics for Model-Based Deep Reinforcement Learning with Model-Free Fine Tuning&lt;/strong&gt;. In &lt;em&gt;ICRA&lt;/em&gt; &lt;a href=&#34;https://ieeexplore.ieee.org/abstract/document/8463189&#34;&gt;2018&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;[3] K. Chua et al. &lt;strong&gt;Deep Reinforcement Learning in a Handful of Trials using Probabilistic Dynamics Models&lt;/strong&gt;. In &lt;em&gt;NIPS&lt;/em&gt; &lt;a href=&#34;https://arxiv.org/pdf/1909.11652.pdf&#34;&gt;2018&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;[4] A. Nagabandi et al. &lt;strong&gt;Deep Dynamics Models for Learning Dexterous Manipulation&lt;/strong&gt;. In &lt;em&gt;CoRL&lt;/em&gt; &lt;a href=&#34;https://arxiv.org/pdf/1909.11652.pdf&#34;&gt;2019&lt;/a&gt;.&lt;/p&gt;</description>
     </item>
     
   </channel>

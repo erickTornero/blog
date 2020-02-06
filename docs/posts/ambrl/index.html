@@ -70,7 +70,7 @@
 
 <h2 id="introduction">Introduction</h2>
 
-<p>Model-based reinforcement learning is a branch in Reinforcement Learning where the transition function <span  class="math">\(P(s', r|s, a)\)</span> in the Markov decision process (MDP) is used. This model is used to improve or create the policy (planning), where the value function is calculated as an intermediate step, as can be seen in <strong>Figure 1</strong> in the <em>model-learning</em> branch. <em>Direct RL</em>, means model-free RL where the policy or value-function is computed <em>directly</em> from experience and it is not needed to model the dynamics. However, these kinds of methods are too poor sample efficient due to that these methods rely on the probability to find good interactions, this becomes even more complicated when the environment has high dimensional state-action space and when sparse rewards are presented.</p>
+<p>Model-based reinforcement learning is a branch in Reinforcement Learning where the transition function <span  class="math">\(P(s', r|s, a)\)</span> in the Markov decision process (MDP) is used. This model is used to improve or create a policy (planning), where the value function is calculated as an intermediate step, as can be seen in <strong>Figure 1</strong> in the <em>model-learning</em> branch. <em>Direct RL</em>, means model-free RL where the policy or value-function is computed <em>directly</em> from experience and it is not needed to model the dynamics. However, these kinds of methods are too poor sample efficient due to that these methods rely on the probability to find good interactions, this becomes even more complicated when the environment has high dimensional state-action space and when sparse rewards are presented.</p>
 
 <figure>
     <img src="https://ericktornero.github.io/blog/images/squeme_mbmf.png"/> <figcaption>
@@ -121,11 +121,11 @@
 
 <p>[<a href="https://arxiv.org/pdf/1708.02596.pdf">See paper</a>]</p>
 
-<p>This paper proposes deterministic Neural Network for Model-based Reinforcement for solving continuous taks. The pipeline is shown in <strong>Fig. 4</strong>, a Neural Network <span  class="math">\(\hat{f}_\theta\)</span> models the dynamics of the environment and is trained as a multidimensional regression in a deterministic way using <a href="https://en.wikipedia.org/wiki/Mean_squared_error">MSE Loss</a> function (<strong>Eq. 3</strong>). The <em>MPC Controller</em> laverage the knowledge of the transition function <span  class="math">\(\hat{f}_{\theta}\)</span> to predict the next state <span  class="math">\(\hat{s}_{t+1}\)</span> given a current state <span  class="math">\(s_t\)</span> and an action taken <span  class="math">\(a_t\)</span> as in <strong>Eq. 1</strong>. Then this used for multistep prediction of <em>horizon</em> <span  class="math">\(H\)</span> by recursively applying the <strong>Eq. 1</strong> <span  class="math">\(H\)</span> times (<strong>Eq. 2</strong>). Note that reward is a function over states <span  class="math">\(r_t = fn(s_t)\)</span>, then if the state <span  class="math">\(s_t\)</span> is predicted by <strong>Eq. 1</strong>, reward is approximate by <span  class="math">\(\hat{r}_{t+i} = fn(\hat{s}_{t+i})\)</span>.</p>
+<p>This paper proposes deterministic Neural Network for Model-based Reinforcement Learning for solving continuous taks. The pipeline is shown in <strong>Fig. 4</strong>, a Neural Network <span  class="math">\(\hat{f}_\theta\)</span> models the dynamics of the environment and is trained as a multidimensional regression in a deterministic way using <a href="https://en.wikipedia.org/wiki/Mean_squared_error">MSE Loss</a> function (<strong>Eq. 3</strong>). The <em>MPC Controller</em> laverage the knowledge of the transition function <span  class="math">\(\hat{f}_{\theta}\)</span> to predict the next state <span  class="math">\(\hat{s}_{t+1}\)</span> given a current state <span  class="math">\(s_t\)</span> and an action taken <span  class="math">\(a_t\)</span> as in <strong>Eq. 1</strong>. The same logic is used for multistep prediction of <em>horizon</em> <span  class="math">\(H\)</span>, by recursively applying the <strong>Eq. 1</strong> <span  class="math">\(H\)</span> times (<strong>Eq. 2</strong>). Note that reward is a function over states <span  class="math">\(r_t = fn(s_t)\)</span>, then if the state <span  class="math">\(\hat{s}_{t+i}\)</span> is predicted by <strong>Eq. 2</strong>, reward is approximate by <span  class="math">\(\hat{r}_{t+i} = fn(\hat{s}_{t+i})\)</span>.</p>
 
 <p><span  class="math">\[\hat{s}_{t+1} = s_t + \hat{f}_\theta(s_t, a_t)\tag{1}\]</span></p>
 
-<p><span  class="math">\[\hat{s}_{t+i} = \hat{f}_\theta(\dots(\hat{f}_\theta(\hat{f}_\theta(s_t, a_t), a_{t+1})\dots, a_{t+i}) \tag{2}\]</span></p>
+<p><span  class="math">\[\hat{s}_{t+i} = \hat{f}_\theta(\dots(\hat{f}_\theta(\hat{f}_\theta(s_t, a_t), a_{t+1})\dots, a_{t+i-1}) \tag{2}\]</span></p>
 
 <p><span  class="math">\[Loss_\theta = \frac{1}{\mathcal{D}} \sum_{(s_t, a_t, s_{t+1}) \in \mathcal{D}} \frac{1}{2} \Vert (s_{t+1} - s_t) - \hat{f}_\theta(s_t, a_t) \Vert^2 \tag{3}\]</span></p>
 
@@ -137,7 +137,7 @@
 </figure>
 
 
-<p>This method reach aceptable results in continuous tasks, this was shown in the <a href="http://www.mujoco.org/">Mujoco Environment</a>. While this method take over 100x less interactions with respect model-free methods, this method can not achieve the assimpotic results, to reduce this gap this method, uses the previous model-based for initialize a model-free method (<em>PPO</em>), this is particular useful for model-free becouse model-free performance based on the probability to see good interactions, and model-based can achieve this with few samples, resulting in a faster convergence for model-free methods as can be seen in <strong>Fig. 5</strong> and <strong>Fig. 6</strong> (<em>fine-tuning</em>).</p>
+<p>This method reach aceptable results in continuous tasks, It was tested in the <a href="http://www.mujoco.org/">Mujoco Environment</a>. While this method take over 100x less samples with respect model-free methods, this method can not reach the same assimpotic performace. A second proposal uses the previous model-based for initialize a model-free method (<em>PPO</em>), this is particular useful for model-free because the sample-complexity of model-free based on the probability to see good interactions, and model-based can achieve this with few samples. The results show faster convergence for model-free methods as can be seen in <strong>Fig. 5</strong> and <strong>Fig. 6</strong> (<em>fine-tuning</em>).</p>
 
 <figure>
     <img src="https://ericktornero.github.io/blog/images/anusha2017results1.gif"
@@ -213,7 +213,7 @@
 
 <p>[<a href="https://arxiv.org/pdf/1909.11652.pdf">See paper</a>]</p>
 
-<p>This paper is an extention of the previous paper <em>DRL with a handful of trials using probabilistic models</em>. It also models aleatoric and epistemic uncertainties with Gaussian parametrization via Neural Networks and with Ensembles bootstrap respectively. The main contributions is an extension for (MPPI) algorithm that uses weighted rewards. MPPI uses random sampling techniques to explore actions near to the control sequence, instead in this paper a <em>Filtering</em> techniques is added to add dependencies of previous timesteps:</p>
+<p>This paper is an extention of the previous paper <em>DRL with a handful of trials using probabilistic models</em>, taking the problem of dexterous manipulation. It also models aleatoric and epistemic uncertainties with Gaussian parametrization via Neural Networks and with Ensembles bootstrap respectively. The main contributions is a modification for (MPPI) algorithm that uses weighted rewards. MPPI uses random sampling techniques to explore actions near to the control sequence, instead in this paper a <em>Filtering</em> technique is used to add dependencies of previous timesteps:</p>
 
 <p><strong>Filtering and reward weighted refinement overview</strong>:</p>
 
@@ -221,11 +221,13 @@
 
 <p><span  class="math">\[(\mu_0, \mu_1, \dots, \mu_{H-1})\]</span></p>
 
-<p>It is assumed that the control sequence is a future sequence of lenght <span  class="math">\(H\)</span>, and <span  class="math">\(\mu_0\)</span> should be the control input to be taken. Noises is added in the following way:</p>
+<p>It is assumed that the control sequence is a future sequence of lenght <span  class="math">\(H\)</span>. This sequence is optimized every timestep and <span  class="math">\(\mu_0\)</span> should be the control input to be taken at current timestep. Noises is added in the following way:</p>
 
 <p><span  class="math">\[u_t^i \sim \mathcal{N}(0, \Sigma) \hspace{0.25cm} \forall i \in \{0\dots N-1\}, t \in \{0\dots H-1\}\]</span></p>
 
 <p><span  class="math">\[n_t^i = \beta u_t^i + (1 - \beta) n_{t-1}^i \hspace{0.25cm}\text{where}\hspace{0.25cm} n_{t<0} = 0\]</span></p>
+
+<p>Where <span  class="math">\(u_t^i\)</span> is a gaussian noise with mean <span  class="math">\(0\)</span> and <span  class="math">\(\Sigma\)</span> covariance matrix and <span  class="math">\(n_t^i\)</span> add dependace noise from previous timestep.</p>
 
 <p>Then each action for H (index <span  class="math">\(t\)</span>) horizon for N (index <span  class="math">\(i\)</span>) candidates is computed as:</p>
 
@@ -235,13 +237,27 @@
 
 <p><span  class="math">\[\mu_t = \frac{\sum_{k=0}^N (e^{\gamma R_k})(a_t^{(k)})}{\sum_{j=0}^N e^{\gamma R_j}} \hspace{0.25cm} \forall t \in \{0\dots H-1\}\]</span></p>
 
-<p>Now, the new trajectory is optimized <span  class="math">\(\mu_{0:H-1}\)</span>, but just the first action is taken: <strong><span  class="math">\(\mu_0\)</span></strong>.</p>
+<p>Now, the new trajectory is optimized <span  class="math">\(\mu_{0:H-1}\)</span>. Just the first action is taken: <strong><span  class="math">\(\mu_0\)</span></strong> (Send to actuators).</p>
 
-<p>Update the control sequence as, and repeat the process:</p>
+<p>Finally, the control sequence is updated, and the process is repeated for each timestep:</p>
 
-<p><span  class="math">\[\mu_i = \mu_{i+1} \hspace{0.25cm} \forall i \in {0\dots H-1}\]</span></p>
+<p><span  class="math">\[\mu_i = \mu_{i+1} \hspace{0.25cm} \forall i \in \{0\dots H-2\}, \hspace{0.25cm} \mu_{H-1} = \mu_{init}\]</span></p>
+
+<hr>
 
 <h2 id="learning-latent-dynamics-for-planning-from-pixels">Learning Latent Dynamics for Planning from Pixels</h2>
+
+<hr>
+
+<h2 id="references">References</h2>
+
+<p>[1] R. Sutton, A. Barto. <strong>Reinforcement Learning: An Introduction</strong>, <em>Second edition</em>, <a href="http://incompleteideas.net/book/bookdraft2018jan1.pdf">2018</a>.</p>
+
+<p>[2] A. Nagabandi et al. <strong>Neural Network Dynamics for Model-Based Deep Reinforcement Learning with Model-Free Fine Tuning</strong>. In <em>ICRA</em> <a href="https://ieeexplore.ieee.org/abstract/document/8463189">2018</a>.</p>
+
+<p>[3] K. Chua et al. <strong>Deep Reinforcement Learning in a Handful of Trials using Probabilistic Dynamics Models</strong>. In <em>NIPS</em> <a href="https://arxiv.org/pdf/1909.11652.pdf">2018</a>.</p>
+
+<p>[4] A. Nagabandi et al. <strong>Deep Dynamics Models for Learning Dexterous Manipulation</strong>. In <em>CoRL</em> <a href="https://arxiv.org/pdf/1909.11652.pdf">2019</a>.</p>
         </section>
         <footer>
             <a class="permalink u-url" href="https://ericktornero.github.io/blog/posts/ambrl/"></a>
