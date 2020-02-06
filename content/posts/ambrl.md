@@ -47,6 +47,8 @@ $$v_\pi(s) = \sum_{s, r} \sum_{a} p(s'|s,a) \pi(a|s)[r + v(s)]$$
 ## Neural network dynamics for model-based deep reinforcement learning with model-free fine-tuning
 ### Anusha Nagabandi et al. UC Berkeley 2017
 
+[[See paper](https://arxiv.org/pdf/1708.02596.pdf)]
+
 This paper proposes deterministic Neural Network for Model-based Reinforcement for solving continuous taks. The pipeline is shown in **Fig. 4**, a Neural Network $$\hat{f}_\theta$$ models the dynamics of the environment and is trained as a multidimensional regression in a deterministic way using [MSE Loss][mselink] function (**Eq. 3**). The *MPC Controller* laverage the knowledge of the transition function $$\hat{f}_{\theta}$$ to predict the next state $$\hat{s}_{t+1}$$ given a current state $$s_t$$ and an action taken $$a_t$$ as in **Eq. 1**. Then this used for multistep prediction of *horizon* $$H$$ by recursively applying the **Eq. 1** $$H$$ times (**Eq. 2**). Note that reward is a function over states $$r_t = fn(s_t)$$, then if the state $$s_t$$ is predicted by **Eq. 1**, reward is approximate by $$\hat{r}_{t+i} = fn(\hat{s}_{t+i})$$. 
 
 $$\hat{s}_{t+1} = s_t + \hat{f}_\theta(s_t, a_t)\tag{1}$$
@@ -68,6 +70,9 @@ This method reach aceptable results in continuous tasks, this was shown in the [
 <hr width=90%>
 
 ## Deep Reinforcement Learning with a handful of trials with probabilistic models
+### Kurtland Chua et al. UC Berkeley 2018
+
+[[See paper](http://papers.nips.cc/paper/7725-deep-reinforcement-learning-in-a-handful-of-trials-using-probabilistic-dynamics-models.pdf)]
 
 This paper achieve interesting results reducing the gap between model-free and model-based RL in assimptotic performance with 10x less sample iterations required, by mixing some ideas to model the uncertainty of the dynamics: These uncertainties are devide into two: 
 
@@ -94,9 +99,20 @@ This uncertainty is given by the limitation of data. Overconfidence in zones whe
 {{<figure src="https://ericktornero.github.io/blog/images/algorithm_handful.png" caption="**Figure 9**, Algorithm: PETS">}}
 
 <hr>
+
 ## Deep Dynamics Models for Learning Dexterous Manipulation
 ### Anusha Nagabandi et al. UC Berkeley 2019
+[[See paper](https://arxiv.org/pdf/1909.11652.pdf)]
 
+This paper is an extention of the previous paper *DRL with a handful of trials using probabilistic models*. It also models aleatoric and epistemic uncertainties with Gaussian parametrization via Neural Networks and with Ensembles bootstrap respectively. The main contributions is the mixing with a *Filtering and Reward-Weighted Refinement (MPPI)* for the *Model Predictive Control*, this is described in following equations:
+
+$$\mu_t = \frac{\sum_{k=0}^N (e^{\gamma R_k})(a_t^{(k)})}{\sum_{j=0}^N e^{\gamma R_j}} \hspace{0.25cm} \forall t \in \{0\dots H-1\}$$
+
+$$u_t^i \sim \mathcal{N}(0, \Sigma) \hspace{0.25cm} \forall i \in \{0\dots N-1\}, t \in \{0\dots H-1\}$$
+
+$$n_t^i = \beta u_t^i + (1 - \beta) n_{t-1}^i \hspace{0.25cm}\text{where}\hspace{0.25cm} n_{t<0} = 0$$
+
+$$a_t^i = \mu_t + n_t^i$$
 ## Learning Latent Dynamics for Planning from Pixels
 
 

@@ -119,6 +119,8 @@
 
 <h3 id="anusha-nagabandi-et-al-uc-berkeley-2017">Anusha Nagabandi et al. UC Berkeley 2017</h3>
 
+<p>[<a href="https://arxiv.org/pdf/1708.02596.pdf">See paper</a>]</p>
+
 <p>This paper proposes deterministic Neural Network for Model-based Reinforcement for solving continuous taks. The pipeline is shown in <strong>Fig. 4</strong>, a Neural Network <span  class="math">\(\hat{f}_\theta\)</span> models the dynamics of the environment and is trained as a multidimensional regression in a deterministic way using <a href="https://en.wikipedia.org/wiki/Mean_squared_error">MSE Loss</a> function (<strong>Eq. 3</strong>). The <em>MPC Controller</em> laverage the knowledge of the transition function <span  class="math">\(\hat{f}_{\theta}\)</span> to predict the next state <span  class="math">\(\hat{s}_{t+1}\)</span> given a current state <span  class="math">\(s_t\)</span> and an action taken <span  class="math">\(a_t\)</span> as in <strong>Eq. 1</strong>. Then this used for multistep prediction of <em>horizon</em> <span  class="math">\(H\)</span> by recursively applying the <strong>Eq. 1</strong> <span  class="math">\(H\)</span> times (<strong>Eq. 2</strong>). Note that reward is a function over states <span  class="math">\(r_t = fn(s_t)\)</span>, then if the state <span  class="math">\(s_t\)</span> is predicted by <strong>Eq. 1</strong>, reward is approximate by <span  class="math">\(\hat{r}_{t+i} = fn(\hat{s}_{t+i})\)</span>.</p>
 
 <p><span  class="math">\[\hat{s}_{t+1} = s_t + \hat{f}_\theta(s_t, a_t)\tag{1}\]</span></p>
@@ -156,6 +158,10 @@
 <hr width=90%>
 
 <h2 id="deep-reinforcement-learning-with-a-handful-of-trials-with-probabilistic-models">Deep Reinforcement Learning with a handful of trials with probabilistic models</h2>
+
+<h3 id="kurtland-chua-et-al-uc-berkeley-2018">Kurtland Chua et al. UC Berkeley 2018</h3>
+
+<p>[<a href="http://papers.nips.cc/paper/7725-deep-reinforcement-learning-in-a-handful-of-trials-using-probabilistic-dynamics-models.pdf">See paper</a>]</p>
 
 <p>This paper achieve interesting results reducing the gap between model-free and model-based RL in assimptotic performance with 10x less sample iterations required, by mixing some ideas to model the uncertainty of the dynamics: These uncertainties are devide into two:</p>
 
@@ -204,6 +210,18 @@
 <h2 id="deep-dynamics-models-for-learning-dexterous-manipulation">Deep Dynamics Models for Learning Dexterous Manipulation</h2>
 
 <h3 id="anusha-nagabandi-et-al-uc-berkeley-2019">Anusha Nagabandi et al. UC Berkeley 2019</h3>
+
+<p>[<a href="https://arxiv.org/pdf/1909.11652.pdf">See paper</a>]</p>
+
+<p>This paper is an extention of the previous paper <em>DRL with a handful of trials using probabilistic models</em>. It also models aleatoric and epistemic uncertainties with Gaussian parametrization via Neural Networks and with Ensembles bootstrap respectively. The main contributions is the mixing with a <em>Filtering and Reward-Weighted Refinement (MPPI)</em> for the <em>Model Predictive Control</em>, this is described in following equations:</p>
+
+<p><span  class="math">\[\mu_t = \frac{\sum_{k=0}^N (e^{\gamma R_k})(a_t^{(k)})}{\sum_{j=0}^N e^{\gamma R_j}} \hspace{0.25cm} \forall t \in \{0\dots H-1\}\]</span></p>
+
+<p><span  class="math">\[u_t^i \sim \mathcal{N}(0, \Sigma) \hspace{0.25cm} \forall i \in \{0\dots N-1\}, t \in \{0\dots H-1\}\]</span></p>
+
+<p><span  class="math">\[n_t^i = \beta u_t^i + (1 - \beta) n_{t-1}^i \hspace{0.25cm}\text{where}\hspace{0.25cm} n_{t<0} = 0\]</span></p>
+
+<p><span  class="math">\[a_t^i = \mu_t + n_t^i\]</span></p>
 
 <h2 id="learning-latent-dynamics-for-planning-from-pixels">Learning Latent Dynamics for Planning from Pixels</h2>
         </section>

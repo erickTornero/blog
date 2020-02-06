@@ -69,6 +69,8 @@
 
 &lt;h3 id=&#34;anusha-nagabandi-et-al-uc-berkeley-2017&#34;&gt;Anusha Nagabandi et al. UC Berkeley 2017&lt;/h3&gt;
 
+&lt;p&gt;[&lt;a href=&#34;https://arxiv.org/pdf/1708.02596.pdf&#34;&gt;See paper&lt;/a&gt;]&lt;/p&gt;
+
 &lt;p&gt;This paper proposes deterministic Neural Network for Model-based Reinforcement for solving continuous taks. The pipeline is shown in &lt;strong&gt;Fig. 4&lt;/strong&gt;, a Neural Network &lt;span  class=&#34;math&#34;&gt;\(\hat{f}_\theta\)&lt;/span&gt; models the dynamics of the environment and is trained as a multidimensional regression in a deterministic way using &lt;a href=&#34;https://en.wikipedia.org/wiki/Mean_squared_error&#34;&gt;MSE Loss&lt;/a&gt; function (&lt;strong&gt;Eq. 3&lt;/strong&gt;). The &lt;em&gt;MPC Controller&lt;/em&gt; laverage the knowledge of the transition function &lt;span  class=&#34;math&#34;&gt;\(\hat{f}_{\theta}\)&lt;/span&gt; to predict the next state &lt;span  class=&#34;math&#34;&gt;\(\hat{s}_{t+1}\)&lt;/span&gt; given a current state &lt;span  class=&#34;math&#34;&gt;\(s_t\)&lt;/span&gt; and an action taken &lt;span  class=&#34;math&#34;&gt;\(a_t\)&lt;/span&gt; as in &lt;strong&gt;Eq. 1&lt;/strong&gt;. Then this used for multistep prediction of &lt;em&gt;horizon&lt;/em&gt; &lt;span  class=&#34;math&#34;&gt;\(H\)&lt;/span&gt; by recursively applying the &lt;strong&gt;Eq. 1&lt;/strong&gt; &lt;span  class=&#34;math&#34;&gt;\(H\)&lt;/span&gt; times (&lt;strong&gt;Eq. 2&lt;/strong&gt;). Note that reward is a function over states &lt;span  class=&#34;math&#34;&gt;\(r_t = fn(s_t)\)&lt;/span&gt;, then if the state &lt;span  class=&#34;math&#34;&gt;\(s_t\)&lt;/span&gt; is predicted by &lt;strong&gt;Eq. 1&lt;/strong&gt;, reward is approximate by &lt;span  class=&#34;math&#34;&gt;\(\hat{r}_{t+i} = fn(\hat{s}_{t+i})\)&lt;/span&gt;.&lt;/p&gt;
 
 &lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[\hat{s}_{t+1} = s_t + \hat{f}_\theta(s_t, a_t)\tag{1}\]&lt;/span&gt;&lt;/p&gt;
@@ -106,6 +108,10 @@
 &lt;hr width=90%&gt;
 
 &lt;h2 id=&#34;deep-reinforcement-learning-with-a-handful-of-trials-with-probabilistic-models&#34;&gt;Deep Reinforcement Learning with a handful of trials with probabilistic models&lt;/h2&gt;
+
+&lt;h3 id=&#34;kurtland-chua-et-al-uc-berkeley-2018&#34;&gt;Kurtland Chua et al. UC Berkeley 2018&lt;/h3&gt;
+
+&lt;p&gt;[&lt;a href=&#34;http://papers.nips.cc/paper/7725-deep-reinforcement-learning-in-a-handful-of-trials-using-probabilistic-dynamics-models.pdf&#34;&gt;See paper&lt;/a&gt;]&lt;/p&gt;
 
 &lt;p&gt;This paper achieve interesting results reducing the gap between model-free and model-based RL in assimptotic performance with 10x less sample iterations required, by mixing some ideas to model the uncertainty of the dynamics: These uncertainties are devide into two:&lt;/p&gt;
 
@@ -154,6 +160,18 @@
 &lt;h2 id=&#34;deep-dynamics-models-for-learning-dexterous-manipulation&#34;&gt;Deep Dynamics Models for Learning Dexterous Manipulation&lt;/h2&gt;
 
 &lt;h3 id=&#34;anusha-nagabandi-et-al-uc-berkeley-2019&#34;&gt;Anusha Nagabandi et al. UC Berkeley 2019&lt;/h3&gt;
+
+&lt;p&gt;[&lt;a href=&#34;https://arxiv.org/pdf/1909.11652.pdf&#34;&gt;See paper&lt;/a&gt;]&lt;/p&gt;
+
+&lt;p&gt;This paper is an extention of the previous paper &lt;em&gt;DRL with a handful of trials using probabilistic models&lt;/em&gt;. It also models aleatoric and epistemic uncertainties with Gaussian parametrization via Neural Networks and with Ensembles bootstrap respectively. The main contributions is the mixing with a &lt;em&gt;Filtering and Reward-Weighted Refinement (MPPI)&lt;/em&gt; for the &lt;em&gt;Model Predictive Control&lt;/em&gt;, this is described in following equations:&lt;/p&gt;
+
+&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[\mu_t = \frac{\sum_{k=0}^N (e^{\gamma R_k})(a_t^{(k)})}{\sum_{j=0}^N e^{\gamma R_j}} \hspace{0.25cm} \forall t \in \{0\dots H-1\}\]&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[u_t^i \sim \mathcal{N}(0, \Sigma) \hspace{0.25cm} \forall i \in \{0\dots N-1\}, t \in \{0\dots H-1\}\]&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[n_t^i = \beta u_t^i + (1 - \beta) n_{t-1}^i \hspace{0.25cm}\text{where}\hspace{0.25cm} n_{t&lt;0} = 0\]&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[a_t^i = \mu_t + n_t^i\]&lt;/span&gt;&lt;/p&gt;
 
 &lt;h2 id=&#34;learning-latent-dynamics-for-planning-from-pixels&#34;&gt;Learning Latent Dynamics for Planning from Pixels&lt;/h2&gt;</description>
     </item>
