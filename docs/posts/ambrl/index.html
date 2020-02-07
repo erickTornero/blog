@@ -213,7 +213,7 @@
 
 <p>[<a href="https://arxiv.org/pdf/1909.11652.pdf">See paper</a>]</p>
 
-<p>This paper is an extention of the previous paper <em>DRL with a handful of trials using probabilistic models</em>, taking the problem of dexterous manipulation. It also models aleatoric and epistemic uncertainties with Gaussian parametrization via Neural Networks and with Ensembles bootstrap respectively. The main contributions is a modification for (MPPI) algorithm that uses weighted rewards. MPPI uses random sampling techniques to explore actions near to the control sequence, instead in this paper a <em>Filtering</em> technique is used to add dependencies of previous timesteps:</p>
+<p>This paper is an extention of the previous paper <em>DRL with a handful of trials using probabilistic models (PETS)</em>, taking the problem of dexterous manipulation. It also models aleatoric and epistemic uncertainties with Gaussian parametrization via Neural Networks and with Ensembles bootstrap respectively. The main contributions is a modification for (MPPI) algorithm that uses weighted rewards. MPPI uses random sampling techniques to explore actions near to the control sequence, instead in this paper a <em>Filtering</em> technique is used to add dependencies of previous timesteps:</p>
 
 <p><strong>Filtering and reward weighted refinement overview</strong>:</p>
 
@@ -244,6 +244,22 @@
 <p><span  class="math">\[\mu_i = \mu_{i+1} \hspace{0.25cm} \forall i \in \{0\dots H-2\}, \hspace{0.25cm} \mu_{H-1} = \mu_{init}\]</span></p>
 
 <hr>
+
+<h2 id="exploring-modelbased-planning-with-policy-networks">Exploring Model-based Planning with Policy Networks</h2>
+
+<h3 id="tingwu-wang--jimmy-ba-university-of-toronto-vector-institute-2019">Tingwu Wang &amp; Jimmy Ba, University of Toronto, Vector Institute 2019</h3>
+
+<p>[<a href="https://arxiv.org/pdf/1906.08649.pdf">See paper</a>]</p>
+
+<p>This work is a derivation from the previous method presented <em>(PETS)</em>, the author describe the following points as its main contributions:</p>
+
+<ol>
+<li><p>Apply Policy network to find actions in MPC.</p></li>
+
+<li><p>Formulation of planning as optimization with neural networks. Proposal a planning in parameter space.</p></li>
+
+<li><p>Policy network distillation from the planned trajectories.</p></li>
+</ol>
 
 <h2 id="learning-latent-dynamics-for-planning-from-pixels">Learning Latent Dynamics for Planning from Pixels</h2>
 

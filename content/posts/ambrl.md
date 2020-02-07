@@ -104,7 +104,7 @@ This uncertainty is given by the limitation of data. Overconfidence in zones whe
 ### Anusha Nagabandi et al. UC Berkeley 2019
 [[See paper](https://arxiv.org/pdf/1909.11652.pdf)]
 
-This paper is an extention of the previous paper *DRL with a handful of trials using probabilistic models*, taking the problem of dexterous manipulation. It also models aleatoric and epistemic uncertainties with Gaussian parametrization via Neural Networks and with Ensembles bootstrap respectively. The main contributions is a modification for (MPPI) algorithm that uses weighted rewards. MPPI uses random sampling techniques to explore actions near to the control sequence, instead in this paper a *Filtering* technique is used to add dependencies of previous timesteps:
+This paper is an extention of the previous paper *DRL with a handful of trials using probabilistic models (PETS)*, taking the problem of dexterous manipulation. It also models aleatoric and epistemic uncertainties with Gaussian parametrization via Neural Networks and with Ensembles bootstrap respectively. The main contributions is a modification for (MPPI) algorithm that uses weighted rewards. MPPI uses random sampling techniques to explore actions near to the control sequence, instead in this paper a *Filtering* technique is used to add dependencies of previous timesteps:
 
 **Filtering and reward weighted refinement overview**:
 
@@ -135,6 +135,18 @@ Finally, the control sequence is updated, and the process is repeated for each t
 $$\mu_i = \mu_{i+1} \hspace{0.25cm} \forall i \in \{0\dots H-2\}, \hspace{0.25cm} \mu_{H-1} = \mu_{init}$$
 
 <hr>
+
+## Exploring Model-based Planning with Policy Networks
+### Tingwu Wang & Jimmy Ba, University of Toronto, Vector Institute 2019
+[[See paper](https://arxiv.org/pdf/1906.08649.pdf)]
+
+This work is a derivation from the previous method presented *(PETS)*, the author describe the following points as its main contributions:
+
+1. Apply Policy network to find actions in MPC.
+
+2. Formulation of planning as optimization with neural networks. Proposal a planning in parameter space.
+
+3. Policy network distillation from the planned trajectories.
 
 ## Learning Latent Dynamics for Planning from Pixels
 
