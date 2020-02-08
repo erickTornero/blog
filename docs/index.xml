@@ -213,7 +213,22 @@
 
 &lt;p&gt;&lt;strong&gt;POPLIN-A-Replan:&lt;/strong&gt; In &lt;em&gt;POPLIN-A-Init&lt;/em&gt;, first, the action sequence is initialized, then the noise is added to this sequence. However in &lt;em&gt;POPLIN-A-Replan&lt;/em&gt;, the first action is approximate by the policy, then noise is added to this action, the next state is computed taking into account this noise &lt;span  class=&#34;math&#34;&gt;\(\hat{s}_{i+1} = p(\cdot | s_i, \pi(s_i) + \delta_i)\)&lt;/span&gt;.&lt;/p&gt;
 
-&lt;p&gt;&lt;strong&gt;Policy Planning in Parameter Space&lt;/strong&gt;:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Policy Planning in Parameter Space (POPLIN-P)&lt;/strong&gt;:&lt;/p&gt;
+
+&lt;p&gt;In planning in parameter space, gaussian noise is added to the weights of the neural network. Then exploration is made in the following way:&lt;/p&gt;
+
+&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\(\hat{a}_i = \pi_{\theta + \omega_t}(s_t)\)&lt;/span&gt;
+&lt;span  class=&#34;math&#34;&gt;\(s_{t+1} = p(\cdot | s_t, \hat{a}_t)\)&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;Where &lt;span  class=&#34;math&#34;&gt;\(\omega_t\)&lt;/span&gt; is gaussian noise, as in &lt;em&gt;POPLIN-A&lt;/em&gt;, gaussian noise parameters is updated with the Iterative CEM.&lt;/p&gt;
+
+&lt;figure&gt;
+    &lt;img src=&#34;https://ericktornero.github.io/blog/images/POPLIN_surface.png&#34;
+         alt=&#34;Figure 10, POPLIN surface comparison&#34;/&gt; &lt;figcaption&gt;
+            &lt;p&gt;&lt;strong&gt;Figure 10&lt;/strong&gt;, POPLIN surface comparison&lt;/p&gt;
+        &lt;/figcaption&gt;
+&lt;/figure&gt;
+
 
 &lt;hr&gt;
 

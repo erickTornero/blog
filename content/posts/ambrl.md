@@ -153,8 +153,16 @@ This algorithm uses Iterative Cross Entropy Method as *PETS*, however, istead of
 
 **POPLIN-A-Replan:** In *POPLIN-A-Init*, first, the action sequence is initialized, then the noise is added to this sequence. However in *POPLIN-A-Replan*, the first action is approximate by the policy, then noise is added to this action, the next state is computed taking into account this noise $$\hat{s}_{i+1} = p(\cdot | s_i, \pi(s_i) + \delta_i)$$.
 
-**Policy Planning in Parameter Space**:
+**Policy Planning in Parameter Space (POPLIN-P)**:
 
+In planning in parameter space, gaussian noise is added to the weights of the neural network. Then exploration is made in the following way:
+
+$$\hat{a}_i = \pi_{\theta + \omega_t}(s_t)$$
+$$s_{t+1} = p(\cdot | s_t, \hat{a}_t)$$
+
+Where $$\omega_t$$ is gaussian noise, as in *POPLIN-A*, gaussian noise parameters is updated with the Iterative CEM.
+
+{{<figure src="https://ericktornero.github.io/blog/images/POPLIN_surface.png" caption="**Figure 10**, POPLIN surface comparison">}}
 
 <hr>
 

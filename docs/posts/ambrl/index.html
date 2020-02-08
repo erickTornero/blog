@@ -263,7 +263,22 @@
 
 <p><strong>POPLIN-A-Replan:</strong> In <em>POPLIN-A-Init</em>, first, the action sequence is initialized, then the noise is added to this sequence. However in <em>POPLIN-A-Replan</em>, the first action is approximate by the policy, then noise is added to this action, the next state is computed taking into account this noise <span  class="math">\(\hat{s}_{i+1} = p(\cdot | s_i, \pi(s_i) + \delta_i)\)</span>.</p>
 
-<p><strong>Policy Planning in Parameter Space</strong>:</p>
+<p><strong>Policy Planning in Parameter Space (POPLIN-P)</strong>:</p>
+
+<p>In planning in parameter space, gaussian noise is added to the weights of the neural network. Then exploration is made in the following way:</p>
+
+<p><span  class="math">\(\hat{a}_i = \pi_{\theta + \omega_t}(s_t)\)</span>
+<span  class="math">\(s_{t+1} = p(\cdot | s_t, \hat{a}_t)\)</span></p>
+
+<p>Where <span  class="math">\(\omega_t\)</span> is gaussian noise, as in <em>POPLIN-A</em>, gaussian noise parameters is updated with the Iterative CEM.</p>
+
+<figure>
+    <img src="https://ericktornero.github.io/blog/images/POPLIN_surface.png"
+         alt="Figure 10, POPLIN surface comparison"/> <figcaption>
+            <p><strong>Figure 10</strong>, POPLIN surface comparison</p>
+        </figcaption>
+</figure>
+
 
 <hr>
 
