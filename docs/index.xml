@@ -223,7 +223,7 @@
 &lt;p&gt;Where &lt;span  class=&#34;math&#34;&gt;\(\omega_t\)&lt;/span&gt; is gaussian noise, as in &lt;em&gt;POPLIN-A&lt;/em&gt;, gaussian noise parameters is updated with the Iterative CEM.&lt;/p&gt;
 
 &lt;figure&gt;
-    &lt;img src=&#34;https://ericktornero.github.io/blog/images/POPLIN_surface.png&#34;
+    &lt;img src=&#34;https://ericktornero.github.io/blog/images/POPLIN_surface2.png&#34;
          alt=&#34;Figure 10, POPLIN surface comparison&#34;/&gt; &lt;figcaption&gt;
             &lt;p&gt;&lt;strong&gt;Figure 10&lt;/strong&gt;, POPLIN surface comparison&lt;/p&gt;
         &lt;/figcaption&gt;

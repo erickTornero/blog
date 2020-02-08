@@ -162,7 +162,7 @@ $$s_{t+1} = p(\cdot | s_t, \hat{a}_t)$$
 
 Where $$\omega_t$$ is gaussian noise, as in *POPLIN-A*, gaussian noise parameters is updated with the Iterative CEM.
 
-{{<figure src="https://ericktornero.github.io/blog/images/POPLIN_surface.png" caption="**Figure 10**, POPLIN surface comparison">}}
+{{<figure src="https://ericktornero.github.io/blog/images/POPLIN_surface2.png" caption="**Figure 10**, POPLIN surface comparison">}}
 
 <hr>
 
