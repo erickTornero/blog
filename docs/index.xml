@@ -173,7 +173,7 @@
 
 &lt;p&gt;It is assumed that the control sequence is a future sequence of lenght &lt;span  class=&#34;math&#34;&gt;\(H\)&lt;/span&gt;. This sequence is optimized every timestep and &lt;span  class=&#34;math&#34;&gt;\(\mu_0\)&lt;/span&gt; should be the control input to be taken at current timestep. Noises is added in the following way:&lt;/p&gt;
 
-&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[u_t^i \sim \mathcal{N}(0, \Sigma) \hspace{0.25cm} \forall i \in \{0\dots N-1\}, t \in \{0\dots H-1\}\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\(u_t^i \sim \mathcal{N}(0, \Sigma) \hspace{0.25cm} \forall i \in \{0\dots N-1\}, t \in \{0\dots H-1\}\)&lt;/span&gt;POPLIN-A-Init):**&lt;/p&gt;
 
 &lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[n_t^i = \beta u_t^i + (1 - \beta) n_{t-1}^i \hspace{0.25cm}\text{where}\hspace{0.25cm} n_{t&lt;0} = 0\]&lt;/span&gt;&lt;/p&gt;
 
@@ -201,15 +201,21 @@
 
 &lt;p&gt;[&lt;a href=&#34;https://arxiv.org/pdf/1906.08649.pdf&#34;&gt;See paper&lt;/a&gt;]&lt;/p&gt;
 
-&lt;p&gt;This work is a derivation from the previous method presented &lt;em&gt;(PETS)&lt;/em&gt;, the author describe the following points as its main contributions:&lt;/p&gt;
+&lt;p&gt;This work is a derivation from the previous method presented &lt;em&gt;(PETS)&lt;/em&gt;. However, in this paper, it is used a policy network to help in the planning task with iterative Cross Entropy Method.&lt;/p&gt;
 
-&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;Apply Policy network to find actions in MPC.&lt;/p&gt;&lt;/li&gt;
+&lt;p&gt;Several variations is proposed in this paper, in following subsections, it is discussed how the algorithm search for trajectories: &lt;strong&gt;POPLIN-A&lt;/strong&gt; (adding noise to actions) &lt;strong&gt;POPLIN-P&lt;/strong&gt; (adding noise to parameters e.g. weights of a neural network). In both cases the same heuristic of Iterative Cross Entropy Method (CEM) are used (iteratively adjustment of a gaussian distribution parameters to a group of elites which obtain the best rewards), but with the difference that &lt;strong&gt;POPLIN&lt;/strong&gt; uses a policy network to initializate action distribution instead of random actions as &lt;em&gt;PETS&lt;/em&gt;.&lt;/p&gt;
 
-&lt;li&gt;&lt;p&gt;Formulation of planning as optimization with neural networks. Proposal a planning in parameter space.&lt;/p&gt;&lt;/li&gt;
+&lt;p&gt;&lt;strong&gt;Policy Planning in Action Space (POPLIN-A)&lt;/strong&gt;:&lt;/p&gt;
 
-&lt;li&gt;&lt;p&gt;Policy network distillation from the planned trajectories.&lt;/p&gt;&lt;/li&gt;
-&lt;/ol&gt;
+&lt;p&gt;This algorithm uses Iterative Cross Entropy Method as &lt;em&gt;PETS&lt;/em&gt;, however, istead of random initialization, it laverages the policy network to initializate distribution of action sequences. This initializations can be done in two ways:&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;POPLIN-A-Init:&lt;/strong&gt; Be &lt;strong&gt;a&lt;/strong&gt;&lt;span  class=&#34;math&#34;&gt;\(_i = \{\hat{a}_i, \hat{a}_{i+1}\dots \hat{a}_{i+H} \}\)&lt;/span&gt;, a sequence of actions obtained by the iteration of the policy &lt;span  class=&#34;math&#34;&gt;\(\hat{a}_t = \pi(\hat{s}_t)\)&lt;/span&gt; over the model &lt;span  class=&#34;math&#34;&gt;\( p(\hat{s}_{t+1}| \hat{s}_t, \hat{a}_t)\)&lt;/span&gt; starting from &lt;span  class=&#34;math&#34;&gt;\(s_i\)&lt;/span&gt;. For the exploration process, Gaussian noise is added to this initial sequence, starting with &lt;span  class=&#34;math&#34;&gt;\(\mu_0 = 0\)&lt;/span&gt; and covariance &lt;span  class=&#34;math&#34;&gt;\(\Sigma_0 = \sigma_0^2\mathcal{I}\)&lt;/span&gt;. Then this mean and covariance is iteratively updated by selecting &lt;span  class=&#34;math&#34;&gt;\(\xi\)&lt;/span&gt; elites, and computing the new mean and new covariance.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;POPLIN-A-Replan:&lt;/strong&gt; In &lt;em&gt;POPLIN-A-Init&lt;/em&gt;, first, the action sequence is initialized, then the noise is added to this sequence. However in &lt;em&gt;POPLIN-A-Replan&lt;/em&gt;, the first action is approximate by the policy, then noise is added to this action, the next state is computed taking into account this noise &lt;span  class=&#34;math&#34;&gt;\(\hat{s}_{i+1} = p(\cdot | s_i, \pi(s_i) + \delta_i)\)&lt;/span&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Policy Planning in Parameter Space&lt;/strong&gt;:&lt;/p&gt;
+
+&lt;hr&gt;
 
 &lt;h2 id=&#34;learning-latent-dynamics-for-planning-from-pixels&#34;&gt;Learning Latent Dynamics for Planning from Pixels&lt;/h2&gt;
 

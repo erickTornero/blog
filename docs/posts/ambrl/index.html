@@ -223,7 +223,7 @@
 
 <p>It is assumed that the control sequence is a future sequence of lenght <span  class="math">\(H\)</span>. This sequence is optimized every timestep and <span  class="math">\(\mu_0\)</span> should be the control input to be taken at current timestep. Noises is added in the following way:</p>
 
-<p><span  class="math">\[u_t^i \sim \mathcal{N}(0, \Sigma) \hspace{0.25cm} \forall i \in \{0\dots N-1\}, t \in \{0\dots H-1\}\]</span></p>
+<p><span  class="math">\(u_t^i \sim \mathcal{N}(0, \Sigma) \hspace{0.25cm} \forall i \in \{0\dots N-1\}, t \in \{0\dots H-1\}\)</span>POPLIN-A-Init):**</p>
 
 <p><span  class="math">\[n_t^i = \beta u_t^i + (1 - \beta) n_{t-1}^i \hspace{0.25cm}\text{where}\hspace{0.25cm} n_{t<0} = 0\]</span></p>
 
@@ -251,15 +251,21 @@
 
 <p>[<a href="https://arxiv.org/pdf/1906.08649.pdf">See paper</a>]</p>
 
-<p>This work is a derivation from the previous method presented <em>(PETS)</em>, the author describe the following points as its main contributions:</p>
+<p>This work is a derivation from the previous method presented <em>(PETS)</em>. However, in this paper, it is used a policy network to help in the planning task with iterative Cross Entropy Method.</p>
 
-<ol>
-<li><p>Apply Policy network to find actions in MPC.</p></li>
+<p>Several variations is proposed in this paper, in following subsections, it is discussed how the algorithm search for trajectories: <strong>POPLIN-A</strong> (adding noise to actions) <strong>POPLIN-P</strong> (adding noise to parameters e.g. weights of a neural network). In both cases the same heuristic of Iterative Cross Entropy Method (CEM) are used (iteratively adjustment of a gaussian distribution parameters to a group of elites which obtain the best rewards), but with the difference that <strong>POPLIN</strong> uses a policy network to initializate action distribution instead of random actions as <em>PETS</em>.</p>
 
-<li><p>Formulation of planning as optimization with neural networks. Proposal a planning in parameter space.</p></li>
+<p><strong>Policy Planning in Action Space (POPLIN-A)</strong>:</p>
 
-<li><p>Policy network distillation from the planned trajectories.</p></li>
-</ol>
+<p>This algorithm uses Iterative Cross Entropy Method as <em>PETS</em>, however, istead of random initialization, it laverages the policy network to initializate distribution of action sequences. This initializations can be done in two ways:</p>
+
+<p><strong>POPLIN-A-Init:</strong> Be <strong>a</strong><span  class="math">\(_i = \{\hat{a}_i, \hat{a}_{i+1}\dots \hat{a}_{i+H} \}\)</span>, a sequence of actions obtained by the iteration of the policy <span  class="math">\(\hat{a}_t = \pi(\hat{s}_t)\)</span> over the model <span  class="math">\( p(\hat{s}_{t+1}| \hat{s}_t, \hat{a}_t)\)</span> starting from <span  class="math">\(s_i\)</span>. For the exploration process, Gaussian noise is added to this initial sequence, starting with <span  class="math">\(\mu_0 = 0\)</span> and covariance <span  class="math">\(\Sigma_0 = \sigma_0^2\mathcal{I}\)</span>. Then this mean and covariance is iteratively updated by selecting <span  class="math">\(\xi\)</span> elites, and computing the new mean and new covariance.</p>
+
+<p><strong>POPLIN-A-Replan:</strong> In <em>POPLIN-A-Init</em>, first, the action sequence is initialized, then the noise is added to this sequence. However in <em>POPLIN-A-Replan</em>, the first action is approximate by the policy, then noise is added to this action, the next state is computed taking into account this noise <span  class="math">\(\hat{s}_{i+1} = p(\cdot | s_i, \pi(s_i) + \delta_i)\)</span>.</p>
+
+<p><strong>Policy Planning in Parameter Space</strong>:</p>
+
+<hr>
 
 <h2 id="learning-latent-dynamics-for-planning-from-pixels">Learning Latent Dynamics for Planning from Pixels</h2>
 
