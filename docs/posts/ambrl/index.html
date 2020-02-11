@@ -251,9 +251,11 @@
 
 <p>[<a href="https://arxiv.org/pdf/1906.08649.pdf">See paper</a>]</p>
 
-<p>This work is a derivation from the previous method presented <em>(PETS)</em>. However, in this paper, it is used a policy network to help in the planning task with iterative Cross Entropy Method.</p>
+<p>This work is a derivation from the previous method presented <em>(PETS)</em>. However, in this paper, it is used a policy network to help in the planning task with iterative Cross-Entropy Method. Its main contribution is the proposal of an <strong>algorithm that has a better exploration of action-sequence candidates</strong> in the planning step.</p>
 
-<p>Several variations is proposed in this paper, in following subsections, it is discussed how the algorithm search for trajectories: <strong>POPLIN-A</strong> (adding noise to actions) <strong>POPLIN-P</strong> (adding noise to parameters e.g. weights of a neural network). In both cases the same heuristic of Iterative Cross Entropy Method (CEM) are used (iteratively adjustment of a gaussian distribution parameters to a group of elites which obtain the best rewards), but with the difference that <strong>POPLIN</strong> uses a policy network to initializate action distribution instead of random actions as <em>PETS</em>.</p>
+<p><strong>Recall</strong>: <em>In Gradient-free trajectory optimization (Random Shooting, CEM, MPPI, PDDM), it takes advantage of the knowledge of the dynamics <span  class="math">\(p(s'|s, a)\)</span> by proposing several candidates (N) of action-sequences of length H. The way how these candidates are proposed (exploration) is the main concern of this paper.</em></p>
+
+<p>In the following subsections, it is discussed how the algorithm search for trajectories: <strong>POPLIN-A</strong> (adding noise to actions) <strong>POPLIN-P</strong> (adding noise to parameters e.g. weights of a neural network). In both cases, the same heuristic of Iterative Cross-Entropy Method (CEM) are used (iteratively adjustment of gaussian distribution parameters to a group of elites which obtain the best rewards), but with the difference that <strong>POPLIN,</strong> uses a policy network to initialize action distribution instead of random actions as <em>PETS</em>.</p>
 
 <p><strong>Policy Planning in Action Space (POPLIN-A)</strong>:</p>
 
@@ -270,15 +272,17 @@
 <p><span  class="math">\(\hat{a}_i = \pi_{\theta + \omega_t}(s_t)\)</span>
 <span  class="math">\(s_{t+1} = p(\cdot | s_t, \hat{a}_t)\)</span></p>
 
-<p>Where <span  class="math">\(\omega_t\)</span> is gaussian noise, as in <em>POPLIN-A</em>, gaussian noise parameters is updated with the Iterative CEM.</p>
+<p>Where <span  class="math">\(\omega_t\)</span> is Gaussian noise, as in <em>POPLIN-A</em>, Gaussian noise parameters are updated with the Iterative CEM.</p>
 
 <figure>
     <img src="https://ericktornero.github.io/blog/images/POPLIN_surface2.png"
-         alt="Figure 10, POPLIN surface comparison"/> <figcaption>
-            <p><strong>Figure 10</strong>, POPLIN surface comparison</p>
+         alt="Figure 10, POPLIN surface comparison, Images in left side are the reward surface with respect (a) PETS, (c) POPLIN-A and (e) POPLIN-P. The Images in right side represent the action-sequence reduced with PCA projected in the reward surface relative to each left image"/> <figcaption>
+            <p><strong>Figure 10</strong>, POPLIN surface comparison, Images in left side are the reward surface with respect (a) PETS, (c) POPLIN-A and (e) POPLIN-P. The Images in right side represent the action-sequence reduced with PCA projected in the reward surface relative to each left image</p>
         </figcaption>
 </figure>
 
+
+<p>This paper found interesting results. In Fig. 10, If it is compared to the reward surface of the three algorithms (red color represents high reward). One can observe that the reward surface for the PETS algorithm has a lot of holes, it means that small portions of high reward appears rounded with portions of low reward. In consequence, the mean of action candidates over CEM iterations does not change significantly, it means a poor exploration of action sequences. However, for POPLIN algorithms, especially for POPLIN-P, the reward surface is smoother, allowing to the CEM algorithm a better exploration over iterations.</p>
 
 <hr>
 

@@ -140,9 +140,11 @@ $$\mu_i = \mu_{i+1} \hspace{0.25cm} \forall i \in \{0\dots H-2\}, \hspace{0.25cm
 ### Tingwu Wang & Jimmy Ba, University of Toronto, Vector Institute 2019
 [[See paper](https://arxiv.org/pdf/1906.08649.pdf)]
 
-This work is a derivation from the previous method presented *(PETS)*. However, in this paper, it is used a policy network to help in the planning task with iterative Cross Entropy Method.
+This work is a derivation from the previous method presented *(PETS)*. However, in this paper, it is used a policy network to help in the planning task with iterative Cross-Entropy Method. Its main contribution is the proposal of an **algorithm that has a better exploration of action-sequence candidates** in the planning step.
 
-Several variations is proposed in this paper, in following subsections, it is discussed how the algorithm search for trajectories: **POPLIN-A** (adding noise to actions) **POPLIN-P** (adding noise to parameters e.g. weights of a neural network). In both cases the same heuristic of Iterative Cross Entropy Method (CEM) are used (iteratively adjustment of a gaussian distribution parameters to a group of elites which obtain the best rewards), but with the difference that **POPLIN** uses a policy network to initializate action distribution instead of random actions as *PETS*.
+**Recall**: *In Gradient-free trajectory optimization (Random Shooting, CEM, MPPI, PDDM), it takes advantage of the knowledge of the dynamics $$p(s'|s, a)$$ by proposing several candidates (N) of action-sequences of length H. The way how these candidates are proposed (exploration) is the main concern of this paper.* 
+
+In the following subsections, it is discussed how the algorithm search for trajectories: **POPLIN-A** (adding noise to actions) **POPLIN-P** (adding noise to parameters e.g. weights of a neural network). In both cases, the same heuristic of Iterative Cross-Entropy Method (CEM) are used (iteratively adjustment of gaussian distribution parameters to a group of elites which obtain the best rewards), but with the difference that **POPLIN,** uses a policy network to initialize action distribution instead of random actions as *PETS*.
 
 
 **Policy Planning in Action Space (POPLIN-A)**:  
@@ -160,9 +162,11 @@ In planning in parameter space, gaussian noise is added to the weights of the ne
 $$\hat{a}_i = \pi_{\theta + \omega_t}(s_t)$$
 $$s_{t+1} = p(\cdot | s_t, \hat{a}_t)$$
 
-Where $$\omega_t$$ is gaussian noise, as in *POPLIN-A*, gaussian noise parameters is updated with the Iterative CEM.
+Where $$\omega_t$$ is Gaussian noise, as in *POPLIN-A*, Gaussian noise parameters are updated with the Iterative CEM.
 
-{{<figure src="https://ericktornero.github.io/blog/images/POPLIN_surface2.png" caption="**Figure 10**, POPLIN surface comparison">}}
+{{<figure src="https://ericktornero.github.io/blog/images/POPLIN_surface2.png" caption="**Figure 10**, POPLIN surface comparison, Images in left side are the reward surface with respect (a) PETS, (c) POPLIN-A and (e) POPLIN-P. The Images in right side represent the action-sequence reduced with PCA projected in the reward surface relative to each left image">}}
+
+This paper found interesting results. In Fig. 10, If it is compared to the reward surface of the three algorithms (red color represents high reward). One can observe that the reward surface for the PETS algorithm has a lot of holes, it means that small portions of high reward appears rounded with portions of low reward. In consequence, the mean of action candidates over CEM iterations does not change significantly, it means a poor exploration of action sequences. However, for POPLIN algorithms, especially for POPLIN-P, the reward surface is smoother, allowing to the CEM algorithm a better exploration over iterations. 
 
 <hr>
 
