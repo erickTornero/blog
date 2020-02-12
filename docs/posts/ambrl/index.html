@@ -269,8 +269,9 @@
 
 <p>In planning in parameter space, gaussian noise is added to the weights of the neural network. Then exploration is made in the following way:</p>
 
-<p><span  class="math">\(\hat{a}_i = \pi_{\theta + \omega_t}(s_t)\)</span>
-<span  class="math">\(s_{t+1} = p(\cdot | s_t, \hat{a}_t)\)</span></p>
+<p><span  class="math">\[\hat{a}_i = \pi_{\theta + \omega_t}(s_t)\]</span></p>
+
+<p><span  class="math">\[\hat{s}_{t+1} = p(\cdot | s_t, \hat{a}_t)\]</span></p>
 
 <p>Where <span  class="math">\(\omega_t\)</span> is Gaussian noise, as in <em>POPLIN-A</em>, Gaussian noise parameters are updated with the Iterative CEM.</p>
 

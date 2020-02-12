@@ -160,7 +160,8 @@ This algorithm uses Iterative Cross Entropy Method as *PETS*, however, istead of
 In planning in parameter space, gaussian noise is added to the weights of the neural network. Then exploration is made in the following way:
 
 $$\hat{a}_i = \pi_{\theta + \omega_t}(s_t)$$
-$$s_{t+1} = p(\cdot | s_t, \hat{a}_t)$$
+
+$$\hat{s}_{t+1} = p(\cdot | s_t, \hat{a}_t)$$
 
 Where $$\omega_t$$ is Gaussian noise, as in *POPLIN-A*, Gaussian noise parameters are updated with the Iterative CEM.
 
