@@ -173,7 +173,7 @@
 
 &lt;p&gt;It is assumed that the control sequence is a future sequence of lenght &lt;span  class=&#34;math&#34;&gt;\(H\)&lt;/span&gt;. This sequence is optimized every timestep and &lt;span  class=&#34;math&#34;&gt;\(\mu_0\)&lt;/span&gt; should be the control input to be taken at current timestep. Noises is added in the following way:&lt;/p&gt;
 
-&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\(u_t^i \sim \mathcal{N}(0, \Sigma) \hspace{0.25cm} \forall i \in \{0\dots N-1\}, t \in \{0\dots H-1\}\)&lt;/span&gt;POPLIN-A-Init):**&lt;/p&gt;
+&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[u_t^i \sim \mathcal{N}(0, \Sigma) \hspace{0.25cm} \forall i \in \{0\dots N-1\}, t \in \{0\dots H-1\}\]&lt;/span&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[n_t^i = \beta u_t^i + (1 - \beta) n_{t-1}^i \hspace{0.25cm}\text{where}\hspace{0.25cm} n_{t&lt;0} = 0\]&lt;/span&gt;&lt;/p&gt;
 

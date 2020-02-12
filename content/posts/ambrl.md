@@ -114,7 +114,7 @@ $$(\mu_0, \mu_1, \dots, \mu_{H-1})$$
 
 It is assumed that the control sequence is a future sequence of lenght $$H$$. This sequence is optimized every timestep and $$\mu_0$$ should be the control input to be taken at current timestep. Noises is added in the following way:
 
-$$u_t^i \sim \mathcal{N}(0, \Sigma) \hspace{0.25cm} \forall i \in \{0\dots N-1\}, t \in \{0\dots H-1\}$$POPLIN-A-Init):**
+$$u_t^i \sim \mathcal{N}(0, \Sigma) \hspace{0.25cm} \forall i \in \{0\dots N-1\}, t \in \{0\dots H-1\}$$
 
 $$n_t^i = \beta u_t^i + (1 - \beta) n_{t-1}^i \hspace{0.25cm}\text{where}\hspace{0.25cm} n_{t<0} = 0$$
 
