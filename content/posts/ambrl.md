@@ -4,6 +4,8 @@ date: 2020-01-30T15:39:27-05:00
 draft: false
 math: true
 markup: mmark
+tags: ["model-based", "reinforcement learning", "Artificial Intelligence"]
+categories: ["blogpost"]
 ---
 
 Introduction to the basics on model-based reinforcement learning and the recent advances on this topic.

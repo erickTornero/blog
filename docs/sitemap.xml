@@ -8,7 +8,32 @@
   </url>
   
   <url>
+    <loc>https://ericktornero.github.io/blog/tags/artificial-intelligence/</loc>
+    <lastmod>2020-01-30T15:39:27-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://ericktornero.github.io/blog/categories/blogpost/</loc>
+    <lastmod>2020-01-30T15:39:27-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://ericktornero.github.io/blog/categories/</loc>
+    <lastmod>2020-01-30T15:39:27-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://ericktornero.github.io/blog/tags/model-based/</loc>
+    <lastmod>2020-01-30T15:39:27-05:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://ericktornero.github.io/blog/posts/</loc>
+    <lastmod>2020-01-30T15:39:27-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://ericktornero.github.io/blog/tags/reinforcement-learning/</loc>
     <lastmod>2020-01-30T15:39:27-05:00</lastmod>
   </url>
   
@@ -18,11 +43,12 @@
   </url>
   
   <url>
-    <loc>https://ericktornero.github.io/blog/categories/</loc>
+    <loc>https://ericktornero.github.io/blog/tags/</loc>
+    <lastmod>2020-01-30T15:39:27-05:00</lastmod>
   </url>
   
   <url>
-    <loc>https://ericktornero.github.io/blog/tags/</loc>
+    <loc>https://ericktornero.github.io/blog/about/</loc>
   </url>
   
 </urlset>

@@ -243,5 +243,16 @@
 &lt;p&gt;[5] Tingwu Wang et al. &lt;strong&gt;Exploring Model-based Planning with Policy Networks&lt;/strong&gt;. Arxiv &lt;a href=&#34;https://arxiv.org/pdf/1906.08649.pdf&#34;&gt;2019&lt;/a&gt;.&lt;/p&gt;</description>
     </item>
     
+    <item>
+      <title>About me</title>
+      <link>https://ericktornero.github.io/blog/about/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://ericktornero.github.io/blog/about/</guid>
+      <description>&lt;p&gt;Hello!, This is Erick. Currently, I&#39;m pursuing a master&#39;s degree in Computer Science, at Universidad Católica San Pablo, Arequipa-Perú. I am so interested in how to solve complex tasks in robotics through reinforcement learning.&lt;/p&gt;
+&lt;p&gt;Find more information about me in &lt;strong&gt;&lt;a href=&#34;https://ericktornero.github.io&#34;&gt;erick-tornero-portfolio&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
+</description>
+    </item>
+    
   </channel>
 </rss>
