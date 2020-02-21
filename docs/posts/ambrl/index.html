@@ -70,7 +70,7 @@
 
 <h2 id="introduction">Introduction</h2>
 
-<p>Model-based reinforcement learning is a branch in Reinforcement Learning where the transition function <span  class="math">\(P(s', r|s, a)\)</span> in the Markov decision process (MDP) is used. This model is used to improve or create a policy (planning), where the value function is calculated as an intermediate step, as can be seen in <strong>Figure 1</strong> in the <em>model-learning</em> branch. <em>Direct RL</em>, means model-free RL where the policy or value-function is computed <em>directly</em> from experience and it is not needed to model the dynamics. However, these kinds of methods are too poor sample efficient due to that these methods rely on the probability to find good interactions, this becomes even more complicated when the environment has high dimensional state-action space and when sparse rewards are presented. In contrast, recent advances in Model-based RL, have shown capabilities to learn optimal policies with considerable less interactions, becoming methods more applicable to real-life problems.</p>
+<p>Model-based reinforcement learning is a branch in Reinforcement Learning where the transition function <span  class="math">\(P(s', r|s, a)\)</span> in the Markov decision process (MDP) is used. This model is used to improve or create a policy (planning), where the value function is calculated as an intermediate step, as can be seen in <strong>Figure 1</strong> in the <em>model-learning</em> branch. <em>Direct RL</em>, means model-free RL where the policy or value-function is computed <em>directly</em> from experience and it is not needed to model the dynamics. However, these kinds of methods are too poor sample efficient due to that these methods rely on the probability to find good interactions, this becomes even more complicated when the environment has high dimensional state-action space and when sparse rewards are presented. In contrast, recent advances in Model-based RL, have shown capabilities to learn optimal policies with considerably fewer interactions, becoming methods more applicable to problems where exploration interactions are critical.</p>
 
 <figure>
     <img src="https://ericktornero.github.io/blog/images/squeme_mbmf.png"/> <figcaption>
@@ -79,7 +79,7 @@
 </figure>
 
 
-<p>An interesting algorithm for starting analysis of model-based reinforcement learning is called <strong>Dynamic Programming</strong> algorithm, where is assumed a prior and exact knowledge of the dynamics (transition function). However, in the real world, the dynamics are usually unknown and can be very complex to model. For these kinds of problems, model learning with function approximators are used just as supervised learning with the collected transitions <span  class="math">\((s, a, s')\)</span> as dataset. Examples of these environments are show <strong>Fig. 2</strong>, the left picture shows a Simple Gridworld example with a discrete state and actions. In this case the transition function is known, for example <span  class="math">\(P(s_2|s_1,right)=1.0\)</span> and <span  class="math">\(P(s_2|s_1, left)=0.0\)</span>, where <span  class="math">\(s_x\)</span>: represents the slot <span  class="math">\(x \in \{0, 15\}\)</span>. In the right picture, an environment more approximate to real world is shown: Halfcheetah in <a href="http://www.mujoco.org/">Mujoco Environment</a>, where the dynamics of this environment is unknown and complex.</p>
+<p>An interesting algorithm for starting the analysis of model-based reinforcement learning is called <strong>Dynamic Programming</strong> algorithm, where it is assumed a prior and exact knowledge of the dynamics (transition function). However, in the real world, the dynamics are usually unknown and can be very complex to model. For these kinds of problems, model learning with function approximators is used just as supervised learning with the collected transitions <span  class="math">\((s, a, s')\)</span> as a dataset. Examples of these environments are shown <strong>Fig. 2</strong>, the left picture shows a Simple Gridworld example with a discrete state and actions. In this case the transition function is known, for example <span  class="math">\(P(s_2|s_1,right)=1.0\)</span> and <span  class="math">\(P(s_2|s_1, left)=0.0\)</span>, where <span  class="math">\(s_x\)</span>: represents the slot <span  class="math">\(x \in \{0, 15\}\)</span>. In the right picture, an environment more approximate to the real world is shown: Halfcheetah in <a href="http://www.mujoco.org/">Mujoco Environment</a>, where the dynamics of this environment is unknown and complex.</p>
 
 <figure>
     <img src="https://ericktornero.github.io/blog/images/gridworld_hchetaah.png"/> <figcaption>
@@ -88,11 +88,11 @@
 </figure>
 
 
-<p>For low dimensional state-action space, Gaussian Process (GPs) can be used to approximate the transition function. However when complexity in the model increasses, e.g. in robotics control, gaussian process used to be inadequate. Neural Networks however are known by its high adaptavility to complex functions, and in recent years, has beend showed interesting results in several applications, such as image classification. In that sense, this post focused in recent advances in MBRL that uses Neural Networks for the approximation of the transition function.</p>
+<p>For low dimensional state-action space, Gaussian Process (GPs) can be used to approximate the transition function. However when complexity in the model increases, e.g. in robotics control, the gaussian process used to be inadequate. Neural Networks, however, is known for its high adaptability to complex functions, and in recent years, has been showed interesting results in several applications, such as image classification. In that sense, this post focus on the recent advances in MBRL that use Neural Networks for the approximation of the transition function.</p>
 
-<h2 id="basic-concepts-in-modelbased-reinforcement-learnig">Basic concepts in Model-Based Reinforcement Learnig</h2>
+<h2 id="basic-concepts-in-modelbased-reinforcement-learning">Basic concepts in Model-Based Reinforcement Learning</h2>
 
-<p>Reinforcement learning Framework is defined over a Markov Decision Process, and elements in an MDP are defined in the tuple <span  class="math">\((\mathcal{S}, \mathcal{A}, \mathcal{R}, \mathcal{P}, \gamma)\)</span>, where <span  class="math">\(\mathcal{S}\)</span> is the state space, <span  class="math">\(\mathcal{A}\)</span> is the action space, <span  class="math">\(\mathcal{R}\)</span> is the reward and <span  class="math">\(\mathcal{P(s', r|s, a)}\)</span> define the transition function. In <strong>Fig. 3</strong>, the interaction interaction agent-envrionment is shown, given an observed state <span  class="math">\(s_t \in \mathcal{S}\)</span> at any particular timestep <span  class="math">\(t\)</span>, the agent take an action <span  class="math">\(a_t \in \mathcal{A}\)</span> drawn from its policy <span  class="math">\(\pi(a_t|s_t)\)</span>. The environment respond with the next state <span  class="math">\(s_{t+1}\)</span> and the reward <span  class="math">\(r_{t+1}\)</span> produced by take action <span  class="math">\(a_t\)</span>.</p>
+<p>Reinforcement learning Framework is defined over a Markov Decision Process, and elements in an MDP are defined in the tuple <span  class="math">\((\mathcal{S}, \mathcal{A}, \mathcal{R}, p, \gamma)\)</span>, where <span  class="math">\(\mathcal{S}\)</span> is the state space, <span  class="math">\(\mathcal{A}\)</span> is the action space, <span  class="math">\(\mathcal{R}\)</span> is the reward and <span  class="math">\(p(s', r|s, a)\)</span> define the transition function. In <strong>Fig. 3</strong>, the interaction interaction agent-envrionment is shown, given an observed state <span  class="math">\(s_t \in \mathcal{S}\)</span> at any particular timestep <span  class="math">\(t\)</span>, the agent take an action <span  class="math">\(a_t \in \mathcal{A}\)</span> drawn from its policy <span  class="math">\(\pi(a_t|s_t)\)</span>. The environment respond with the next state <span  class="math">\(s_{t+1}\)</span> and the reward <span  class="math">\(r_{t+1}\)</span> produced by take action <span  class="math">\(a_t\)</span>.</p>
 
 <figure>
     <img src="https://ericktornero.github.io/blog/images/mdp.png"/> <figcaption>
@@ -101,19 +101,12 @@
 </figure>
 
 
-<p>Either model-based or model-free methods try to compute a <strong>policy</strong> <span  class="math">\(\pi(a|s)\)</span> that maximizes the expected reward. In the case of mode-based, the policy is computed indirectly by using the transition model <span  class="math">\(\mathcal{P}(s',r|s, a)\)</span> for planning. As an example, some algorithms are explaining in the following section called: <strong>Dynamic Programming</strong>.</p>
+<p>Either model-based or model-free methods aim to compute a <strong>policy</strong> <span  class="math">\(\pi(a|s)\)</span> that maximizes the expected reward. In the case of mode-based, the policy is computed indirectly by using the transition model <span  class="math">\(p(s',r|s, a)\)</span> for planning. <strong>Dynamic Programming</strong> are considered as model-based methods since it uses its prior knowledge of the dynamics. This is used to improve the value-function, in Equation <strong>(a)</strong> is shown the update rule for the value function for the <em>Policy Iteration</em> algorithm.</p>
 
-<h3 id="dynamic-programming">Dynamic Programming</h3>
+<p><span  class="math">\[v(s) \xleftarrow{} \sum_{s', r} p(s', r|s,\pi(s))[r + \gamma v(s')] \tag{a}\]</span></p>
 
-<p>Dynamic programming are sets of algorithms where is assumed that the environment transition function is priorly known. The aim of RL is summarized in the following equation:</p>
-
-<p><span  class="math">\[\mathbb{E}[G_t] = \mathbb{E}_{\pi}[\sum_t \gamma^tr_t | s_t,a_t]\]</span></p>
-
-<p><span  class="math">\[\mathbb{E}[G_t] = \sum_s [\sum_t v(s) | a_t]\]</span></p>
-
-<p><span  class="math">\[v_\pi(s) = \sum_{s, r} \sum_{a} p(s'|s,a) \pi(a|s)[r + v(s)]\]</span></p>
-
-<hr width=90%>
+<p>However, in <em>Dynamic Programming</em> is assumed an exact knowledge of the dynamics. In the real world, the dynamics are usually unknown. To overcome this problem, methods tend to ignore the transition function <span  class="math">\(p(s', r|s, a)\)</span>, instead try to compute the expected value function through experience, e.g. <em>Q-Learning</em>. On the other hand, instead of having a backup of the value function, one can use the transition function and used to compute candidates of trajectories, these algorithms are known as shooting algorithms. In this blog, we take care of the second type of method. In that sense, the following part of this blog shows recent advances in this field. We will explain more about shooting methods in another post.
+<hr width=90%></p>
 
 <h2 id="neural-network-dynamics-for-modelbased-deep-reinforcement-learning-with-modelfree-finetuning">Neural network dynamics for model-based deep reinforcement learning with model-free fine-tuning</h2>
 
@@ -137,20 +130,20 @@
 </figure>
 
 
-<p>This method reach aceptable results in continuous tasks, It was tested in the <a href="http://www.mujoco.org/">Mujoco Environment</a>. While this method take over 100x less samples with respect model-free methods, this method can not reach the same assimpotic performace. A second proposal uses the previous model-based for initialize a model-free method (<em>PPO</em>), this is particular useful for model-free because the sample-complexity of model-free based on the probability to see good interactions, and model-based can achieve this with few samples. The results show faster convergence for model-free methods as can be seen in <strong>Fig. 5</strong> and <strong>Fig. 6</strong> (<em>fine-tuning</em>).</p>
+<p>This method reaches acceptable results in continuous tasks, It was tested in the <a href="http://www.mujoco.org/">Mujoco Environment</a>. While this method takes over 100x fewer samples concerning model-free methods, this method can not reach the same asymptotic performance. A second proposal uses the previous model-based for initializing a model-free method (<em>PPO</em>), this is particularly useful for model-free because the sample-complexity of model-free based on the probability to see good interactions, and model-based can achieve this with few samples. The results show faster convergence for model-free methods as can be seen in <strong>Fig. 5</strong> and <strong>Fig. 6</strong> (<em>fine-tuning</em>).</p>
 
 <figure>
     <img src="https://ericktornero.github.io/blog/images/anusha2017results1.gif"
-         alt="Figure 5, Performance of Model-based method (left) vs Model-free with fine tuning (right), aceptable performance is show for model-based with just thousands of samples, model-free shown high performance in the convergence (millions of samples)."/> <figcaption>
-            <p><strong>Figure 5</strong>, Performance of Model-based method (left) vs Model-free with fine tuning (right), aceptable performance is show for model-based with just thousands of samples, model-free shown high performance in the convergence (millions of samples).</p>
+         alt="Figure 5, Performance of Model-based method (left) vs Model-free with fine-tuning (right), acceptable performance is shown for model-based with just thousands of samples, model-free shown high performance in the convergence (millions of samples)."/> <figcaption>
+            <p><strong>Figure 5</strong>, Performance of Model-based method (left) vs Model-free with fine-tuning (right), acceptable performance is shown for model-based with just thousands of samples, model-free shown high performance in the convergence (millions of samples).</p>
         </figcaption>
 </figure>
 
 
 <figure>
     <img src="https://ericktornero.github.io/blog/images/anusha2017results2.png"
-         alt="Figure 6, Performance Model-free with fine tuning (red) vs Model-free (blue) in the Swimmer environment. Here, greater sample efficient of applying fine-tuning over the previous model-based is shown. We can appreciate that is difficult or imposible for a simple model-free method to achieve the performance of a Model-based method with the same number of samples, this feature is taked in advantage to make fine-tuning"/> <figcaption>
-            <p><strong>Figure 6</strong>, Performance Model-free with fine tuning (red) vs Model-free (blue) in the Swimmer environment. Here, greater sample efficient of applying fine-tuning over the previous model-based is shown. We can appreciate that is difficult or imposible for a simple model-free method to achieve the performance of a Model-based method with the same number of samples, this feature is taked in advantage to make fine-tuning</p>
+         alt="Figure 6, Performance Model-free with fine-tuning (red) vs Model-free (blue) in the Swimmer environment. Here, greater sample efficiency of applying fine-tuning over the previous model-based is shown. We can appreciate that is difficult or impossible for a simple model-free method to achieve the performance of a Model-based method with the same number of samples, this feature is taken in advantage to make fine-tuning"/> <figcaption>
+            <p><strong>Figure 6</strong>, Performance Model-free with fine-tuning (red) vs Model-free (blue) in the Swimmer environment. Here, greater sample efficiency of applying fine-tuning over the previous model-based is shown. We can appreciate that is difficult or impossible for a simple model-free method to achieve the performance of a Model-based method with the same number of samples, this feature is taken in advantage to make fine-tuning</p>
         </figcaption>
 </figure>
 
@@ -163,11 +156,11 @@
 
 <p>[<a href="http://papers.nips.cc/paper/7725-deep-reinforcement-learning-in-a-handful-of-trials-using-probabilistic-dynamics-models.pdf">See paper</a>]</p>
 
-<p>This paper achieve interesting results reducing the gap between model-free and model-based RL in assimptotic performance with 10x less sample iterations required, by mixing some ideas to model the uncertainty of the dynamics: These uncertainties are devide into two:</p>
+<p>This paper achieves interesting results reducing the gap between model-free and model-based RL in asymptotic performance with 10x fewer sample iterations required, by mixing some ideas to model the uncertainty of the dynamics: These uncertainties are divided into two:</p>
 
 <p><strong>1. Aleatoric Uncertainty</strong>:</p>
 
-<p>This uncertainty is given by the stochasticity of the system, e.g. noise, inherent randomness. The paper models this behaviour by outputting the mean and variance of a <em>Gaussian Distribution</em>, It allows to model differents variances for differents states (<a href="https://en.wikipedia.org/wiki/Heteroscedasticity">Heterokedastic</a>). While the distribution over states can be assumed any tractable distribution, this paper assumed a Gaussian Distribution over states. Given by:</p>
+<p>This uncertainty is given by the stochasticity of the system, e.g. noise, inherent randomness. The paper models this behavior by outputting the mean and variance of a <em>Gaussian Distribution</em>, It allows us to model different variances for different states (<a href="https://en.wikipedia.org/wiki/Heteroscedasticity">Heterokedastic</a>). While the distribution over states can be assumed any tractable distribution, this paper assumed a Gaussian Distribution over states. Given by:</p>
 
 <p><span  class="math">\[\hat{f} = Pr(s_{t+1}|s_t, a_t) = \mathcal{N}(\mu_\theta(s_t, a_t), \Sigma{_\theta}(s_t,a_t))\]</span></p>
 
@@ -177,12 +170,12 @@
 
 <p><strong>2. Epistemic Uncertainty</strong>:</p>
 
-<p>This uncertainty is given by the limitation of data. Overconfidence in zones where there are not sufficient data-training points can be fatal for prediction, epistemic uncertainty tries to model this. The paper model this by using a simple bootstrap of ensembles. In <strong>Fig. 4</strong>, an example of two ensembles is shown (red and blue). In zones where there are data for training, the two ensembles behaive very similar, but in zones where not, for example between the two markable zones of datapoints, each ensemble can take different behaivor, these differences represents an uncertainty due to the missing of data or <em>epistemic uncertainty</em>.</p>
+<p>This uncertainty is given by the limitation of data. Overconfidence in zones where there are not sufficient data-training points can be fatal for prediction, epistemic uncertainty tries to model this. The paper model this by using a simple bootstrap of ensembles. In <strong>Fig. 4</strong>, an example of two ensembles is shown (red and blue). In zones where there are data for training, the two ensembles behave very similarly, but in zones where not, for example between the two markable zones of data points, each ensemble can take different behavior, these differences represent the uncertainty due to the missing of data or <em>epistemic uncertainty</em>.</p>
 
 <figure>
     <img src="https://ericktornero.github.io/blog/images/epistemic_unc.png"
-         alt="Figure 7, probabilistc Ensembles. Epistemic uncertainty can be seen in the center of the picture, where not data-training points appear, as a result different behaviour of the bootstrap ensembles exists. Aleatoric uncertainties can be seen in zones where there are many data-training points (Green) but still exits variance, proper of the environment."/> <figcaption>
-            <p><strong>Figure 7</strong>, probabilistc Ensembles. Epistemic uncertainty can be seen in the center of the picture, where not data-training points appear, as a result different behaviour of the bootstrap ensembles exists. Aleatoric uncertainties can be seen in zones where there are many data-training points (Green) but still exits variance, proper of the environment.</p>
+         alt="Figure 7, probabilistic Ensembles. Epistemic uncertainty can be seen in the center of the picture, where not data-training points appear, as a result, different behavior of the bootstrap ensembles exists. Aleatoric uncertainties can be seen in zones where there are many data-training points (Green) but still exits variance, proper of the environment."/> <figcaption>
+            <p><strong>Figure 7</strong>, probabilistic Ensembles. Epistemic uncertainty can be seen in the center of the picture, where not data-training points appear, as a result, different behavior of the bootstrap ensembles exists. Aleatoric uncertainties can be seen in zones where there are many data-training points (Green) but still exits variance, proper of the environment.</p>
         </figcaption>
 </figure>
 
@@ -191,8 +184,8 @@
 
 <figure>
     <img src="https://ericktornero.github.io/blog/images/pipeline_handful.png"
-         alt="Figure 8, Pipeline. Algorithm uses both uncertainties previously presented for model the dynamics (left picture). These uncertainties is propagated through each sequence of trajectories by a particles system (center picture). The final reward for each timestep would the average of each particle at given index. MPC controller in this case Cross Entropy Method (CEM), propagate N candidates of sequences of horizon H, and evaluate the best one trajectory, then first action of best trajectory is taken."/> <figcaption>
-            <p><strong>Figure 8</strong>, Pipeline. Algorithm uses both uncertainties previously presented for model the dynamics (left picture). These uncertainties is propagated through each sequence of trajectories by a particles system (center picture). The final reward for each timestep would the average of each particle at given index. MPC controller in this case Cross Entropy Method (CEM), propagate N candidates of sequences of horizon H, and evaluate the best one trajectory, then first action of best trajectory is taken.</p>
+         alt="Figure 8, Pipeline. The algorithm uses both uncertainties previously presented for model the dynamics (left picture). These uncertainties are propagated through each sequence of trajectories by a particle system (center picture). The final reward for each timestep would the average of each particle at a given index. MPC controller, in this case, Cross-Entropy Method (CEM), propagate N candidates of sequences of horizon H and evaluate the best one trajectory, then, the first action of best trajectory is taken."/> <figcaption>
+            <p><strong>Figure 8</strong>, Pipeline. The algorithm uses both uncertainties previously presented for model the dynamics (left picture). These uncertainties are propagated through each sequence of trajectories by a particle system (center picture). The final reward for each timestep would the average of each particle at a given index. MPC controller, in this case, Cross-Entropy Method (CEM), propagate N candidates of sequences of horizon H and evaluate the best one trajectory, then, the first action of best trajectory is taken.</p>
         </figcaption>
 </figure>
 
@@ -213,7 +206,7 @@
 
 <p>[<a href="https://arxiv.org/pdf/1909.11652.pdf">See paper</a>]</p>
 
-<p>This paper is an extention of the previous paper <em>DRL with a handful of trials using probabilistic models (PETS)</em>, taking the problem of dexterous manipulation. It also models aleatoric and epistemic uncertainties with Gaussian parametrization via Neural Networks and with Ensembles bootstrap respectively. The main contributions is a modification for (MPPI) algorithm that uses weighted rewards. MPPI uses random sampling techniques to explore actions near to the control sequence, instead in this paper a <em>Filtering</em> technique is used to add dependencies of previous timesteps:</p>
+<p>This paper is an extension of the previous paper <em>DRL with a handful of trials using probabilistic models (PETS)</em>, taking the problem of dexterous manipulation. It also models aleatoric and epistemic uncertainties with Gaussian parametrization via Neural Networks and with Ensembles bootstrap respectively. The main contributions are a modification for (MPPI) algorithm that uses weighted rewards. MPPI uses random sampling techniques to explore actions near to the control sequence, instead of in this paper a <em>Filtering</em> technique is used to add dependencies of previous timesteps:</p>
 
 <p><strong>Filtering and reward weighted refinement overview</strong>:</p>
 
@@ -227,17 +220,17 @@
 
 <p><span  class="math">\[n_t^i = \beta u_t^i + (1 - \beta) n_{t-1}^i \hspace{0.25cm}\text{where}\hspace{0.25cm} n_{t<0} = 0\]</span></p>
 
-<p>Where <span  class="math">\(u_t^i\)</span> is a gaussian noise with mean <span  class="math">\(0\)</span> and <span  class="math">\(\Sigma\)</span> covariance matrix and <span  class="math">\(n_t^i\)</span> add dependace noise from previous timestep.</p>
+<p>Where <span  class="math">\(u_t^i\)</span> is a gaussian noise with mean <span  class="math">\(0\)</span> and <span  class="math">\(\Sigma\)</span> covariance matrix and <span  class="math">\(n_t^i\)</span> add dependence noise from the previous timestep.</p>
 
 <p>Then each action for H (index <span  class="math">\(t\)</span>) horizon for N (index <span  class="math">\(i\)</span>) candidates is computed as:</p>
 
 <p><span  class="math">\[a_t^i = \mu_t + n_t^i\]</span></p>
 
-<p>With the previous actions sequence for N candidates, the predicted states is computed with the dynamics model, then the reward <span  class="math">\(R_k\)</span> is computed for each trajectory. Then the new mean is computed through the weighted reward.</p>
+<p>With the previous actions sequence for N candidates, the predicted states are computed with the dynamics model, then the reward <span  class="math">\(R_k\)</span> is computed for each trajectory. Then the new mean is computed through the weighted reward.</p>
 
 <p><span  class="math">\[\mu_t = \frac{\sum_{k=0}^N (e^{\gamma R_k})(a_t^{(k)})}{\sum_{j=0}^N e^{\gamma R_j}} \hspace{0.25cm} \forall t \in \{0\dots H-1\}\]</span></p>
 
-<p>Now, the new trajectory is optimized <span  class="math">\(\mu_{0:H-1}\)</span>. Just the first action is taken: <strong><span  class="math">\(\mu_0\)</span></strong> (Send to actuators).</p>
+<p>Now, the new trajectory is optimized at <span  class="math">\(\mu_{0: H-1}\)</span>. Just the first action is taken: <strong><span  class="math">\(\mu_0\)</span></strong> (Send to actuators).</p>
 
 <p>Finally, the control sequence is updated, and the process is repeated for each timestep:</p>
 
@@ -251,7 +244,7 @@
 
 <p>[<a href="https://arxiv.org/pdf/1906.08649.pdf">See paper</a>]</p>
 
-<p>This work is a derivation from the previous method presented <em>(PETS)</em>. However, in this paper, it is used a policy network to help in the planning task with iterative Cross-Entropy Method. Its main contribution is the proposal of an <strong>algorithm that has a better exploration of action-sequence candidates</strong> in the planning step.</p>
+<p>This work is a derivation from the previous method presented <em>(PETS)</em>. However, in this paper, it is used as a policy network to help in the planning task with iterative Cross-Entropy Method. Its main contribution is the proposal of an <strong>algorithm that has a better exploration of action-sequence candidates</strong> in the planning step.</p>
 
 <p><strong>Recall</strong>: <em>In Gradient-free trajectory optimization (Random Shooting, CEM, MPPI, PDDM), it takes advantage of the knowledge of the dynamics <span  class="math">\(p(s'|s, a)\)</span> by proposing several candidates (N) of action-sequences of length H. The way how these candidates are proposed (exploration) is the main concern of this paper.</em></p>
 
@@ -267,7 +260,7 @@
 
 <p><strong>Policy Planning in Parameter Space (POPLIN-P)</strong>:</p>
 
-<p>In planning in parameter space, gaussian noise is added to the weights of the neural network. Then exploration is made in the following way:</p>
+<p>In planning in parameter space, Gaussian noise is added to the weights of the neural network. Then exploration is made in the following way:</p>
 
 <p><span  class="math">\[\hat{a}_i = \pi_{\theta + \omega_t}(s_t)\]</span></p>
 
@@ -287,10 +280,6 @@
 
 <hr>
 
-<h2 id="learning-latent-dynamics-for-planning-from-pixels">Learning Latent Dynamics for Planning from Pixels</h2>
-
-<hr>
-
 <h2 id="references">References</h2>
 
 <p>[1] R. Sutton, A. Barto. <strong>Reinforcement Learning: An Introduction</strong>, <em>Second edition</em>, <a href="http://incompleteideas.net/book/bookdraft2018jan1.pdf">2018</a>.</p>
@@ -300,6 +289,8 @@
 <p>[3] K. Chua et al. <strong>Deep Reinforcement Learning in a Handful of Trials using Probabilistic Dynamics Models</strong>. In <em>NIPS</em> <a href="https://arxiv.org/pdf/1909.11652.pdf">2018</a>.</p>
 
 <p>[4] A. Nagabandi et al. <strong>Deep Dynamics Models for Learning Dexterous Manipulation</strong>. In <em>CoRL</em> <a href="https://arxiv.org/pdf/1909.11652.pdf">2019</a>.</p>
+
+<p>[5] Tingwu Wang et al. <strong>Exploring Model-based Planning with Policy Networks</strong>. Arxiv <a href="https://arxiv.org/pdf/1906.08649.pdf">2019</a>.</p>
         </section>
         <footer>
             <a class="permalink u-url" href="https://ericktornero.github.io/blog/posts/ambrl/"></a>
