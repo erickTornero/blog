@@ -6,7 +6,7 @@ publishDir = "docs"
 
 [params]
     Author      =   "Erick Tornero"
-    Description = "Description of website for head meta tag"
+    Description = "Erick Tornero, Research Blog"
     Biography = "If you have any questions or want to keep in touch, feel free to mail me to erick.tornero@ucsp.edu.pe"
     
     Avatar = "images/avatar.jpg"
