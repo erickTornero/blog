@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Research blog</title>
@@ -5,253 +6,27 @@
     <description>Recent content on Research blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 30 Jan 2020 15:39:27 -0500</lastBuildDate>
     
-        <atom:link href="https://ericktornero.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://ericktornero.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Advances in Model Based Reinforcement Learning</title>
-      <link>https://ericktornero.github.io/blog/posts/ambrl/</link>
+      <link>https://ericktornero.github.io/blog/post/ambrl/</link>
       <pubDate>Thu, 30 Jan 2020 15:39:27 -0500</pubDate>
       
-      <guid>https://ericktornero.github.io/blog/posts/ambrl/</guid>
-      <description>&lt;p&gt;Introduction to the basics on model-based reinforcement learning and the recent advances on this topic.&lt;/p&gt;
-
-&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
-
-&lt;p&gt;Model-based reinforcement learning is a branch in Reinforcement Learning where the transition function &lt;span  class=&#34;math&#34;&gt;\(P(s&#39;, r|s, a)\)&lt;/span&gt; in the Markov decision process (MDP) is used. This model is used to improve or create a policy (planning), where the value function is calculated as an intermediate step, as can be seen in &lt;strong&gt;Figure 1&lt;/strong&gt; in the &lt;em&gt;model-learning&lt;/em&gt; branch. &lt;em&gt;Direct RL&lt;/em&gt;, means model-free RL where the policy or value-function is computed &lt;em&gt;directly&lt;/em&gt; from experience and it is not needed to model the dynamics. However, these kinds of methods are too poor sample efficient due to that these methods rely on the probability to find good interactions, this becomes even more complicated when the environment has high dimensional state-action space and when sparse rewards are presented. In contrast, recent advances in Model-based RL, have shown capabilities to learn optimal policies with considerably fewer interactions, becoming methods more applicable to problems where exploration interactions are critical.&lt;/p&gt;
-
-&lt;figure&gt;
-    &lt;img src=&#34;https://ericktornero.github.io/blog/images/squeme_mbmf.png&#34;/&gt; &lt;figcaption&gt;
-            &lt;h4&gt;Figure 1, Taken from [1]&lt;/h4&gt;
-        &lt;/figcaption&gt;
-&lt;/figure&gt;
-
-
-&lt;p&gt;An interesting algorithm for starting the analysis of model-based reinforcement learning is called &lt;strong&gt;Dynamic Programming&lt;/strong&gt; algorithm, where it is assumed a prior and exact knowledge of the dynamics (transition function). However, in the real world, the dynamics are usually unknown and can be very complex to model. For these kinds of problems, model learning with function approximators is used just as supervised learning with the collected transitions &lt;span  class=&#34;math&#34;&gt;\((s, a, s&#39;)\)&lt;/span&gt; as a dataset. Examples of these environments are shown &lt;strong&gt;Fig. 2&lt;/strong&gt;, the left picture shows a Simple Gridworld example with a discrete state and actions. In this case the transition function is known, for example &lt;span  class=&#34;math&#34;&gt;\(P(s_2|s_1,right)=1.0\)&lt;/span&gt; and &lt;span  class=&#34;math&#34;&gt;\(P(s_2|s_1, left)=0.0\)&lt;/span&gt;, where &lt;span  class=&#34;math&#34;&gt;\(s_x\)&lt;/span&gt;: represents the slot &lt;span  class=&#34;math&#34;&gt;\(x \in \{0, 15\}\)&lt;/span&gt;. In the right picture, an environment more approximate to the real world is shown: Halfcheetah in &lt;a href=&#34;http://www.mujoco.org/&#34;&gt;Mujoco Environment&lt;/a&gt;, where the dynamics of this environment is unknown and complex.&lt;/p&gt;
-
-&lt;figure&gt;
-    &lt;img src=&#34;https://ericktornero.github.io/blog/images/gridworld_hchetaah.png&#34;/&gt; &lt;figcaption&gt;
-            &lt;h4&gt;Figure 2, left: Gridworld environment, taken from [1]. Right: Halfcheetah Environment&lt;/h4&gt;
-        &lt;/figcaption&gt;
-&lt;/figure&gt;
-
-
-&lt;p&gt;For low dimensional state-action space, Gaussian Process (GPs) can be used to approximate the transition function. However when complexity in the model increases, e.g. in robotics control, the gaussian process used to be inadequate. Neural Networks, however, is known for its high adaptability to complex functions, and in recent years, has been showed interesting results in several applications, such as image classification. In that sense, this post focus on the recent advances in MBRL that use Neural Networks for the approximation of the transition function.&lt;/p&gt;
-
-&lt;h2 id=&#34;basic-concepts-in-modelbased-reinforcement-learning&#34;&gt;Basic concepts in Model-Based Reinforcement Learning&lt;/h2&gt;
-
-&lt;p&gt;Reinforcement learning Framework is defined over a Markov Decision Process, and elements in an MDP are defined in the tuple &lt;span  class=&#34;math&#34;&gt;\((\mathcal{S}, \mathcal{A}, \mathcal{R}, p, \gamma)\)&lt;/span&gt;, where &lt;span  class=&#34;math&#34;&gt;\(\mathcal{S}\)&lt;/span&gt; is the state space, &lt;span  class=&#34;math&#34;&gt;\(\mathcal{A}\)&lt;/span&gt; is the action space, &lt;span  class=&#34;math&#34;&gt;\(\mathcal{R}\)&lt;/span&gt; is the reward and &lt;span  class=&#34;math&#34;&gt;\(p(s&#39;, r|s, a)\)&lt;/span&gt; define the transition function. In &lt;strong&gt;Fig. 3&lt;/strong&gt;, the interaction interaction agent-envrionment is shown, given an observed state &lt;span  class=&#34;math&#34;&gt;\(s_t \in \mathcal{S}\)&lt;/span&gt; at any particular timestep &lt;span  class=&#34;math&#34;&gt;\(t\)&lt;/span&gt;, the agent take an action &lt;span  class=&#34;math&#34;&gt;\(a_t \in \mathcal{A}\)&lt;/span&gt; drawn from its policy &lt;span  class=&#34;math&#34;&gt;\(\pi(a_t|s_t)\)&lt;/span&gt;. The environment respond with the next state &lt;span  class=&#34;math&#34;&gt;\(s_{t+1}\)&lt;/span&gt; and the reward &lt;span  class=&#34;math&#34;&gt;\(r_{t+1}\)&lt;/span&gt; produced by take action &lt;span  class=&#34;math&#34;&gt;\(a_t\)&lt;/span&gt;.&lt;/p&gt;
-
-&lt;figure&gt;
-    &lt;img src=&#34;https://ericktornero.github.io/blog/images/mdp.png&#34;/&gt; &lt;figcaption&gt;
-            &lt;h4&gt;Figure 3, Interaction in MDP&lt;/h4&gt;
-        &lt;/figcaption&gt;
-&lt;/figure&gt;
-
-
-&lt;p&gt;Either model-based or model-free methods aim to compute a &lt;strong&gt;policy&lt;/strong&gt; &lt;span  class=&#34;math&#34;&gt;\(\pi(a|s)\)&lt;/span&gt; that maximizes the expected reward. In the case of mode-based, the policy is computed indirectly by using the transition model &lt;span  class=&#34;math&#34;&gt;\(p(s&#39;,r|s, a)\)&lt;/span&gt; for planning. &lt;strong&gt;Dynamic Programming&lt;/strong&gt; are considered as model-based methods since it uses its prior knowledge of the dynamics. This is used to improve the value-function, in Equation &lt;strong&gt;(a)&lt;/strong&gt; is shown the update rule for the value function for the &lt;em&gt;Policy Iteration&lt;/em&gt; algorithm.&lt;/p&gt;
-
-&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[v(s) \xleftarrow{} \sum_{s&#39;, r} p(s&#39;, r|s,\pi(s))[r + \gamma v(s&#39;)] \tag{a}\]&lt;/span&gt;&lt;/p&gt;
-
-&lt;p&gt;However, in &lt;em&gt;Dynamic Programming&lt;/em&gt; is assumed an exact knowledge of the dynamics. In the real world, the dynamics are usually unknown. To overcome this problem, methods tend to ignore the transition function &lt;span  class=&#34;math&#34;&gt;\(p(s&#39;, r|s, a)\)&lt;/span&gt;, instead try to compute the expected value function through experience, e.g. &lt;em&gt;Q-Learning&lt;/em&gt;. On the other hand, instead of having a backup of the value function, one can use the transition function and used to compute candidates of trajectories, these algorithms are known as shooting algorithms. In this blog, we take care of the second type of method. In that sense, the following part of this blog shows recent advances in this field. We will explain more about shooting methods in another post.
-&lt;hr width=90%&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;neural-network-dynamics-for-modelbased-deep-reinforcement-learning-with-modelfree-finetuning&#34;&gt;Neural network dynamics for model-based deep reinforcement learning with model-free fine-tuning&lt;/h2&gt;
-
-&lt;h3 id=&#34;anusha-nagabandi-et-al-uc-berkeley-2017&#34;&gt;Anusha Nagabandi et al. UC Berkeley 2017&lt;/h3&gt;
-
-&lt;p&gt;[&lt;a href=&#34;https://arxiv.org/pdf/1708.02596.pdf&#34;&gt;See paper&lt;/a&gt;]&lt;/p&gt;
-
-&lt;p&gt;This paper proposes deterministic Neural Network for Model-based Reinforcement Learning for solving continuous taks. The pipeline is shown in &lt;strong&gt;Fig. 4&lt;/strong&gt;, a Neural Network &lt;span  class=&#34;math&#34;&gt;\(\hat{f}_\theta\)&lt;/span&gt; models the dynamics of the environment and is trained as a multidimensional regression in a deterministic way using &lt;a href=&#34;https://en.wikipedia.org/wiki/Mean_squared_error&#34;&gt;MSE Loss&lt;/a&gt; function (&lt;strong&gt;Eq. 3&lt;/strong&gt;). The &lt;em&gt;MPC Controller&lt;/em&gt; laverage the knowledge of the transition function &lt;span  class=&#34;math&#34;&gt;\(\hat{f}_{\theta}\)&lt;/span&gt; to predict the next state &lt;span  class=&#34;math&#34;&gt;\(\hat{s}_{t+1}\)&lt;/span&gt; given a current state &lt;span  class=&#34;math&#34;&gt;\(s_t\)&lt;/span&gt; and an action taken &lt;span  class=&#34;math&#34;&gt;\(a_t\)&lt;/span&gt; as in &lt;strong&gt;Eq. 1&lt;/strong&gt;. The same logic is used for multistep prediction of &lt;em&gt;horizon&lt;/em&gt; &lt;span  class=&#34;math&#34;&gt;\(H\)&lt;/span&gt;, by recursively applying the &lt;strong&gt;Eq. 1&lt;/strong&gt; &lt;span  class=&#34;math&#34;&gt;\(H\)&lt;/span&gt; times (&lt;strong&gt;Eq. 2&lt;/strong&gt;). Note that reward is a function over states &lt;span  class=&#34;math&#34;&gt;\(r_t = fn(s_t)\)&lt;/span&gt;, then if the state &lt;span  class=&#34;math&#34;&gt;\(\hat{s}_{t+i}\)&lt;/span&gt; is predicted by &lt;strong&gt;Eq. 2&lt;/strong&gt;, reward is approximate by &lt;span  class=&#34;math&#34;&gt;\(\hat{r}_{t+i} = fn(\hat{s}_{t+i})\)&lt;/span&gt;.&lt;/p&gt;
-
-&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[\hat{s}_{t+1} = s_t + \hat{f}_\theta(s_t, a_t)\tag{1}\]&lt;/span&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[\hat{s}_{t+i} = \hat{f}_\theta(\dots(\hat{f}_\theta(\hat{f}_\theta(s_t, a_t), a_{t+1})\dots, a_{t+i-1}) \tag{2}\]&lt;/span&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[Loss_\theta = \frac{1}{\mathcal{D}} \sum_{(s_t, a_t, s_{t+1}) \in \mathcal{D}} \frac{1}{2} \Vert (s_{t+1} - s_t) - \hat{f}_\theta(s_t, a_t) \Vert^2 \tag{3}\]&lt;/span&gt;&lt;/p&gt;
-
-&lt;figure&gt;
-    &lt;img src=&#34;https://ericktornero.github.io/blog/images/anusha2017.png&#34;
-         alt=&#34;Figure 4, Pipeline Anusha paper. MPC Controller is a trajectory optimizer for planning future H actions, given a known transition function p(s&amp;#39;|s, a) and a reward function r_t = fn(s_t). The MPC just take the first action of the trajectory and replan for each time-step. Transition tuple (s_i, a_i, s_{i&amp;#43;1}) is stored in a dataset D for train the Dynamics with supervised learning and MSE Loss.&#34;/&gt; &lt;figcaption&gt;
-            &lt;p&gt;&lt;strong&gt;Figure 4&lt;/strong&gt;, Pipeline Anusha paper. MPC Controller is a trajectory optimizer for planning future H actions, given a known transition function &lt;strong&gt;p(s&#39;|s, a)&lt;/strong&gt; and a reward function &lt;strong&gt;r_t = fn(s_t)&lt;/strong&gt;. The MPC just take the first action of the trajectory and replan for each time-step. Transition tuple (s_i, a_i, s_{i+1}) is stored in a dataset D for train the Dynamics  with supervised learning and MSE Loss.&lt;/p&gt;
-        &lt;/figcaption&gt;
-&lt;/figure&gt;
-
-
-&lt;p&gt;This method reaches acceptable results in continuous tasks, It was tested in the &lt;a href=&#34;http://www.mujoco.org/&#34;&gt;Mujoco Environment&lt;/a&gt;. While this method takes over 100x fewer samples concerning model-free methods, this method can not reach the same asymptotic performance. A second proposal uses the previous model-based for initializing a model-free method (&lt;em&gt;PPO&lt;/em&gt;), this is particularly useful for model-free because the sample-complexity of model-free based on the probability to see good interactions, and model-based can achieve this with few samples. The results show faster convergence for model-free methods as can be seen in &lt;strong&gt;Fig. 5&lt;/strong&gt; and &lt;strong&gt;Fig. 6&lt;/strong&gt; (&lt;em&gt;fine-tuning&lt;/em&gt;).&lt;/p&gt;
-
-&lt;figure&gt;
-    &lt;img src=&#34;https://ericktornero.github.io/blog/images/anusha2017results1.gif&#34;
-         alt=&#34;Figure 5, Performance of Model-based method (left) vs Model-free with fine-tuning (right), acceptable performance is shown for model-based with just thousands of samples, model-free shown high performance in the convergence (millions of samples).&#34;/&gt; &lt;figcaption&gt;
-            &lt;p&gt;&lt;strong&gt;Figure 5&lt;/strong&gt;, Performance of Model-based method (left) vs Model-free with fine-tuning (right), acceptable performance is shown for model-based with just thousands of samples, model-free shown high performance in the convergence (millions of samples).&lt;/p&gt;
-        &lt;/figcaption&gt;
-&lt;/figure&gt;
-
-
-&lt;figure&gt;
-    &lt;img src=&#34;https://ericktornero.github.io/blog/images/anusha2017results2.png&#34;
-         alt=&#34;Figure 6, Performance Model-free with fine-tuning (red) vs Model-free (blue) in the Swimmer environment. Here, greater sample efficiency of applying fine-tuning over the previous model-based is shown. We can appreciate that is difficult or impossible for a simple model-free method to achieve the performance of a Model-based method with the same number of samples, this feature is taken in advantage to make fine-tuning&#34;/&gt; &lt;figcaption&gt;
-            &lt;p&gt;&lt;strong&gt;Figure 6&lt;/strong&gt;, Performance Model-free with fine-tuning (red) vs Model-free (blue) in the Swimmer environment. Here, greater sample efficiency of applying fine-tuning over the previous model-based is shown. We can appreciate that is difficult or impossible for a simple model-free method to achieve the performance of a Model-based method with the same number of samples, this feature is taken in advantage to make fine-tuning&lt;/p&gt;
-        &lt;/figcaption&gt;
-&lt;/figure&gt;
-
-
-&lt;hr width=90%&gt;
-
-&lt;h2 id=&#34;deep-reinforcement-learning-with-a-handful-of-trials-with-probabilistic-models&#34;&gt;Deep Reinforcement Learning with a handful of trials with probabilistic models&lt;/h2&gt;
-
-&lt;h3 id=&#34;kurtland-chua-et-al-uc-berkeley-2018&#34;&gt;Kurtland Chua et al. UC Berkeley 2018&lt;/h3&gt;
-
-&lt;p&gt;[&lt;a href=&#34;http://papers.nips.cc/paper/7725-deep-reinforcement-learning-in-a-handful-of-trials-using-probabilistic-dynamics-models.pdf&#34;&gt;See paper&lt;/a&gt;]&lt;/p&gt;
-
-&lt;p&gt;This paper achieves interesting results reducing the gap between model-free and model-based RL in asymptotic performance with 10x fewer sample iterations required, by mixing some ideas to model the uncertainty of the dynamics: These uncertainties are divided into two:&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;1. Aleatoric Uncertainty&lt;/strong&gt;:&lt;/p&gt;
-
-&lt;p&gt;This uncertainty is given by the stochasticity of the system, e.g. noise, inherent randomness. The paper models this behavior by outputting the mean and variance of a &lt;em&gt;Gaussian Distribution&lt;/em&gt;, It allows us to model different variances for different states (&lt;a href=&#34;https://en.wikipedia.org/wiki/Heteroscedasticity&#34;&gt;Heterokedastic&lt;/a&gt;). While the distribution over states can be assumed any tractable distribution, this paper assumed a Gaussian Distribution over states. Given by:&lt;/p&gt;
-
-&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[\hat{f} = Pr(s_{t+1}|s_t, a_t) = \mathcal{N}(\mu_\theta(s_t, a_t), \Sigma{_\theta}(s_t,a_t))\]&lt;/span&gt;&lt;/p&gt;
-
-&lt;p&gt;In that sense the loss function is given by:&lt;/p&gt;
-
-&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[loss_{Gauss}(\theta) = \sum_{n=1}^N[\mu_\theta(s_n, a_n) - s_{n+1}]^\intercal \Sigma_\theta^{-1}(s_n, a_n)[\mu_\theta(s_n, a_n) - s_{n+1}] + \dots \newline \dots + \log\det\Sigma{_\theta}(s_n, a_n)\]&lt;/span&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;2. Epistemic Uncertainty&lt;/strong&gt;:&lt;/p&gt;
-
-&lt;p&gt;This uncertainty is given by the limitation of data. Overconfidence in zones where there are not sufficient data-training points can be fatal for prediction, epistemic uncertainty tries to model this. The paper model this by using a simple bootstrap of ensembles. In &lt;strong&gt;Fig. 4&lt;/strong&gt;, an example of two ensembles is shown (red and blue). In zones where there are data for training, the two ensembles behave very similarly, but in zones where not, for example between the two markable zones of data points, each ensemble can take different behavior, these differences represent the uncertainty due to the missing of data or &lt;em&gt;epistemic uncertainty&lt;/em&gt;.&lt;/p&gt;
-
-&lt;figure&gt;
-    &lt;img src=&#34;https://ericktornero.github.io/blog/images/epistemic_unc.png&#34;
-         alt=&#34;Figure 7, probabilistic Ensembles. Epistemic uncertainty can be seen in the center of the picture, where not data-training points appear, as a result, different behavior of the bootstrap ensembles exists. Aleatoric uncertainties can be seen in zones where there are many data-training points (Green) but still exits variance, proper of the environment.&#34;/&gt; &lt;figcaption&gt;
-            &lt;p&gt;&lt;strong&gt;Figure 7&lt;/strong&gt;, probabilistic Ensembles. Epistemic uncertainty can be seen in the center of the picture, where not data-training points appear, as a result, different behavior of the bootstrap ensembles exists. Aleatoric uncertainties can be seen in zones where there are many data-training points (Green) but still exits variance, proper of the environment.&lt;/p&gt;
-        &lt;/figcaption&gt;
-&lt;/figure&gt;
-
-
-&lt;h4 id=&#34;uncertainty-propagation&#34;&gt;Uncertainty propagation:&lt;/h4&gt;
-
-&lt;figure&gt;
-    &lt;img src=&#34;https://ericktornero.github.io/blog/images/pipeline_handful.png&#34;
-         alt=&#34;Figure 8, Pipeline. The algorithm uses both uncertainties previously presented for model the dynamics (left picture). These uncertainties are propagated through each sequence of trajectories by a particle system (center picture). The final reward for each timestep would the average of each particle at a given index. MPC controller, in this case, Cross-Entropy Method (CEM), propagate N candidates of sequences of horizon H and evaluate the best one trajectory, then, the first action of best trajectory is taken.&#34;/&gt; &lt;figcaption&gt;
-            &lt;p&gt;&lt;strong&gt;Figure 8&lt;/strong&gt;, Pipeline. The algorithm uses both uncertainties previously presented for model the dynamics (left picture). These uncertainties are propagated through each sequence of trajectories by a particle system (center picture). The final reward for each timestep would the average of each particle at a given index. MPC controller, in this case, Cross-Entropy Method (CEM), propagate N candidates of sequences of horizon H and evaluate the best one trajectory, then, the first action of best trajectory is taken.&lt;/p&gt;
-        &lt;/figcaption&gt;
-&lt;/figure&gt;
-
-
-&lt;figure&gt;
-    &lt;img src=&#34;https://ericktornero.github.io/blog/images/algorithm_handful.png&#34;
-         alt=&#34;Figure 9, Algorithm: PETS&#34;/&gt; &lt;figcaption&gt;
-            &lt;p&gt;&lt;strong&gt;Figure 9&lt;/strong&gt;, Algorithm: PETS&lt;/p&gt;
-        &lt;/figcaption&gt;
-&lt;/figure&gt;
-
-
-&lt;hr&gt;
-
-&lt;h2 id=&#34;deep-dynamics-models-for-learning-dexterous-manipulation&#34;&gt;Deep Dynamics Models for Learning Dexterous Manipulation&lt;/h2&gt;
-
-&lt;h3 id=&#34;anusha-nagabandi-et-al-uc-berkeley-2019&#34;&gt;Anusha Nagabandi et al. UC Berkeley 2019&lt;/h3&gt;
-
-&lt;p&gt;[&lt;a href=&#34;https://arxiv.org/pdf/1909.11652.pdf&#34;&gt;See paper&lt;/a&gt;]&lt;/p&gt;
-
-&lt;p&gt;This paper is an extension of the previous paper &lt;em&gt;DRL with a handful of trials using probabilistic models (PETS)&lt;/em&gt;, taking the problem of dexterous manipulation. It also models aleatoric and epistemic uncertainties with Gaussian parametrization via Neural Networks and with Ensembles bootstrap respectively. The main contributions are a modification for (MPPI) algorithm that uses weighted rewards. MPPI uses random sampling techniques to explore actions near to the control sequence, instead of in this paper a &lt;em&gt;Filtering&lt;/em&gt; technique is used to add dependencies of previous timesteps:&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Filtering and reward weighted refinement overview&lt;/strong&gt;:&lt;/p&gt;
-
-&lt;p&gt;Given a sequence control:&lt;/p&gt;
-
-&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[(\mu_0, \mu_1, \dots, \mu_{H-1})\]&lt;/span&gt;&lt;/p&gt;
-
-&lt;p&gt;It is assumed that the control sequence is a future sequence of lenght &lt;span  class=&#34;math&#34;&gt;\(H\)&lt;/span&gt;. This sequence is optimized every timestep and &lt;span  class=&#34;math&#34;&gt;\(\mu_0\)&lt;/span&gt; should be the control input to be taken at current timestep. Noises is added in the following way:&lt;/p&gt;
-
-&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[u_t^i \sim \mathcal{N}(0, \Sigma) \hspace{0.25cm} \forall i \in \{0\dots N-1\}, t \in \{0\dots H-1\}\]&lt;/span&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[n_t^i = \beta u_t^i + (1 - \beta) n_{t-1}^i \hspace{0.25cm}\text{where}\hspace{0.25cm} n_{t&lt;0} = 0\]&lt;/span&gt;&lt;/p&gt;
-
-&lt;p&gt;Where &lt;span  class=&#34;math&#34;&gt;\(u_t^i\)&lt;/span&gt; is a gaussian noise with mean &lt;span  class=&#34;math&#34;&gt;\(0\)&lt;/span&gt; and &lt;span  class=&#34;math&#34;&gt;\(\Sigma\)&lt;/span&gt; covariance matrix and &lt;span  class=&#34;math&#34;&gt;\(n_t^i\)&lt;/span&gt; add dependence noise from the previous timestep.&lt;/p&gt;
-
-&lt;p&gt;Then each action for H (index &lt;span  class=&#34;math&#34;&gt;\(t\)&lt;/span&gt;) horizon for N (index &lt;span  class=&#34;math&#34;&gt;\(i\)&lt;/span&gt;) candidates is computed as:&lt;/p&gt;
-
-&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[a_t^i = \mu_t + n_t^i\]&lt;/span&gt;&lt;/p&gt;
-
-&lt;p&gt;With the previous actions sequence for N candidates, the predicted states are computed with the dynamics model, then the reward &lt;span  class=&#34;math&#34;&gt;\(R_k\)&lt;/span&gt; is computed for each trajectory. Then the new mean is computed through the weighted reward.&lt;/p&gt;
-
-&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[\mu_t = \frac{\sum_{k=0}^N (e^{\gamma R_k})(a_t^{(k)})}{\sum_{j=0}^N e^{\gamma R_j}} \hspace{0.25cm} \forall t \in \{0\dots H-1\}\]&lt;/span&gt;&lt;/p&gt;
-
-&lt;p&gt;Now, the new trajectory is optimized at &lt;span  class=&#34;math&#34;&gt;\(\mu_{0: H-1}\)&lt;/span&gt;. Just the first action is taken: &lt;strong&gt;&lt;span  class=&#34;math&#34;&gt;\(\mu_0\)&lt;/span&gt;&lt;/strong&gt; (Send to actuators).&lt;/p&gt;
-
-&lt;p&gt;Finally, the control sequence is updated, and the process is repeated for each timestep:&lt;/p&gt;
-
-&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[\mu_i = \mu_{i+1} \hspace{0.25cm} \forall i \in \{0\dots H-2\}, \hspace{0.25cm} \mu_{H-1} = \mu_{init}\]&lt;/span&gt;&lt;/p&gt;
-
-&lt;hr&gt;
-
-&lt;h2 id=&#34;exploring-modelbased-planning-with-policy-networks&#34;&gt;Exploring Model-based Planning with Policy Networks&lt;/h2&gt;
-
-&lt;h3 id=&#34;tingwu-wang--jimmy-ba-university-of-toronto-vector-institute-2019&#34;&gt;Tingwu Wang &amp;amp; Jimmy Ba, University of Toronto, Vector Institute 2019&lt;/h3&gt;
-
-&lt;p&gt;[&lt;a href=&#34;https://arxiv.org/pdf/1906.08649.pdf&#34;&gt;See paper&lt;/a&gt;]&lt;/p&gt;
-
-&lt;p&gt;This work is a derivation from the previous method presented &lt;em&gt;(PETS)&lt;/em&gt;. However, in this paper, it is used as a policy network to help in the planning task with iterative Cross-Entropy Method. Its main contribution is the proposal of an &lt;strong&gt;algorithm that has a better exploration of action-sequence candidates&lt;/strong&gt; in the planning step.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Recall&lt;/strong&gt;: &lt;em&gt;In Gradient-free trajectory optimization (Random Shooting, CEM, MPPI, PDDM), it takes advantage of the knowledge of the dynamics &lt;span  class=&#34;math&#34;&gt;\(p(s&#39;|s, a)\)&lt;/span&gt; by proposing several candidates (N) of action-sequences of length H. The way how these candidates are proposed (exploration) is the main concern of this paper.&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;In the following subsections, it is discussed how the algorithm search for trajectories: &lt;strong&gt;POPLIN-A&lt;/strong&gt; (adding noise to actions) &lt;strong&gt;POPLIN-P&lt;/strong&gt; (adding noise to parameters e.g. weights of a neural network). In both cases, the same heuristic of Iterative Cross-Entropy Method (CEM) are used (iteratively adjustment of gaussian distribution parameters to a group of elites which obtain the best rewards), but with the difference that &lt;strong&gt;POPLIN,&lt;/strong&gt; uses a policy network to initialize action distribution instead of random actions as &lt;em&gt;PETS&lt;/em&gt;.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Policy Planning in Action Space (POPLIN-A)&lt;/strong&gt;:&lt;/p&gt;
-
-&lt;p&gt;This algorithm uses Iterative Cross Entropy Method as &lt;em&gt;PETS&lt;/em&gt;, however, istead of random initialization, it laverages the policy network to initializate distribution of action sequences. This initializations can be done in two ways:&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;POPLIN-A-Init:&lt;/strong&gt; Be &lt;strong&gt;a&lt;/strong&gt;&lt;span  class=&#34;math&#34;&gt;\(_i = \{\hat{a}_i, \hat{a}_{i+1}\dots \hat{a}_{i+H} \}\)&lt;/span&gt;, a sequence of actions obtained by the iteration of the policy &lt;span  class=&#34;math&#34;&gt;\(\hat{a}_t = \pi(\hat{s}_t)\)&lt;/span&gt; over the model &lt;span  class=&#34;math&#34;&gt;\( p(\hat{s}_{t+1}| \hat{s}_t, \hat{a}_t)\)&lt;/span&gt; starting from &lt;span  class=&#34;math&#34;&gt;\(s_i\)&lt;/span&gt;. For the exploration process, Gaussian noise is added to this initial sequence, starting with &lt;span  class=&#34;math&#34;&gt;\(\mu_0 = 0\)&lt;/span&gt; and covariance &lt;span  class=&#34;math&#34;&gt;\(\Sigma_0 = \sigma_0^2\mathcal{I}\)&lt;/span&gt;. Then this mean and covariance is iteratively updated by selecting &lt;span  class=&#34;math&#34;&gt;\(\xi\)&lt;/span&gt; elites, and computing the new mean and new covariance.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;POPLIN-A-Replan:&lt;/strong&gt; In &lt;em&gt;POPLIN-A-Init&lt;/em&gt;, first, the action sequence is initialized, then the noise is added to this sequence. However in &lt;em&gt;POPLIN-A-Replan&lt;/em&gt;, the first action is approximate by the policy, then noise is added to this action, the next state is computed taking into account this noise &lt;span  class=&#34;math&#34;&gt;\(\hat{s}_{i+1} = p(\cdot | s_i, \pi(s_i) + \delta_i)\)&lt;/span&gt;.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Policy Planning in Parameter Space (POPLIN-P)&lt;/strong&gt;:&lt;/p&gt;
-
-&lt;p&gt;In planning in parameter space, Gaussian noise is added to the weights of the neural network. Then exploration is made in the following way:&lt;/p&gt;
-
-&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[\hat{a}_i = \pi_{\theta + \omega_t}(s_t)\]&lt;/span&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[\hat{s}_{t+1} = p(\cdot | s_t, \hat{a}_t)\]&lt;/span&gt;&lt;/p&gt;
-
-&lt;p&gt;Where &lt;span  class=&#34;math&#34;&gt;\(\omega_t\)&lt;/span&gt; is Gaussian noise, as in &lt;em&gt;POPLIN-A&lt;/em&gt;, Gaussian noise parameters are updated with the Iterative CEM.&lt;/p&gt;
-
-&lt;figure&gt;
-    &lt;img src=&#34;https://ericktornero.github.io/blog/images/POPLIN_surface2.png&#34;
-         alt=&#34;Figure 10, POPLIN surface comparison, Images in left side are the reward surface with respect (a) PETS, (c) POPLIN-A and (e) POPLIN-P. The Images in right side represent the action-sequence reduced with PCA projected in the reward surface relative to each left image&#34;/&gt; &lt;figcaption&gt;
-            &lt;p&gt;&lt;strong&gt;Figure 10&lt;/strong&gt;, POPLIN surface comparison, Images in left side are the reward surface with respect (a) PETS, (c) POPLIN-A and (e) POPLIN-P. The Images in right side represent the action-sequence reduced with PCA projected in the reward surface relative to each left image&lt;/p&gt;
-        &lt;/figcaption&gt;
-&lt;/figure&gt;
-
-
-&lt;p&gt;This paper found interesting results. In Fig. 10, If it is compared to the reward surface of the three algorithms (red color represents high reward). One can observe that the reward surface for the PETS algorithm has a lot of holes, it means that small portions of high reward appears rounded with portions of low reward. In consequence, the mean of action candidates over CEM iterations does not change significantly, it means a poor exploration of action sequences. However, for POPLIN algorithms, especially for POPLIN-P, the reward surface is smoother, allowing to the CEM algorithm a better exploration over iterations.&lt;/p&gt;
-
-&lt;hr&gt;
-
-&lt;h2 id=&#34;references&#34;&gt;References&lt;/h2&gt;
-
-&lt;p&gt;[1] R. Sutton, A. Barto. &lt;strong&gt;Reinforcement Learning: An Introduction&lt;/strong&gt;, &lt;em&gt;Second edition&lt;/em&gt;, &lt;a href=&#34;http://incompleteideas.net/book/bookdraft2018jan1.pdf&#34;&gt;2018&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;[2] A. Nagabandi et al. &lt;strong&gt;Neural Network Dynamics for Model-Based Deep Reinforcement Learning with Model-Free Fine Tuning&lt;/strong&gt;. In &lt;em&gt;ICRA&lt;/em&gt; &lt;a href=&#34;https://ieeexplore.ieee.org/abstract/document/8463189&#34;&gt;2018&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;[3] K. Chua et al. &lt;strong&gt;Deep Reinforcement Learning in a Handful of Trials using Probabilistic Dynamics Models&lt;/strong&gt;. In &lt;em&gt;NIPS&lt;/em&gt; &lt;a href=&#34;https://arxiv.org/pdf/1909.11652.pdf&#34;&gt;2018&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;[4] A. Nagabandi et al. &lt;strong&gt;Deep Dynamics Models for Learning Dexterous Manipulation&lt;/strong&gt;. In &lt;em&gt;CoRL&lt;/em&gt; &lt;a href=&#34;https://arxiv.org/pdf/1909.11652.pdf&#34;&gt;2019&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;[5] Tingwu Wang et al. &lt;strong&gt;Exploring Model-based Planning with Policy Networks&lt;/strong&gt;. Arxiv &lt;a href=&#34;https://arxiv.org/pdf/1906.08649.pdf&#34;&gt;2019&lt;/a&gt;.&lt;/p&gt;</description>
+      <guid>https://ericktornero.github.io/blog/post/ambrl/</guid>
+      <description>&lt;p&gt;Introduction to the basics on model-based reinforcement learning and the recent advances on this topic.&lt;/p&gt;</description>
     </item>
     
     <item>
-      <title>About me</title>
+      <title>About</title>
       <link>https://ericktornero.github.io/blog/about/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://ericktornero.github.io/blog/about/</guid>
-      <description>&lt;p&gt;Hello!, This is Erick. Currently, I&#39;m pursuing a master&#39;s degree in Computer Science, at Universidad Católica San Pablo, Arequipa-Perú. I am so interested in how to solve complex tasks in robotics through reinforcement learning.&lt;/p&gt;
-&lt;p&gt;Find more information about me in &lt;strong&gt;&lt;a href=&#34;https://ericktornero.github.io&#34;&gt;erick-tornero-portfolio&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
-</description>
+      <description>Hello!, This is Erick. Currently, I&amp;rsquo;m pursuing a master&amp;rsquo;s degree in Computer Science, at Universidad Católica San Pablo, Arequipa-Perú. I am so interested in how to solve complex tasks in robotics through reinforcement learning.
+Find more information about me in erick-tornero-portfolio. If you have any questions or want to keep in touch, feel free to mail me to erick.tornero@ucsp.edu.pe</description>
     </item>
     
   </channel>
