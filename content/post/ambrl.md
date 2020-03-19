@@ -6,6 +6,7 @@ math: true
 markup: mmark
 tags: ["model-based", "reinforcement learning", "Artificial Intelligence"]
 categories: ["blogpost"]
+author: "Erick Tornero"
 ---
 
 Introduction to the basics on model-based reinforcement learning and the recent advances on this topic.
@@ -13,15 +14,15 @@ Introduction to the basics on model-based reinforcement learning and the recent 
 <!--more-->
 ## Introduction
 
+Model-based reinforcement learning is a branch in Reinforcement Learning where the transition function $P(s', r|s, a)$ in the Markov decision process (MDP) is used. This model is used to improve or create a policy (planning), where the value function is calculated as an intermediate step, as can be seen in **Figure 1** in the *model-learning* branch. *Direct RL*, means model-free RL where the policy or value-function is computed *directly* from experience and it is not needed to model the dynamics. However, these kinds of methods are too poor sample efficient due to that these methods rely on the probability to find good interactions, this becomes even more complicated when the environment has high dimensional state-action space and when sparse rewards are presented. In contrast, recent advances in Model-based RL, have shown capabilities to learn optimal policies with considerably fewer interactions, becoming methods more applicable to problems where exploration interactions are critical.
 
-Model-based reinforcement learning is a branch in Reinforcement Learning where the transition function $$P(s', r|s, a)$$ in the Markov decision process (MDP) is used. This model is used to improve or create a policy (planning), where the value function is calculated as an intermediate step, as can be seen in **Figure 1** in the *model-learning* branch. *Direct RL*, means model-free RL where the policy or value-function is computed *directly* from experience and it is not needed to model the dynamics. However, these kinds of methods are too poor sample efficient due to that these methods rely on the probability to find good interactions, this becomes even more complicated when the environment has high dimensional state-action space and when sparse rewards are presented. In contrast, recent advances in Model-based RL, have shown capabilities to learn optimal policies with considerably fewer interactions, becoming methods more applicable to problems where exploration interactions are critical.
-
-{{<figure src="https://ericktornero.github.io/blog/images/squeme_mbmf.png" title="Figure 1, Taken from [1]">}}
+{{<figure src="https://ericktornero.github.io/blog/images/squeme_mbmf.png" caption="**Figure 1**, Taken from [1]">}}
 
 
 An interesting algorithm for starting the analysis of model-based reinforcement learning is called **Dynamic Programming** algorithm, where it is assumed a prior and exact knowledge of the dynamics (transition function). However, in the real world, the dynamics are usually unknown and can be very complex to model. For these kinds of problems, model learning with function approximators is used just as supervised learning with the collected transitions $$(s, a, s')$$ as a dataset. Examples of these environments are shown **Fig. 2**, the left picture shows a Simple Gridworld example with a discrete state and actions. In this case the transition function is known, for example $$P(s_2|s_1,right)=1.0$$ and $$P(s_2|s_1, left)=0.0$$, where $$s_x$$: represents the slot $$x \in \{0, 15\}$$. In the right picture, an environment more approximate to the real world is shown: Halfcheetah in [Mujoco Environment][mujocolink], where the dynamics of this environment is unknown and complex. 
 
-{{<figure src="https://ericktornero.github.io/blog/images/gridworld_hchetaah.png" title="Figure 2, left: Gridworld environment, taken from [1]. Right: Halfcheetah Environment">}}
+
+{{<figure src="https://ericktornero.github.io/blog/images/gridworld_hchetaah.png" caption="**Figure 2**, left: Gridworld environment, taken from [1]. Right: Halfcheetah Environment">}}
 
 For low dimensional state-action space, Gaussian Process (GPs) can be used to approximate the transition function. However when complexity in the model increases, e.g. in robotics control, the gaussian process used to be inadequate. Neural Networks, however, is known for its high adaptability to complex functions, and in recent years, has been showed interesting results in several applications, such as image classification. In that sense, this post focus on the recent advances in MBRL that use Neural Networks for the approximation of the transition function.
 
@@ -29,7 +30,7 @@ For low dimensional state-action space, Gaussian Process (GPs) can be used to ap
 
 Reinforcement learning Framework is defined over a Markov Decision Process, and elements in an MDP are defined in the tuple $$(\mathcal{S}, \mathcal{A}, \mathcal{R}, p, \gamma)$$, where $$\mathcal{S}$$ is the state space, $$\mathcal{A}$$ is the action space, $$\mathcal{R}$$ is the reward and $$p(s', r|s, a)$$ define the transition function. In **Fig. 3**, the interaction interaction agent-envrionment is shown, given an observed state $$s_t \in \mathcal{S}$$ at any particular timestep $$t$$, the agent take an action $$a_t \in \mathcal{A}$$ drawn from its policy $$\pi(a_t|s_t)$$. The environment respond with the next state $$s_{t+1}$$ and the reward $$r_{t+1}$$ produced by take action $$a_t$$. 
 
-{{<figure src="https://ericktornero.github.io/blog/images/mdp.png" title="Figure 3, Interaction in MDP">}}
+{{<figure src="https://ericktornero.github.io/blog/images/mdp.png" caption="**Figure 3**, Interaction in MDP">}}
 
 Either model-based or model-free methods aim to compute a **policy** $$\pi(a|s)$$ that maximizes the expected reward. In the case of mode-based, the policy is computed indirectly by using the transition model $$p(s',r|s, a)$$ for planning. **Dynamic Programming** are considered as model-based methods since it uses its prior knowledge of the dynamics. This is used to improve the value-function, in Equation **(a)** is shown the update rule for the value function for the *Policy Iteration* algorithm.
 
@@ -78,7 +79,7 @@ $$\hat{f} = Pr(s_{t+1}|s_t, a_t) = \mathcal{N}(\mu_\theta(s_t, a_t), \Sigma{_\th
 
 In that sense the loss function is given by:
 
-$$loss_{Gauss}(\theta) = \sum_{n=1}^N[\mu_\theta(s_n, a_n) - s_{n+1}]^\intercal \Sigma_\theta^{-1}(s_n, a_n)[\mu_\theta(s_n, a_n) - s_{n+1}] + \dots \newline \dots + \log\det\Sigma{_\theta}(s_n, a_n)$$
+$$loss_{Gauss}(\theta) = \sum_{n=1}^N[\mu_\theta(s_n, a_n) - s_{n+1}]^\intercal \Sigma_\theta^{-1}(s_n, a_n)[\mu_\theta(s_n, a_n) - s_{n+1}] + \dots \\ \dots + \log\det\Sigma{_\theta}(s_n, a_n)$$
 
 **2. Epistemic Uncertainty**:
 

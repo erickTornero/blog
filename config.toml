@@ -1,23 +1,101 @@
 baseURL = "https://ericktornero.github.io/blog/"
 languageCode = "en-us"
 title = "Research blog"
-theme = "indigo"
 publishDir = "docs"
 
-[params]
-    Author      =   "Erick Tornero"
-    Description = "Erick Tornero, Research Blog"
-    Biography = "If you have any questions or want to keep in touch, feel free to mail me to erick.tornero@ucsp.edu.pe"
-    
-    Avatar = "images/avatar.jpg"
-    ShowBio = true
-    PermalinkText = "🔗"
-    EmailAddress = "erick.tornero@ucsp.edu.pe"
-    GitHubUser = "erickTornero"
-    LinkedInUser = "ericktornero"
-    TwitterUser = "erickTorneroT"
+preserveTaxonomyNames = true
+enableRobotsTXT = true
+enableEmoji = true
+theme = "even"
+enableGitInfo = true 
 
-    [params.indieWeb]
-        EmailAddress = "erick.tornero@ucsp.edu.pe"
-        Country = "Perú"
-        City = "Arequipa"
+# Syntax highlighting by Chroma. NOTE: Don't enable `highlightInClient` and `chroma` at the same time!
+pygmentsOptions = "linenos=table"
+pygmentsCodefences = true
+pygmentsUseClasses = true
+pygmentsCodefencesGuessSyntax = true
+
+hasCJKLanguage = false     # has chinese/japanese/korean ? 
+paginate = 5                                              
+disqusShortname = ""      # disqus_shortname
+googleAnalytics = ""      # UA-XXXXXXXX-X
+copyright = ""            # default: author.name ↓        
+
+[author]                  # essential                     
+  name = "erickTornero"
+
+[sitemap]                 # essential                    
+  changefreq = "weekly"
+  priority = 0.5
+  filename = "sitemap.xml"
+
+[[menu.main]]             # config your menu
+  name = "Home"
+  weight = 10
+  identifier = "home"
+  url = "/"
+[[menu.main]]
+  name = "Posts"
+  weight = 20
+  identifier = "archives"
+  url = "/post/"
+[[menu.main]]
+  name = "Tags"
+  weight = 30
+  identifier = "tags"
+  url = "/tags/"
+[[menu.main]]
+  name = "Categories"
+  weight = 40
+  identifier = "categories"
+  url = "/categories/"
+
+[params]
+  version = "4.x"           # Used to give a friendly message when you have an incompatible update
+  debug = false             # If true, load `eruda.min.js`. See https://github.com/liriliri/eruda
+
+  since = "2020"            # Site creation time          # 站点建立时间
+
+  # site info (optional)                                  # 站点信息（可选，不需要的可以直接注释掉）
+  logoTitle = "Research Blog"       
+  
+  keywords = ["reinforcement learning", "robotics", "deep learning", "artificial intelligence", ""]
+  description = "A research blog about reinforcement learning applied to robotics"
+
+  # paginate of archives, tags and categories             
+  archivePaginate = 5
+
+  # show 'xx Posts In Total' in archive page ?            
+  showArchiveCount = false
+
+  # The date format to use; for a list of valid formats, see https://gohugo.io/functions/format/
+  dateFormatToUse = "2006-01-02"
+
+  # show word count and read time ?                       # 是否显示字数统计与阅读时间
+  moreMeta = true
+
+  # Syntax highlighting by highlight.js
+  highlightInClient = false
+
+  postMetaInFooter = true   # contain author, lastMod, markdown link, license           # 包含作者，上次修改时间，markdown链接，许可信息
+  linkToMarkDown = false    # Only effective when hugo will output .md files.           # 链接到markdown原始文件（仅当允许hugo生成markdown文件时有效）
+  contentCopyright = ''     # e.g. '<a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a>'
+
+  # Link custom CSS and JS assets
+  #   (relative to /static/css and /static/js respectively)
+  customCSS = ["custom.css"]
+  customJS = []
+
+  uglyURLs = false          # please keep same with uglyurls setting
+
+  # Display a message at the beginning of an article to warn the readers that it's content may be outdated.
+  [params.outdatedInfoWarning]
+    enable = false
+    hint = 30               # Display hint if the last modified time is more than these days ago.    # 如果文章最后更新于这天数之前，显示提醒
+    warn = 180              # Display warning if the last modified time is more than these days ago.    # 如果文章最后更新于这天数之前，显示警告
+
+  [params.social]                                         
+    a-email = "mailto:erick.tornero@ucsp.edu.pe"
+    c-twitter = "https://www.twitter.com/erickTorneroT"
+    e-linkedin = "https://www.linkedin.com/in/ericktornero/"
+    g-github = "http://www.github.com/ericktornero"
