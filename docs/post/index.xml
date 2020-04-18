@@ -6,10 +6,19 @@
     <description>Recent content in Posts on Research blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 30 Jan 2020 15:39:27 -0500</lastBuildDate>
+    <lastBuildDate>Sat, 21 Mar 2020 20:13:27 -0500</lastBuildDate>
     
 	<atom:link href="https://ericktornero.github.io/blog/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Markov Chain &amp; Hidden Markov Models</title>
+      <link>https://ericktornero.github.io/blog/post/markov/</link>
+      <pubDate>Sat, 21 Mar 2020 20:13:27 -0500</pubDate>
+      
+      <guid>https://ericktornero.github.io/blog/post/markov/</guid>
+      <description>Markov chain is a framework to model sequences</description>
+    </item>
     
     <item>
       <title>Advances in Model Based Reinforcement Learning</title>

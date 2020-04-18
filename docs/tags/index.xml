@@ -6,10 +6,37 @@
     <description>Recent content in Tags on Research blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 30 Jan 2020 15:39:27 -0500</lastBuildDate>
+    <lastBuildDate>Sat, 21 Mar 2020 20:13:27 -0500</lastBuildDate>
     
 	<atom:link href="https://ericktornero.github.io/blog/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>HMM</title>
+      <link>https://ericktornero.github.io/blog/tags/hmm/</link>
+      <pubDate>Sat, 21 Mar 2020 20:13:27 -0500</pubDate>
+      
+      <guid>https://ericktornero.github.io/blog/tags/hmm/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>markov</title>
+      <link>https://ericktornero.github.io/blog/tags/markov/</link>
+      <pubDate>Sat, 21 Mar 2020 20:13:27 -0500</pubDate>
+      
+      <guid>https://ericktornero.github.io/blog/tags/markov/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>markov-chain</title>
+      <link>https://ericktornero.github.io/blog/tags/markov-chain/</link>
+      <pubDate>Sat, 21 Mar 2020 20:13:27 -0500</pubDate>
+      
+      <guid>https://ericktornero.github.io/blog/tags/markov-chain/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Artificial Intelligence</title>
