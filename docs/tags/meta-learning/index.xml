@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>blogpost on Research blog</title>
-    <link>https://ericktornero.github.io/blog/categories/blogpost/</link>
-    <description>Recent content in blogpost on Research blog</description>
+    <title>meta-learning on Research blog</title>
+    <link>https://ericktornero.github.io/blog/tags/meta-learning/</link>
+    <description>Recent content in meta-learning on Research blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 27 Apr 2020 02:03:11 -0500</lastBuildDate>
     
-	<atom:link href="https://ericktornero.github.io/blog/categories/blogpost/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://ericktornero.github.io/blog/tags/meta-learning/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -19,15 +19,6 @@
       <guid>https://ericktornero.github.io/blog/post/meta-learning-start/</guid>
       <description>Meta-learning is one of the hottest topics of research. In recent years, many researchers have taken interested in meta-learning due to its promise to reach generalization. In this blog post, we present a brief introduction to concepts in meta-learning and some applications which will immerse you in this wonderful field.
 An starting point of view One can notice that humans or animals can learn a task quickly when they have prior knowledge on another similar task.</description>
-    </item>
-    
-    <item>
-      <title>Advances in Model Based Reinforcement Learning</title>
-      <link>https://ericktornero.github.io/blog/post/ambrl/</link>
-      <pubDate>Thu, 30 Jan 2020 15:39:27 -0500</pubDate>
-      
-      <guid>https://ericktornero.github.io/blog/post/ambrl/</guid>
-      <description>&lt;p&gt;Reinforcement learning is a very interesting research topic, in recent years, their applications and their performance have been growing quickly. In this blog post, we present the basics of model-based reinforcement learning and its recent advances.&lt;/p&gt;</description>
     </item>
     
   </channel>

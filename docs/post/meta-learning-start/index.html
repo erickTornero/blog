@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Introduction to Meta Learning - Research blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+<meta name="google-site-verification" content="jzEUwTDFo-TA-QnHpsX5SEwfkEbP8EbWqLrAi8lEtHc" />
+
+<meta name="author" content="Erick Tornero" /><meta name="description" content="Meta-learning is one of the hottest topics of research. In recent years, many researchers have taken interested in meta-learning due to its promise to reach generalization. In this blog post, we present a brief introduction to concepts in meta-learning and some applications which will immerse you in this wonderful field.
+An starting point of view One can notice that humans or animals can learn a task quickly when they have prior knowledge on another similar task." /><meta name="keywords" content="reinforcement learning, robotics, deep learning, artificial intelligence, " />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.69.2 with theme even" />
+
+
+<link rel="canonical" href="https://ericktornero.github.io/blog/post/meta-learning-start/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/blog/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/blog/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/blog/favicon-16x16.png">
+<link rel="manifest" href="/blog/manifest.json">
+<link rel="mask-icon" href="/blog/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/blog/dist/even.c2a46f00.min.css" rel="stylesheet">
+
+<link rel="stylesheet" href="/blog/css/custom.css">
+
+
+<meta property="og:title" content="Introduction to Meta Learning" />
+<meta property="og:description" content="Meta-learning is one of the hottest topics of research. In recent years, many researchers have taken interested in meta-learning due to its promise to reach generalization. In this blog post, we present a brief introduction to concepts in meta-learning and some applications which will immerse you in this wonderful field.
+An starting point of view One can notice that humans or animals can learn a task quickly when they have prior knowledge on another similar task." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://ericktornero.github.io/blog/post/meta-learning-start/" />
+<meta property="article:published_time" content="2020-04-27T02:03:11-05:00" />
+<meta property="article:modified_time" content="2020-04-27T02:03:11-05:00" />
+<meta itemprop="name" content="Introduction to Meta Learning">
+<meta itemprop="description" content="Meta-learning is one of the hottest topics of research. In recent years, many researchers have taken interested in meta-learning due to its promise to reach generalization. In this blog post, we present a brief introduction to concepts in meta-learning and some applications which will immerse you in this wonderful field.
+An starting point of view One can notice that humans or animals can learn a task quickly when they have prior knowledge on another similar task.">
+<meta itemprop="datePublished" content="2020-04-27T02:03:11-05:00" />
+<meta itemprop="dateModified" content="2020-04-27T02:03:11-05:00" />
+<meta itemprop="wordCount" content="340">
+
+
+
+<meta itemprop="keywords" content="meta-learning,Artificial Intelligence," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Introduction to Meta Learning"/>
+<meta name="twitter:description" content="Meta-learning is one of the hottest topics of research. In recent years, many researchers have taken interested in meta-learning due to its promise to reach generalization. In this blog post, we present a brief introduction to concepts in meta-learning and some applications which will immerse you in this wonderful field.
+An starting point of view One can notice that humans or animals can learn a task quickly when they have prior knowledge on another similar task."/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/blog/" class="logo">Research Blog</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/blog/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/blog/post/">
+        <li class="mobile-menu-item">Posts</li>
+      </a><a href="/blog/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/blog/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/blog/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/blog/" class="logo">Research Blog</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/blog/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/blog/post/">Posts</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/blog/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/blog/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/blog/about/">About</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Introduction to Meta Learning</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-04-27 </span>
+        <div class="post-category">
+            <a href="/blog/categories/blogpost/"> blogpost </a>
+            </div>
+          <span class="more-meta"> 340 words </span>
+          <span class="more-meta"> 2 mins read </span>
+        
+      </div>
+    </header>
+
+    
+    <div class="post-content">
+      <p>Meta-learning is one of the hottest topics of research. In recent years, many researchers have taken interested in meta-learning due to its promise to reach <em>generalization</em>. In this blog post, we present a brief introduction to concepts in meta-learning and some applications which will immerse you in this wonderful field.</p>
+
+<h2 id="an-starting-point-of-view">An starting point of view</h2>
+
+<p>One can notice that humans or animals can learn a task quickly when they have prior knowledge on another similar task. For instance, driving a motorcycle is an esier task when before you know how to ride a bike, or how babies start to walk, using its knowledge in how to stand up. Naive machine learning techniques usually are not able to do things like that, if we see common problems like classification, regression or reinforcement learning, usually our model can solve just an specific problem, it is a problem in how to generalize even to minor changes in a unique environment. So, meta-larning is a field which try to mitigate this problem, we can define: <em>meta-learning as one of the fields that try to take advantage of prior knowledge of many tasks to learn as quickly as possible a related new task.</em></p>
+
+<figure>
+    <img src="https://ericktornero.github.io/blog/images/metalearn/babywalk.gif"
+         alt="Figure 1, Babies can take advantage of its knowledge in how to stand-up to start to walk"/> <figcaption>
+            <p><strong>Figure 1</strong>, Babies can take advantage of its knowledge in how to stand-up to start to walk</p>
+        </figcaption>
+</figure>
+
+
+<h2 id="relation-and-differences-with-related-topics">Relation and differences with related topics</h2>
+
+<p>It is common to get confused with other topics that are similar to meta-learning as transfer learning, continual learning, or multitask learning. Here we explain the main differences.</p>
+
+<p><strong>Transfer Learning:</strong> Transfer learning aims to learn a task by taking advantage of a previous related learned task by transferring its parameters. We can notice that this is very similar to the meta-learning target, however, in meta-learning, it is explicitly defined the notion of generalization over tasks, while in transfer learning it is not necessary. Another difference is that while meta-learning techniques can transfer parameters, it is not just limited to this, we will see a further explanation later.</p>
+
+<p><strong>Continual Learning:</strong></p>
+
+<p><strong>Multi-task Learning:</strong></p>
+
+<h2 id="common-approaches-of-metalearning">Common approaches of Meta-learning</h2>
+
+<h2 id="some-applications-of-metalearning">Some applications of Meta-Learning</h2>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">Erick Tornero</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2020-04-27
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/blog/tags/meta-learning/">meta-learning</a>
+          <a href="/blog/tags/artificial-intelligence/">Artificial Intelligence</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/blog/post/ambrl/">
+            <span class="next-text nav-default">Advances in Model Based Reinforcement Learning</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:erick.tornero@ucsp.edu.pe" class="iconfont icon-email" title="email"></a>
+      <a href="https://www.twitter.com/erickTorneroT" class="iconfont icon-twitter" title="twitter"></a>
+      <a href="https://www.linkedin.com/in/ericktornero/" class="iconfont icon-linkedin" title="linkedin"></a>
+      <a href="http://www.github.com/ericktornero" class="iconfont icon-github" title="github"></a>
+  <a href="https://ericktornero.github.io/blog/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">erickTornero</span>
+  </span>
+  
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.1/dist/katex.min.css" integrity="sha384-dbVIfZGuN1Yq7/1Ocstc1lUEm+AT+/rCkibIcC/OmWo5f0EA48Vf8CytHzGrSwbQ" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.1/dist/katex.min.js" integrity="sha384-2BKqo+exmr9su6dir+qCw08N2ZKRucY4PrGQPPWU1A7FtlCGjmEGFqXCv5nyM5Ij" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+    onload="renderMathInElement(document.body);"></script>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  <script type="text/javascript" src="/blog/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/blog/lib/slideout/slideout-1.0.1.min.js"></script>
+  
+<script type="text/javascript" src="/blog/dist/even.26188efa.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
