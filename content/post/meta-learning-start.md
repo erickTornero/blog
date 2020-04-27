@@ -11,17 +11,17 @@ author: "Erick Tornero"
 
 ---
 
-Meta-learning is one of the hottest topic of research, in recent years, many researchers have taken interested on meta-learning due to its promise to reach *generalization*. In this blogpost we present a brief introduction in concepts and few applications to be introduced on this wonderful field.
+Meta-learning is one of the hottest topics of research. In recent years, many researchers have taken interested in meta-learning due to its promise to reach *generalization*. In this blog post, we present a brief introduction to concepts in meta-learning and some applications which will immerse you in this wonderful field.
 
-## Introduction
+## An starting point of view
 
-When we start to study many of the probles that machine learning is able to solve, such us classification, regression or reinforcement learning. Usually they are solved in a way that the model is able to solve just that specific problem, arising problems, when out of distribution testing examples are given to our model. However, we can see that these two task could be very similar, so the question is: Can we take advantage of the previous learned model to solve this new task?.
+When we start to study many of the problems that machine learning can solve, such as classification, regression, or reinforcement learning. Usually, they are solved in a way that the model can solve just that specific problem. However, problems arise when out of distribution testing examples are given to our model. So, an interesting question rise: Can we take advantage of the previously learned tasks to solve a new unknown task?.
 
-One can notice that humans or animals are able to learn a task quickly when they have a prior knowladge on another similar task. For instance, driving a motorcycle when befores there's a knowladge in how to drive a byke, or how babies start to walk, using its knowladge in how to stand up. Naive machine learning techniques usually are not able to do things like that. So, we can understand *meta-learning as one of the fields that try to take advantage of prior knowladge of many tasks to learn as quickly as possible a related new task.*
+One can notice that humans or animals can learn a task quickly when they have prior knowledge on another similar task. For instance, driving a motorcycle is an esier task when before you know how to ride a bike, or how babies start to walk, using its knowledge in how to stand up. Naive machine learning techniques usually are not able to do things like that. So, we can understand *meta-learning as one of the fields that try to take advantage of prior knowledge of many tasks to learn as quickly as possible a related new task.*
 
-{{<figure src="https://ericktornero.github.io/blog/images/metalearn/babywalk.gif" caption="**Figure 1**">}}
+{{<figure src="https://ericktornero.github.io/blog/images/metalearn/babywalk.gif" caption="**Figure 1**, Babies can take advantage of its knowledge in how to stand-up to start to walk">}}
 
-## Relationship with anothers similar fields
+## Relation and differences with related topics
 
 
 

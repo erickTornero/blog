@@ -9,7 +9,7 @@ categories: ["blogpost"]
 author: "Erick Tornero"
 ---
 
-Introduction to the basics on model-based reinforcement learning and the recent advances on this topic.
+Reinforcement learning is a very interesting research topic, in recent years, their applications and their performance have been growing quickly. In this blog post, we present the basics of model-based reinforcement learning and its recent advances.
 
 <!--more-->
 ## Introduction
