@@ -23,19 +23,35 @@ One can notice that humans or animals can learn a task quickly when they have pr
 
 ## Relation and differences with related topics
 
+Ok, the previous definition can be a bit confusing to other related fields such as transfer learning, continual learning, multi-task learning, among others, because all of them rely on the laverage of previous knowladge from related taks. But, think that in meta-learning a meta-representation is explicitly learned. 
+
+For instance, in transfer learning, parameters trained with an specific task are transfer to another related task. Here, there's not any optimal representation to be transfered over tasks, don't matters if the parameters are the optimal to be transfered over different tasks. Or in Continual learning where adaptation to new possible non-stationary distribution is doing in continual way by laveraging previous knowledge, but there's not necessary the existence of a meta-representation. While for at least these methods are differents to meta-learning in the escense, meta-learning can be used to reach those purpose.
 
 
-It is common to get confused with other topics that are similar to meta-learning as transfer learning, continual learning, or multitask learning. Here we explain the main differences.
 
-**Transfer Learning:** Transfer learning aims to learn a task by taking advantage of a previous related learned task by transferring its parameters. We can notice that this is very similar to the meta-learning target, however, in meta-learning, it is explicitly defined the notion of generalization over tasks, while in transfer learning it is not necessary. Another difference is that while meta-learning techniques can transfer parameters, it is not just limited to this, we will see a further explanation later.
+[//]: <> (It is common to get confused with other topics that are similar to meta-learning as transfer learning, continual learning, or multitask learning. Here we explain the main differences.)
 
+[//]: <> (**Transfer Learning:** Transfer learning aims to learn a task by taking advantage of a previous related learned task by transferring its parameters. We can notice that this is very similar to the meta-learning target, however, in meta-learning, it is explicitly defined the notion of generalization over tasks, while in transfer learning it is not necessary. Another difference is that while meta-learning techniques can transfer parameters, it is not just limited to this, we will see a further explanation later.)
 
-**Continual Learning:**
+[//]: <> (**Continual Learning:** Continual learning aims to lifelong learning, adapting to possible changes in the environment trying to avoid catastrophic forgetfulness. )
 
+[//]: <> (As well as meta-learning, continual learning takes advantage of the previously acquired knowledge to adapt faster along time. Continual learning can use meta-learning for its purpose but is not limited to do it. Here, like in transfer learning, there's not explicit meta-optimization over tasks.)
 
-**Multi-task Learning:**
+[//]: <> (**Multi-task Learning:** Multi-task learning aims to achieve good performance over a set of tasks. Usually Multi-task learning promotes good generalization)
 
 ## Common approaches of Meta-learning
 
+There's lot of approaches to tackle the meta-learning problem, here we discuss the two most common, main difference is how they considers the meta-representation: Optimization based methods and Black Box methods.
+
+### Optimization based methods
+
+### Black Box methods
+
 
 ## Some applications of Meta-Learning
+
+Applications of meta-learning are diverece for superised learning, unsupervised learning, reinforcement learning, etc. Here we discuss some of the most important configurations.
+
+### Few-shot learning
+
+### Reinforcement learning
