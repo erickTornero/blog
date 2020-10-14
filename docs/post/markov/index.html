@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>Markov Chain &amp; Hidden Markov Models - Research blog</title>
+  <title>Cadena de Markov (MC) - Research blog</title>
   <meta name="renderer" content="webkit" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
@@ -15,15 +15,17 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 <meta name="google-site-verification" content="jzEUwTDFo-TA-QnHpsX5SEwfkEbP8EbWqLrAi8lEtHc" />
+<meta property=”og:site_name” content="Erick Tornero Reinforcement Research blog"  />
 
-<meta name="author" content="Erick Tornero" /><meta name="description" content="Markov chain is a framework to model sequences" /><meta name="keywords" content="reinforcement learning, robotics, deep learning, artificial intelligence, " />
-
-
-
-
+<meta name="author" content="Erick Tornero" /><meta name="description" content="La segunda acepción de la RAE nos dice que una secuencia &amp;quot;es una sucesión de cosas que guardan entre sí cierta relación&amp;quot;. En el mundo real podemos encontrar innumerables ejemplos que se ajustan a esta definición. Por ejemplo, en aplicaciónes de transformación de audio a texto y visceverza, pronóstico del clima, en el control de robots o procesamiento de video, etc. En ese sentido, es importante poder abstraer modelos matemáticos que nos permitan estudiar mejor estos procesos.
+" /><meta name="keywords" content="reinforcement learning, robotics, deep learning, artificial intelligence, " />
 
 
-<meta name="generator" content="Hugo 0.69.0 with theme even" />
+
+
+
+
+<meta name="generator" content="Hugo 0.76.4 with theme even" />
 
 
 <link rel="canonical" href="https://ericktornero.github.io/blog/post/markov/" />
@@ -39,23 +41,24 @@
 <link rel="stylesheet" href="/blog/css/custom.css">
 
 
-<meta property="og:title" content="Markov Chain &amp; Hidden Markov Models" />
-<meta property="og:description" content="Markov chain is a framework to model sequences" />
+<meta property="og:title" content="Cadena de Markov (MC)" />
+<meta property="og:description" content="La segunda acepción de la RAE nos dice que una secuencia &quot;es una sucesión de cosas que guardan entre sí cierta relación&quot;. En el mundo real podemos encontrar innumerables ejemplos que se ajustan a esta definición. Por ejemplo, en aplicaciónes de transformación de audio a texto y visceverza, pronóstico del clima, en el control de robots o procesamiento de video, etc. En ese sentido, es importante poder abstraer modelos matemáticos que nos permitan estudiar mejor estos procesos." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://ericktornero.github.io/blog/post/markov/" />
 <meta property="article:published_time" content="2020-03-21T20:13:27-05:00" />
 <meta property="article:modified_time" content="2020-03-21T20:13:27-05:00" />
-<meta itemprop="name" content="Markov Chain &amp; Hidden Markov Models">
-<meta itemprop="description" content="Markov chain is a framework to model sequences">
+<meta itemprop="name" content="Cadena de Markov (MC)">
+<meta itemprop="description" content="La segunda acepción de la RAE nos dice que una secuencia &quot;es una sucesión de cosas que guardan entre sí cierta relación&quot;. En el mundo real podemos encontrar innumerables ejemplos que se ajustan a esta definición. Por ejemplo, en aplicaciónes de transformación de audio a texto y visceverza, pronóstico del clima, en el control de robots o procesamiento de video, etc. En ese sentido, es importante poder abstraer modelos matemáticos que nos permitan estudiar mejor estos procesos.">
 <meta itemprop="datePublished" content="2020-03-21T20:13:27-05:00" />
 <meta itemprop="dateModified" content="2020-03-21T20:13:27-05:00" />
-<meta itemprop="wordCount" content="8">
+<meta itemprop="wordCount" content="646">
 
 
 
-<meta itemprop="keywords" content="markov,markov-chain,HMM," /><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Markov Chain &amp; Hidden Markov Models"/>
-<meta name="twitter:description" content="Markov chain is a framework to model sequences"/>
+<meta itemprop="keywords" content="markov,markov-chain," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Cadena de Markov (MC)"/>
+<meta name="twitter:description" content="La segunda acepción de la RAE nos dice que una secuencia &quot;es una sucesión de cosas que guardan entre sí cierta relación&quot;. En el mundo real podemos encontrar innumerables ejemplos que se ajustan a esta definición. Por ejemplo, en aplicaciónes de transformación de audio a texto y visceverza, pronóstico del clima, en el control de robots o procesamiento de video, etc. En ese sentido, es importante poder abstraer modelos matemáticos que nos permitan estudiar mejor estos procesos."/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -122,23 +125,80 @@
           <article class="post">
     
     <header class="post-header">
-      <h1 class="post-title">Markov Chain &amp; Hidden Markov Models</h1>
+      <h1 class="post-title">Cadena de Markov (MC)</h1>
 
       <div class="post-meta">
         <span class="post-time"> 2020-03-21 </span>
         <div class="post-category">
             <a href="/blog/categories/blogpost/"> blogpost </a>
             </div>
-          <span class="more-meta"> 8 words </span>
-          <span class="more-meta"> 1 min read </span>
+          <span class="more-meta"> 646 words </span>
+          <span class="more-meta"> 4 mins read </span>
         
       </div>
     </header>
 
     
     <div class="post-content">
-      <p>Markov chain is a framework to model sequences</p>
+      <p>La segunda acepción de la <a href="https://dle.rae.es/secuencia?m=form">RAE</a> nos dice que una <strong>secuencia</strong> <em>&quot;es una sucesión de cosas que guardan entre sí cierta relación&quot;</em>. En el mundo real podemos encontrar innumerables ejemplos que se ajustan a esta definición. Por ejemplo, en aplicaciónes de transformación de audio a texto y visceverza, pronóstico del clima, en el control de robots o procesamiento de video, etc. En ese sentido, es importante poder abstraer modelos matemáticos que nos permitan estudiar mejor estos procesos.</p>
 
+<figure>
+    <img src="/blog/images/helloworld.gif"
+         alt="Sistema secuencial de sugerencia de texto"/> <figcaption>
+            <p>Sistema secuencial de sugerencia de texto</p>
+        </figcaption>
+</figure>
+
+
+<h2 id="el-problema-de-la-dimensionalidad">El problema de la dimensionalidad</h2>
+
+<p>El siguiente grafo, o propiamente dicho: <em>Modelo Gráfico probabilistico</em> (PGM) representa un sistema secuencial de longitud de secuencia <span  class="math">\(T=4\)</span>.</p>
+
+<figure>
+    <img src="/blog/images/sequential_model.png"
+         alt="Modelo de un sistema secuencial sin ninguna asumpción"/> <figcaption>
+            <p>Modelo de un sistema secuencial sin ninguna asumpción</p>
+        </figcaption>
+</figure>
+
+
+<p>Siguiendo la regla de la cadena para un modelo de longitud arbitraria <span  class="math">\(T\)</span> se obtiene la probabilidad de dicho evento.</p>
+
+<p><span  class="math">\[p(x_{1:T}) = p(x_1)p(x_2|x_1)p(x_3|x_2,x_1)\cdots p(x_T|x_{1:T-1})\]</span></p>
+
+<p>El número de parametros para resolver este problema es del orden de <span  class="math">\(O(M^T)\)</span>, siendo M el número de estados y T el orden de la secuencia. De aqui que el número de parametros se incremente exponencial a medidad que crecen los estados y el orden de la secuencia, lo que hace impráctico este tipo de soluciónes para problemas que empiezen a crecer en complejidad.</p>
+
+<h2 id="markov-chain-y-la-asumpción-de-independencia">Markov Chain y la asumpción de independencia</h2>
+
+<p>En el ejemplo anterior vimos que un modelo sin ninguna asumpción puede requerir una cantidad muy grande de parametros. Markov Chain es una forma en como podemos plasmar un modelo secuencial de una forma sencilla bajo la asumpción de que la probabilidad que ocurra un estado <span  class="math">\(x_t\)</span> en un tiempo determinado <span  class="math">\(t\)</span> únicamente depende de lo que ocurre un instante anterior <span  class="math">\(x_{t-1}\)</span>, como se puede ver en la ecuación y grafo siguiente. Bajo esta asumpción se reduce el número de parametros a <span  class="math">\(O(K^2)\)</span>, como veremos más adelante esto es: una matriz cuadrada de dimensión 2.</p>
+
+<p><span  class="math">\[p(x_t|x_{t-1})\]</span></p>
+
+<figure>
+    <img src="/blog/images/mdp_pgm.png"
+         alt="Modelo Gráfico Probabilistico de una Cadena de Markov, note que cada estádo depende únicamente del estado anterior a excepción del primer estado."/> <figcaption>
+            <p>Modelo Gráfico Probabilistico de una Cadena de Markov, note que cada estádo depende únicamente del estado anterior a excepción del primer estado.</p>
+        </figcaption>
+</figure>
+
+
+<p>Por lo que podemos escribir la probabilidad de un evento (secuencia de estádos) <span  class="math">\(x_1, x_2, x_3, \cdots,x_T\)</span> que sigue un proceso markoviano tiene la forma:</p>
+
+<p><span  class="math">\[p(x_{1:T}) = p(x_1)\prod_{t=2}^T p(x_t|x_{t-1})\]</span></p>
+
+<p>Donde <span  class="math">\(p(x_1)\)</span> es la probabilidad de que dicho evento empieze en el estado <span  class="math">\(x_1\)</span>.</p>
+
+<p>Nótese que la <strong>asumpción de markov</strong> de que <em>el estado siguiente solo depende del estado actual</em> únicamente es cierto cuando se conoce el estado actual. En otras palabras, <em>&quot;el estado siguiente es independiente de los estádos anteriores dado que se conoce el estádo actual&quot;</em>, es decir <span  class="math">\(x_{t+1} \perp x_{1:t-1} | x_t\)</span>.</p>
+
+<p>Esto puede ser una asumpción fuerte para ciertas aplicaciones que implica que en cada estado conocemos toda la información necesaria para predecir el estádo siguiente.. Por ejemplo, consideremos que estamos intentando obtener la posición de un robot mediante una cámara. Definimos que el estado actual son los pixeles del frame actual <span  class="math">\(x_t = F_t\)</span>, se puede intuir que este sistema no cumpliría con la propiedad de markov, ya que los pixeles de un único frame no nos informa de hacia donde se mueve el objeto por lo que no se podría saber cual es la posición en <span  class="math">\(t+1\)</span>.</p>
+
+<p>Una solución para escenarios donde no se cumple la propiedad de Markov es utilizar cadenas de markov de órdenes mayores a uno. Por ejemplo una cadena de Markov de segundo orden tiene la siguiente propiedad: <span  class="math">\(p(x_t|x_{t-1}, x_{t-2})\)</span>, es decir: el estado actual depende de los 2 estados anteriores. En ese sentido, uno podría pensar aumentar el orden de la cadena, pero nótese que el caso extremo es el presentado en el primer ejemplo, donde se tiene <span  class="math">\(O(M^K)\)</span> parámetros.</p>
+
+<p>Existen otros métodos como los <em>Modelos Ocultos de Markov (HMM)</em>, que estan diseñados para solucionar estas dependencias o correlaciones con los estádos anteriores, o cuando las entradas son ruidosas. Esto lo veremos en otro post.</p>
+
+<h2 id="referencias">Referencias</h2>
+
+<p>[1] Kevin P. Murphy. <strong>Machine Learning: A probabilistic Perspective</strong>, <em>First edition</em>, <a href="https://storage.googleapis.com/pub-tools-public-publication-data/pdf/38136.pdf">2012</a>.</p>
     </div>
 
     <div class="post-copyright">
@@ -160,7 +220,6 @@
       <div class="post-tags">
           <a href="/blog/tags/markov/">markov</a>
           <a href="/blog/tags/markov-chain/">markov-chain</a>
-          <a href="/blog/tags/hmm/">HMM</a>
           </div>
       <nav class="post-nav">
         

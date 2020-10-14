@@ -6,21 +6,7 @@
     <description>Recent content in Artificial Intelligence on Research blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 27 Apr 2020 02:03:11 -0500</lastBuildDate>
-    
-	<atom:link href="https://ericktornero.github.io/blog/tags/artificial-intelligence/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-    <item>
-      <title>Introduction to Meta Learning</title>
-      <link>https://ericktornero.github.io/blog/post/meta-learning-start/</link>
-      <pubDate>Mon, 27 Apr 2020 02:03:11 -0500</pubDate>
-      
-      <guid>https://ericktornero.github.io/blog/post/meta-learning-start/</guid>
-      <description>Meta-learning is one of the hottest topics of research. In recent years, many researchers have taken interested in meta-learning due to its promise to reach generalization. In this blog post, we present a brief introduction to concepts in meta-learning and some applications which will immerse you in this wonderful field.
-An starting point of view One can notice that humans or animals can learn a task quickly when they have prior knowledge on another similar task.</description>
-    </item>
-    
+    <lastBuildDate>Thu, 30 Jan 2020 15:39:27 -0500</lastBuildDate><atom:link href="https://ericktornero.github.io/blog/tags/artificial-intelligence/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Advances in Model Based Reinforcement Learning</title>
       <link>https://ericktornero.github.io/blog/post/ambrl/</link>
