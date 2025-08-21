@@ -17,7 +17,7 @@
 <meta name="google-site-verification" content="jzEUwTDFo-TA-QnHpsX5SEwfkEbP8EbWqLrAi8lEtHc" />
 <meta property=”og:site_name” content="Erick Tornero Reinforcement Research blog"  />
 
-<meta name="author" content="Erick Tornero" /><meta name="description" content="La segunda acepción de la RAE nos dice que una secuencia &amp;quot;es una sucesión de cosas que guardan entre sí cierta relación&amp;quot;. En el mundo real podemos encontrar innumerables ejemplos que se ajustan a esta definición. Por ejemplo, en aplicaciónes de transformación de audio a texto y visceverza, pronóstico del clima, en el control de robots o procesamiento de video, etc. En ese sentido, es importante poder abstraer modelos matemáticos que nos permitan estudiar mejor estos procesos.
+<meta name="author" content="Erick Tornero" /><meta name="description" content="La segunda acepción de la RAE nos dice que una secuencia &amp;ldquo;es una sucesión de cosas que guardan entre sí cierta relación&amp;rdquo;. En el mundo real podemos encontrar innumerables ejemplos que se ajustan a esta definición. Por ejemplo, en aplicaciónes de transformación de audio a texto y visceverza, pronóstico del clima, en el control de robots o procesamiento de video, etc. En ese sentido, es importante poder abstraer modelos matemáticos que nos permitan estudiar mejor estos procesos.
 " /><meta name="keywords" content="reinforcement learning, robotics, deep learning, artificial intelligence, " />
 
 
@@ -25,7 +25,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.76.5 with theme even" />
+<meta name="generator" content="Hugo 0.123.7 with theme even" />
 
 
 <link rel="canonical" href="https://ericktornero.github.io/blog/post/markov/" />
@@ -36,29 +36,24 @@
 <link rel="mask-icon" href="/blog/safari-pinned-tab.svg" color="#5bbad5">
 
 
-<link href="/blog/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link href="/blog/dist/%3cnil%3e" rel="stylesheet">
 
-<link rel="stylesheet" href="/blog/css/custom.css">
+<link rel="stylesheet" href="/css/custom.css">
 
 
 <meta property="og:title" content="Cadena de Markov (MC)" />
-<meta property="og:description" content="La segunda acepción de la RAE nos dice que una secuencia &quot;es una sucesión de cosas que guardan entre sí cierta relación&quot;. En el mundo real podemos encontrar innumerables ejemplos que se ajustan a esta definición. Por ejemplo, en aplicaciónes de transformación de audio a texto y visceverza, pronóstico del clima, en el control de robots o procesamiento de video, etc. En ese sentido, es importante poder abstraer modelos matemáticos que nos permitan estudiar mejor estos procesos." />
+<meta property="og:description" content="La segunda acepción de la RAE nos dice que una secuencia &ldquo;es una sucesión de cosas que guardan entre sí cierta relación&rdquo;. En el mundo real podemos encontrar innumerables ejemplos que se ajustan a esta definición. Por ejemplo, en aplicaciónes de transformación de audio a texto y visceverza, pronóstico del clima, en el control de robots o procesamiento de video, etc. En ese sentido, es importante poder abstraer modelos matemáticos que nos permitan estudiar mejor estos procesos." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://ericktornero.github.io/blog/post/markov/" />
+<meta property="og:url" content="https://ericktornero.github.io/blog/post/markov/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2020-03-21T20:13:27-05:00" />
 <meta property="article:modified_time" content="2020-03-21T20:13:27-05:00" />
+
 <meta itemprop="name" content="Cadena de Markov (MC)">
-<meta itemprop="description" content="La segunda acepción de la RAE nos dice que una secuencia &quot;es una sucesión de cosas que guardan entre sí cierta relación&quot;. En el mundo real podemos encontrar innumerables ejemplos que se ajustan a esta definición. Por ejemplo, en aplicaciónes de transformación de audio a texto y visceverza, pronóstico del clima, en el control de robots o procesamiento de video, etc. En ese sentido, es importante poder abstraer modelos matemáticos que nos permitan estudiar mejor estos procesos.">
-<meta itemprop="datePublished" content="2020-03-21T20:13:27-05:00" />
+<meta itemprop="description" content="La segunda acepción de la RAE nos dice que una secuencia &ldquo;es una sucesión de cosas que guardan entre sí cierta relación&rdquo;. En el mundo real podemos encontrar innumerables ejemplos que se ajustan a esta definición. Por ejemplo, en aplicaciónes de transformación de audio a texto y visceverza, pronóstico del clima, en el control de robots o procesamiento de video, etc. En ese sentido, es importante poder abstraer modelos matemáticos que nos permitan estudiar mejor estos procesos."><meta itemprop="datePublished" content="2020-03-21T20:13:27-05:00" />
 <meta itemprop="dateModified" content="2020-03-21T20:13:27-05:00" />
 <meta itemprop="wordCount" content="646">
-
-
-
-<meta itemprop="keywords" content="markov,markov-chain," />
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Cadena de Markov (MC)"/>
-<meta name="twitter:description" content="La segunda acepción de la RAE nos dice que una secuencia &quot;es una sucesión de cosas que guardan entre sí cierta relación&quot;. En el mundo real podemos encontrar innumerables ejemplos que se ajustan a esta definición. Por ejemplo, en aplicaciónes de transformación de audio a texto y visceverza, pronóstico del clima, en el control de robots o procesamiento de video, etc. En ese sentido, es importante poder abstraer modelos matemáticos que nos permitan estudiar mejor estos procesos."/>
+<meta itemprop="keywords" content="markov,markov-chain," /><meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Cadena de Markov (MC)"/>
+<meta name="twitter:description" content="La segunda acepción de la RAE nos dice que una secuencia &ldquo;es una sucesión de cosas que guardan entre sí cierta relación&rdquo;. En el mundo real podemos encontrar innumerables ejemplos que se ajustan a esta definición. Por ejemplo, en aplicaciónes de transformación de audio a texto y visceverza, pronóstico del clima, en el control de robots o procesamiento de video, etc. En ese sentido, es importante poder abstraer modelos matemáticos que nos permitan estudiar mejor estos procesos."/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -73,7 +68,7 @@
 <body>
   <div id="mobile-navbar" class="mobile-navbar">
   <div class="mobile-header-logo">
-    <a href="/blog/" class="logo">Research Blog</a>
+    <a href="/" class="logo">Research Blog</a>
   </div>
   <div class="mobile-navbar-icon">
     <span></span>
@@ -99,7 +94,7 @@
   <div class="container" id="mobile-panel">
     <header id="header" class="header">
         <div class="logo-wrapper">
-  <a href="/blog/" class="logo">Research Blog</a>
+  <a href="/" class="logo">Research Blog</a>
 </div>
 
 <nav class="site-navbar">
@@ -140,64 +135,41 @@
 
     
     <div class="post-content">
-      <p>La segunda acepción de la <a href="https://dle.rae.es/secuencia?m=form">RAE</a> nos dice que una <strong>secuencia</strong> <em>&quot;es una sucesión de cosas que guardan entre sí cierta relación&quot;</em>. En el mundo real podemos encontrar innumerables ejemplos que se ajustan a esta definición. Por ejemplo, en aplicaciónes de transformación de audio a texto y visceverza, pronóstico del clima, en el control de robots o procesamiento de video, etc. En ese sentido, es importante poder abstraer modelos matemáticos que nos permitan estudiar mejor estos procesos.</p>
-
-<figure>
-    <img src="/blog/images/helloworld.gif"
-         alt="Sistema secuencial de sugerencia de texto"/> <figcaption>
+      <p>La segunda acepción de la <a href="https://dle.rae.es/secuencia?m=form">RAE</a> nos dice que una <strong>secuencia</strong> <em>&ldquo;es una sucesión de cosas que guardan entre sí cierta relación&rdquo;</em>. En el mundo real podemos encontrar innumerables ejemplos que se ajustan a esta definición. Por ejemplo, en aplicaciónes de transformación de audio a texto y visceverza, pronóstico del clima, en el control de robots o procesamiento de video, etc. En ese sentido, es importante poder abstraer modelos matemáticos que nos permitan estudiar mejor estos procesos.</p>
+<figure><img src="/blog/images/helloworld.gif"
+         alt="Sistema secuencial de sugerencia de texto"/><figcaption>
             <p>Sistema secuencial de sugerencia de texto</p>
         </figcaption>
 </figure>
 
-
 <h2 id="el-problema-de-la-dimensionalidad">El problema de la dimensionalidad</h2>
-
-<p>El siguiente grafo o propiamente dicho: <em>Modelo Gráfico probabilistico</em> (PGM) representa un sistema secuencial de longitud de secuencia <span  class="math">\(T=4\)</span>.</p>
-
-<figure>
-    <img src="/blog/images/sequential_model.png"
-         alt="Modelo de un sistema secuencial sin ninguna asumpción"/> <figcaption>
+<p>El siguiente grafo o propiamente dicho: <em>Modelo Gráfico probabilistico</em> (PGM) representa un sistema secuencial de longitud de secuencia $$T=4$$.</p>
+<figure><img src="/blog/images/sequential_model.png"
+         alt="Modelo de un sistema secuencial sin ninguna asumpción"/><figcaption>
             <p>Modelo de un sistema secuencial sin ninguna asumpción</p>
         </figcaption>
 </figure>
 
-
-<p>Siguiendo la regla de la cadena para un modelo de longitud arbitraria <span  class="math">\(T\)</span> se obtiene la probabilidad de dicho evento.</p>
-
-<p><span  class="math">\[p(x_{1:T}) = p(x_1)p(x_2|x_1)p(x_3|x_2,x_1)\cdots p(x_T|x_{1:T-1})\]</span></p>
-
-<p>El número de parametros para resolver este problema es del orden de <span  class="math">\(O(M^T)\)</span>, siendo M el número de estados y T el orden de la secuencia. De aquí que el número de parámetros se incremente exponencialmente a medida que crecen los estados y el orden de la secuencia, lo que hace impráctico este tipo de soluciones para problemas que empiezen a crecer en complejidad.</p>
-
+<p>Siguiendo la regla de la cadena para un modelo de longitud arbitraria $$T$$ se obtiene la probabilidad de dicho evento.</p>
+<p>$$p(x_{1:T}) = p(x_1)p(x_2|x_1)p(x_3|x_2,x_1)\cdots p(x_T|x_{1:T-1})$$</p>
+<p>El número de parametros para resolver este problema es del orden de $$O(M^T)$$, siendo M el número de estados y T el orden de la secuencia. De aquí que el número de parámetros se incremente exponencialmente a medida que crecen los estados y el orden de la secuencia, lo que hace impráctico este tipo de soluciones para problemas que empiezen a crecer en complejidad.</p>
 <h2 id="markov-chain-y-la-asumpción-de-independencia">Markov Chain y la asumpción de independencia</h2>
-
-<p>En el ejemplo anterior vimos que un modelo sin ninguna asumpción puede requerir una cantidad muy grande de parámetros. Markov Chain es una forma en como podemos plasmar un modelo secuencial de una forma sencilla bajo la asumpción de que la probabilidad que ocurra un estado <span  class="math">\(x_t\)</span> en un tiempo determinado <span  class="math">\(t\)</span> únicamente depende de lo que ocurre un instante anterior <span  class="math">\(x_{t-1}\)</span>, como se puede ver en la ecuación y grafo siguiente. Bajo esta asumpción se reduce el número de parámetros a <span  class="math">\(O(K^2)\)</span>, como veremos más adelante esto es: una matriz cuadrada de dimensión 2.</p>
-
-<p><span  class="math">\[p(x_t|x_{t-1})\]</span></p>
-
-<figure>
-    <img src="/blog/images/mdp_pgm.png"
-         alt="Modelo Gráfico Probabilistico de una Cadena de Markov, note que cada estado depende únicamente del estado anterior a excepción del primer estado."/> <figcaption>
+<p>En el ejemplo anterior vimos que un modelo sin ninguna asumpción puede requerir una cantidad muy grande de parámetros. Markov Chain es una forma en como podemos plasmar un modelo secuencial de una forma sencilla bajo la asumpción de que la probabilidad que ocurra un estado $$x_t$$ en un tiempo determinado $$t$$ únicamente depende de lo que ocurre un instante anterior $$x_{t-1}$$, como se puede ver en la ecuación y grafo siguiente. Bajo esta asumpción se reduce el número de parámetros a $$O(K^2)$$, como veremos más adelante esto es: una matriz cuadrada de dimensión 2.</p>
+<p>$$p(x_t|x_{t-1})$$</p>
+<figure><img src="/blog/images/mdp_pgm.png"
+         alt="Modelo Gráfico Probabilistico de una Cadena de Markov, note que cada estado depende únicamente del estado anterior a excepción del primer estado."/><figcaption>
             <p>Modelo Gráfico Probabilistico de una Cadena de Markov, note que cada estado depende únicamente del estado anterior a excepción del primer estado.</p>
         </figcaption>
 </figure>
 
-
-<p>Por lo que podemos escribir la probabilidad de un evento (secuencia de estádos) <span  class="math">\(x_1, x_2, x_3, \cdots,x_T\)</span> que sigue un Proceso Markoviano tiene la forma:</p>
-
-<p><span  class="math">\[p(x_{1:T}) = p(x_1)\prod_{t=2}^T p(x_t|x_{t-1})\]</span></p>
-
-<p>Donde <span  class="math">\(p(x_1)\)</span> es la probabilidad de que dicho evento empieze en el estado <span  class="math">\(x_1\)</span>.</p>
-
-<p>Nótese que la <strong>asumpción de Markov</strong> de que <em>el estado siguiente solo depende del estado actual</em> únicamente es cierto cuando se conoce el estado actual. En otras palabras, <em>&quot;el estado siguiente es independiente de los estádos anteriores dado que se conoce el estado actual&quot;</em>, es decir <span  class="math">\(x_{t+1} \perp x_{1:t-1} | x_t\)</span>.</p>
-
-<p>Esto puede ser una asumpción fuerte para ciertas aplicaciones que implica que en cada estado conocemos toda la información necesaria para predecir el estado siguiente. Por ejemplo, consideremos que estamos intentando obtener la posición de un robot mediante una cámara. Definimos que el estado actual son los píxeles del <em>frame</em> actual <span  class="math">\(x_t = F_t\)</span>, se puede intuir que este sistema no cumpliría con la propiedad de Markov, ya que los píxeles de un único <em>frame</em> no nos informa de hacia donde se mueve el objeto por lo que no se podría saber cual es la posición en <span  class="math">\(t+1\)</span>.</p>
-
-<p>Una solución para escenarios donde no se cumple la propiedad de Markov es utilizar Cadenas de Markov de órdenes mayores a uno. Por ejemplo una cadena de Markov de segundo orden tiene la siguiente propiedad: <span  class="math">\(p(x_t|x_{t-1}, x_{t-2})\)</span>, es decir: el estado actual depende de los 2 estados anteriores. En ese sentido, uno podría pensar aumentar el orden de la cadena, pero nótese que el caso extremo es el presentado en el primer ejemplo, donde se tiene <span  class="math">\(O(M^K)\)</span> parámetros.</p>
-
+<p>Por lo que podemos escribir la probabilidad de un evento (secuencia de estádos) $$x_1, x_2, x_3, \cdots,x_T$$ que sigue un Proceso Markoviano tiene la forma:</p>
+<p>$$p(x_{1:T}) = p(x_1)\prod_{t=2}^T p(x_t|x_{t-1})$$</p>
+<p>Donde $$p(x_1)$$ es la probabilidad de que dicho evento empieze en el estado $$x_1$$.</p>
+<p>Nótese que la <strong>asumpción de Markov</strong> de que <em>el estado siguiente solo depende del estado actual</em> únicamente es cierto cuando se conoce el estado actual. En otras palabras, <em>&ldquo;el estado siguiente es independiente de los estádos anteriores dado que se conoce el estado actual&rdquo;</em>, es decir $$x_{t+1} \perp x_{1:t-1} | x_t$$.</p>
+<p>Esto puede ser una asumpción fuerte para ciertas aplicaciones que implica que en cada estado conocemos toda la información necesaria para predecir el estado siguiente. Por ejemplo, consideremos que estamos intentando obtener la posición de un robot mediante una cámara. Definimos que el estado actual son los píxeles del <em>frame</em> actual $$x_t = F_t$$, se puede intuir que este sistema no cumpliría con la propiedad de Markov, ya que los píxeles de un único <em>frame</em> no nos informa de hacia donde se mueve el objeto por lo que no se podría saber cual es la posición en $$t+1$$.</p>
+<p>Una solución para escenarios donde no se cumple la propiedad de Markov es utilizar Cadenas de Markov de órdenes mayores a uno. Por ejemplo una cadena de Markov de segundo orden tiene la siguiente propiedad: $$p(x_t|x_{t-1}, x_{t-2})$$, es decir: el estado actual depende de los 2 estados anteriores. En ese sentido, uno podría pensar aumentar el orden de la cadena, pero nótese que el caso extremo es el presentado en el primer ejemplo, donde se tiene $$O(M^K)$$ parámetros.</p>
 <p>Existen otros métodos como los <em>Modelos Ocultos de Markov (HMM)</em>, que estan diseñados para solucionar estas dependencias o correlaciones con los estados anteriores, o cuando las entradas son ruidosas. Esto lo veremos en otro post.</p>
-
 <h2 id="referencias">Referencias</h2>
-
 <p>[1] Kevin P. Murphy. <strong>Machine Learning: A probabilistic Perspective</strong>, <em>First edition</em>, <a href="https://storage.googleapis.com/pub-tools-public-publication-data/pdf/38136.pdf">2012</a>.</p>
     </div>
 
@@ -247,9 +219,7 @@
 
     <footer id="footer" class="footer">
       <div class="social-links">
-      <a href="mailto:erick.tornero@ucsp.edu.pe" class="iconfont icon-email" title="email"></a>
       <a href="https://www.twitter.com/erickTorneroT" class="iconfont icon-twitter" title="twitter"></a>
-      <a href="https://www.linkedin.com/in/ericktornero/" class="iconfont icon-linkedin" title="linkedin"></a>
       <a href="http://www.github.com/ericktornero" class="iconfont icon-github" title="github"></a>
   <a href="https://ericktornero.github.io/blog/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
 </div>
@@ -268,7 +238,8 @@
 
   <span class="copyright-year">
     &copy; 
-    2020
+    2020 - 
+    2025
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>
@@ -291,7 +262,10 @@
   <script type="text/javascript" src="/blog/lib/jquery/jquery-3.2.1.min.js"></script>
   <script type="text/javascript" src="/blog/lib/slideout/slideout-1.0.1.min.js"></script>
   
-<script type="text/javascript" src="/blog/dist/even.26188efa.min.js"></script>
+
+
+
+<script type="text/javascript" src="/blog/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script>
 
 
 

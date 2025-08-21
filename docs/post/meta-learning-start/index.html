@@ -25,7 +25,7 @@ An starting point of view One can notice that humans or animals can learn a task
 
 
 
-<meta name="generator" content="Hugo 0.76.5 with theme even" />
+<meta name="generator" content="Hugo 0.123.7 with theme even" />
 
 
 <link rel="canonical" href="https://ericktornero.github.io/blog/post/meta-learning-start/" />
@@ -36,30 +36,25 @@ An starting point of view One can notice that humans or animals can learn a task
 <link rel="mask-icon" href="/blog/safari-pinned-tab.svg" color="#5bbad5">
 
 
-<link href="/blog/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link href="/blog/dist/%3cnil%3e" rel="stylesheet">
 
-<link rel="stylesheet" href="/blog/css/custom.css">
+<link rel="stylesheet" href="/css/custom.css">
 
 
 <meta property="og:title" content="Introduction to Meta Learning" />
 <meta property="og:description" content="Meta-learning is one of the hottest topics of research. In recent years, many researchers have taken interested in meta-learning due to its promise to reach generalization. In this blog post, we present a brief introduction to concepts in meta-learning and some applications which will immerse you in this wonderful field.
 An starting point of view One can notice that humans or animals can learn a task quickly when they have prior knowledge on another similar task." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://ericktornero.github.io/blog/post/meta-learning-start/" />
+<meta property="og:url" content="https://ericktornero.github.io/blog/post/meta-learning-start/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2020-04-27T02:03:11-05:00" />
 <meta property="article:modified_time" content="2020-04-27T02:03:11-05:00" />
+
 <meta itemprop="name" content="Introduction to Meta Learning">
 <meta itemprop="description" content="Meta-learning is one of the hottest topics of research. In recent years, many researchers have taken interested in meta-learning due to its promise to reach generalization. In this blog post, we present a brief introduction to concepts in meta-learning and some applications which will immerse you in this wonderful field.
-An starting point of view One can notice that humans or animals can learn a task quickly when they have prior knowledge on another similar task.">
-<meta itemprop="datePublished" content="2020-04-27T02:03:11-05:00" />
+An starting point of view One can notice that humans or animals can learn a task quickly when they have prior knowledge on another similar task."><meta itemprop="datePublished" content="2020-04-27T02:03:11-05:00" />
 <meta itemprop="dateModified" content="2020-04-27T02:03:11-05:00" />
 <meta itemprop="wordCount" content="431">
-
-
-
-<meta itemprop="keywords" content="meta-learning,Artificial Intelligence," />
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Introduction to Meta Learning"/>
+<meta itemprop="keywords" content="meta-learning,Artificial Intelligence," /><meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Introduction to Meta Learning"/>
 <meta name="twitter:description" content="Meta-learning is one of the hottest topics of research. In recent years, many researchers have taken interested in meta-learning due to its promise to reach generalization. In this blog post, we present a brief introduction to concepts in meta-learning and some applications which will immerse you in this wonderful field.
 An starting point of view One can notice that humans or animals can learn a task quickly when they have prior knowledge on another similar task."/>
 
@@ -76,7 +71,7 @@ An starting point of view One can notice that humans or animals can learn a task
 <body>
   <div id="mobile-navbar" class="mobile-navbar">
   <div class="mobile-header-logo">
-    <a href="/blog/" class="logo">Research Blog</a>
+    <a href="/" class="logo">Research Blog</a>
   </div>
   <div class="mobile-navbar-icon">
     <span></span>
@@ -102,7 +97,7 @@ An starting point of view One can notice that humans or animals can learn a task
   <div class="container" id="mobile-panel">
     <header id="header" class="header">
         <div class="logo-wrapper">
-  <a href="/blog/" class="logo">Research Blog</a>
+  <a href="/" class="logo">Research Blog</a>
 </div>
 
 <nav class="site-navbar">
@@ -144,39 +139,24 @@ An starting point of view One can notice that humans or animals can learn a task
     
     <div class="post-content">
       <p>Meta-learning is one of the hottest topics of research. In recent years, many researchers have taken interested in meta-learning due to its promise to reach <em>generalization</em>. In this blog post, we present a brief introduction to concepts in meta-learning and some applications which will immerse you in this wonderful field.</p>
-
 <h2 id="an-starting-point-of-view">An starting point of view</h2>
-
 <p>One can notice that humans or animals can learn a task quickly when they have prior knowledge on another similar task. For instance, driving a motorcycle is an esier task when before you know how to ride a bike, or how babies start to walk, using its knowledge in how to stand up. Naive machine learning techniques usually are not able to do things like that, if we see common problems like classification, regression or reinforcement learning, usually our model can solve just an specific problem, it is a problem in how to generalize even to minor changes in a unique environment. So, meta-larning is a field which try to mitigate this problem, we can define: <em>meta-learning as one of the fields that try to take advantage of prior knowledge of many tasks to learn as quickly as possible a related new task.</em></p>
-
-<figure>
-    <img src="https://ericktornero.github.io/blog/images/metalearn/babywalk.gif"
-         alt="Figure 1, Babies can take advantage of its knowledge in how to stand-up to start to walk"/> <figcaption>
+<figure><img src="https://ericktornero.github.io/blog/images/metalearn/babywalk.gif"
+         alt="Figure 1, Babies can take advantage of its knowledge in how to stand-up to start to walk"/><figcaption>
             <p><strong>Figure 1</strong>, Babies can take advantage of its knowledge in how to stand-up to start to walk</p>
         </figcaption>
 </figure>
 
-
 <h2 id="relation-and-differences-with-related-topics">Relation and differences with related topics</h2>
-
 <p>Ok, the previous definition can be a bit confusing to other related fields such as transfer learning, continual learning, multi-task learning, among others, because all of them rely on the laverage of previous knowladge from related taks. But, think that in meta-learning a meta-representation is explicitly learned.</p>
-
-<p>For instance, in transfer learning, parameters trained with an specific task are transfer to another related task. Here, there's not any optimal representation to be transfered over tasks, don't matters if the parameters are the optimal to be transfered over different tasks. Or in Continual learning where adaptation to new possible non-stationary distribution is doing in continual way by laveraging previous knowledge, but there's not necessary the existence of a meta-representation. While for at least these methods are differents to meta-learning in the escense, meta-learning can be used to reach those purpose.</p>
-
-<h2 id="common-approaches-of-metalearning">Common approaches of Meta-learning</h2>
-
-<p>There's lot of approaches to tackle the meta-learning problem, here we discuss the two most common, main difference is how they considers the meta-representation: Optimization based methods and Black Box methods.</p>
-
+<p>For instance, in transfer learning, parameters trained with an specific task are transfer to another related task. Here, there&rsquo;s not any optimal representation to be transfered over tasks, don&rsquo;t matters if the parameters are the optimal to be transfered over different tasks. Or in Continual learning where adaptation to new possible non-stationary distribution is doing in continual way by laveraging previous knowledge, but there&rsquo;s not necessary the existence of a meta-representation. While for at least these methods are differents to meta-learning in the escense, meta-learning can be used to reach those purpose.</p>
+<h2 id="common-approaches-of-meta-learning">Common approaches of Meta-learning</h2>
+<p>There&rsquo;s lot of approaches to tackle the meta-learning problem, here we discuss the two most common, main difference is how they considers the meta-representation: Optimization based methods and Black Box methods.</p>
 <h3 id="optimization-based-methods">Optimization based methods</h3>
-
 <h3 id="black-box-methods">Black Box methods</h3>
-
-<h2 id="some-applications-of-metalearning">Some applications of Meta-Learning</h2>
-
+<h2 id="some-applications-of-meta-learning">Some applications of Meta-Learning</h2>
 <p>Applications of meta-learning are diverece for superised learning, unsupervised learning, reinforcement learning, etc. Here we discuss some of the most important configurations.</p>
-
-<h3 id="fewshot-learning">Few-shot learning</h3>
-
+<h3 id="few-shot-learning">Few-shot learning</h3>
 <h3 id="reinforcement-learning">Reinforcement learning</h3>
 
     </div>
@@ -223,9 +203,7 @@ An starting point of view One can notice that humans or animals can learn a task
 
     <footer id="footer" class="footer">
       <div class="social-links">
-      <a href="mailto:erick.tornero@ucsp.edu.pe" class="iconfont icon-email" title="email"></a>
       <a href="https://www.twitter.com/erickTorneroT" class="iconfont icon-twitter" title="twitter"></a>
-      <a href="https://www.linkedin.com/in/ericktornero/" class="iconfont icon-linkedin" title="linkedin"></a>
       <a href="http://www.github.com/ericktornero" class="iconfont icon-github" title="github"></a>
   <a href="https://ericktornero.github.io/blog/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
 </div>
@@ -244,7 +222,8 @@ An starting point of view One can notice that humans or animals can learn a task
 
   <span class="copyright-year">
     &copy; 
-    2020
+    2020 - 
+    2025
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>
@@ -267,7 +246,10 @@ An starting point of view One can notice that humans or animals can learn a task
   <script type="text/javascript" src="/blog/lib/jquery/jquery-3.2.1.min.js"></script>
   <script type="text/javascript" src="/blog/lib/slideout/slideout-1.0.1.min.js"></script>
   
-<script type="text/javascript" src="/blog/dist/even.26188efa.min.js"></script>
+
+
+
+<script type="text/javascript" src="/blog/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script>
 
 
 
