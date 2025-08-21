@@ -6,34 +6,28 @@
     <description>Recent content in Posts on Research blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 27 Apr 2020 02:03:11 -0500</lastBuildDate><atom:link href="https://ericktornero.github.io/blog/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 27 Apr 2020 02:03:11 -0500</lastBuildDate>
+    <atom:link href="https://ericktornero.github.io/blog/post/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Introduction to Meta Learning</title>
       <link>https://ericktornero.github.io/blog/post/meta-learning-start/</link>
       <pubDate>Mon, 27 Apr 2020 02:03:11 -0500</pubDate>
-      
       <guid>https://ericktornero.github.io/blog/post/meta-learning-start/</guid>
-      <description>Meta-learning is one of the hottest topics of research. In recent years, many researchers have taken interested in meta-learning due to its promise to reach generalization. In this blog post, we present a brief introduction to concepts in meta-learning and some applications which will immerse you in this wonderful field.
-An starting point of view One can notice that humans or animals can learn a task quickly when they have prior knowledge on another similar task.</description>
+      <description>Meta-learning is one of the hottest topics of research. In recent years, many researchers have taken interested in meta-learning due to its promise to reach generalization. In this blog post, we present a brief introduction to concepts in meta-learning and some applications which will immerse you in this wonderful field.&#xA;An starting point of view One can notice that humans or animals can learn a task quickly when they have prior knowledge on another similar task.</description>
     </item>
-    
     <item>
       <title>Cadena de Markov (MC)</title>
       <link>https://ericktornero.github.io/blog/post/markov/</link>
       <pubDate>Sat, 21 Mar 2020 20:13:27 -0500</pubDate>
-      
       <guid>https://ericktornero.github.io/blog/post/markov/</guid>
-      <description>&lt;p&gt;La segunda acepción de la &lt;a href=&#34;https://dle.rae.es/secuencia?m=form&#34;&gt;RAE&lt;/a&gt; nos dice que una &lt;strong&gt;secuencia&lt;/strong&gt; &lt;em&gt;&amp;quot;es una sucesión de cosas que guardan entre sí cierta relación&amp;quot;&lt;/em&gt;. En el mundo real podemos encontrar innumerables ejemplos que se ajustan a esta definición. Por ejemplo, en aplicaciónes de transformación de audio a texto y visceverza, pronóstico del clima, en el control de robots o procesamiento de video, etc. En ese sentido, es importante poder abstraer modelos matemáticos que nos permitan estudiar mejor estos procesos.&lt;/p&gt;</description>
+      <description>&lt;p&gt;La segunda acepción de la &lt;a href=&#34;https://dle.rae.es/secuencia?m=form&#34;&gt;RAE&lt;/a&gt; nos dice que una &lt;strong&gt;secuencia&lt;/strong&gt; &lt;em&gt;&amp;ldquo;es una sucesión de cosas que guardan entre sí cierta relación&amp;rdquo;&lt;/em&gt;. En el mundo real podemos encontrar innumerables ejemplos que se ajustan a esta definición. Por ejemplo, en aplicaciónes de transformación de audio a texto y visceverza, pronóstico del clima, en el control de robots o procesamiento de video, etc. En ese sentido, es importante poder abstraer modelos matemáticos que nos permitan estudiar mejor estos procesos.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Advances in Model Based Reinforcement Learning</title>
       <link>https://ericktornero.github.io/blog/post/ambrl/</link>
       <pubDate>Thu, 30 Jan 2020 15:39:27 -0500</pubDate>
-      
       <guid>https://ericktornero.github.io/blog/post/ambrl/</guid>
       <description>&lt;p&gt;Reinforcement learning is a very interesting research topic, in recent years, their applications and their performance have been growing quickly. In this blog post, we present the basics of model-based reinforcement learning and its recent advances.&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

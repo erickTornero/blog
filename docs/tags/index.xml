@@ -6,60 +6,49 @@
     <description>Recent content in Tags on Research blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 27 Apr 2020 02:03:11 -0500</lastBuildDate><atom:link href="https://ericktornero.github.io/blog/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 27 Apr 2020 02:03:11 -0500</lastBuildDate>
+    <atom:link href="https://ericktornero.github.io/blog/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Artificial Intelligence</title>
       <link>https://ericktornero.github.io/blog/tags/artificial-intelligence/</link>
       <pubDate>Mon, 27 Apr 2020 02:03:11 -0500</pubDate>
-      
       <guid>https://ericktornero.github.io/blog/tags/artificial-intelligence/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>meta-learning</title>
+      <title>Meta-Learning</title>
       <link>https://ericktornero.github.io/blog/tags/meta-learning/</link>
       <pubDate>Mon, 27 Apr 2020 02:03:11 -0500</pubDate>
-      
       <guid>https://ericktornero.github.io/blog/tags/meta-learning/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>markov</title>
+      <title>Markov</title>
       <link>https://ericktornero.github.io/blog/tags/markov/</link>
       <pubDate>Sat, 21 Mar 2020 20:13:27 -0500</pubDate>
-      
       <guid>https://ericktornero.github.io/blog/tags/markov/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>markov-chain</title>
+      <title>Markov-Chain</title>
       <link>https://ericktornero.github.io/blog/tags/markov-chain/</link>
       <pubDate>Sat, 21 Mar 2020 20:13:27 -0500</pubDate>
-      
       <guid>https://ericktornero.github.io/blog/tags/markov-chain/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>model-based</title>
+      <title>Model-Based</title>
       <link>https://ericktornero.github.io/blog/tags/model-based/</link>
       <pubDate>Thu, 30 Jan 2020 15:39:27 -0500</pubDate>
-      
       <guid>https://ericktornero.github.io/blog/tags/model-based/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>reinforcement learning</title>
+      <title>Reinforcement Learning</title>
       <link>https://ericktornero.github.io/blog/tags/reinforcement-learning/</link>
       <pubDate>Thu, 30 Jan 2020 15:39:27 -0500</pubDate>
-      
       <guid>https://ericktornero.github.io/blog/tags/reinforcement-learning/</guid>
       <description></description>
     </item>
-    
   </channel>
 </rss>

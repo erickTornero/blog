@@ -95,7 +95,5 @@ copyright = ""            # default: author.name ↓
     warn = 180              # Display warning if the last modified time is more than these days ago.    # 如果文章最后更新于这天数之前，显示警告
 
   [params.social]                                         
-    a-email = "mailto:erick.tornero@ucsp.edu.pe"
     c-twitter = "https://www.twitter.com/erickTorneroT"
-    e-linkedin = "https://www.linkedin.com/in/ericktornero/"
     g-github = "http://www.github.com/ericktornero"
